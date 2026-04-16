@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "genere_le": "2026-04-15T12:58:49.721Z",
+    "version_questionnaire": "5.0",
+    "outil": "Formulaire Avant-Vente Ynov'iT Odoo"
+  },
+  "societe": {
+    "siren": "443061841"
+  },
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_portail": 0
+  },
+  "reponses_detail": [
+    {
+      "id": "nb_societes",
+      "label": "Nombre de sociétés dans l'instance Odoo",
+      "valeur": 1
+    },
+    {
+      "id": "nb_users_portail",
+      "label": "Nombre d'utilisateurs portail prévus (clients, fournisseurs)",
+      "valeur": 0
+    }
+  ]
+}

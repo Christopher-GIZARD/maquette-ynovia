@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "genere_le": "2026-04-14T13:54:44.777Z",
+    "version_questionnaire": "5.0",
+    "outil": "Formulaire Avant-Vente Ynov'iT Odoo"
+  },
+  "societe": {
+    "siren": "678910"
+  },
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_internes": 1,
+    "nb_users_portail": 1,
+    "date_go_live": "2026-04-25",
+    "budget": "10–25k€",
+    "pays_activite": [
+      "France"
+    ],
+    "langues": [
+      "Français"
+    ],
+    "migration_donnees": true,
+    "migration_perimetre": [
+      "Clients / contacts",
+      "Fournisseurs",
+      "Catalogue produits"
+    ],
+    "vol_clients": "> 20 000",
+    "vol_clients_format": "Export ERP propre",
+    "vol_fournisseurs": "> 2 000",
+    "vol_fourn_format": "Fichier Excel manuel",
+    "vol_fourn_tarifs": true,
+    "vol_produits": "> 15 000",
+    "vol_produits_format": "Nomenclature Excel",
+    "vol_produits_variantes": true,
+    "vol_var_nb_valeurs_moy": 4,
+    "vol_var_combinaisons": "< 10",
+    "vol_var_matrice_incomplete": true,
+    "vol_produits_images": true,
+    "vol_produits_desc": true,
+    "vol_produits_bom": true,
+    "has_sale": true,
+    "sale_types_produits": [
+      "Biens physiques (stockables)",
+      "Biens consommables",
+      "Services (main d'œuvre, prestation)"
+    ],
+    "sale_variantes": "Simples (1–2 attributs)",
+    "sale_var_nb_attr": 2,
+    "sale_var_nb_val": 4,
+    "sale_var_nb_comb": "< 10",
+    "sale_unites_mesure": true,
+    "sale_conditionnements": false,
+    "sale_grilles": "1 seul tarif",
+    "sale_remises": true,
+    "sale_marges": true,
+    "sale_commissions": true
+  },
+  "reponses_detail": [
+    {
+      "id": "nb_societes",
+      "label": "Nombre de sociétés dans l'instance Odoo",
+      "valeur": 1
+    },
+    {
+      "id": "nb_users_internes",
+      "label": "Nombre d'utilisateurs internes prévus",
+      "valeur": 1
+    },
+    {
+      "id": "nb_users_portail",
+      "label": "Nombre d'utilisateurs portail prévus (clients, fournisseurs)",
+      "valeur": 1
+    },
+    {
+      "id": "date_go_live",
+      "label": "Date de go-live souhaitée",
+      "valeur": "2026-04-25"
+    },
+    {
+      "id": "budget",
+      "label": "Budget indicatif du projet",
+      "valeur": "10–25k€"
+    },
+    {
+      "id": "pays_activite",
+      "label": "Pays dans lesquels l'entreprise est active",
+      "valeur": [
+        "France"
+      ]
+    },
+    {
+      "id": "langues",
+      "label": "Langues requises (interface / documents)",
+      "valeur": [
+        "Français"
+      ]
+    },
+    {
+      "id": "migration_donnees",
+      "label": "Reprise de données depuis l'existant requise ?",
+      "valeur": true
+    },
+    {
+      "id": "migration_perimetre",
+      "label": "Périmètre de la reprise de données",
+      "valeur": [
+        "Clients / contacts",
+        "Fournisseurs",
+        "Catalogue produits"
+      ]
+    },
+    {
+      "id": "vol_clients",
+      "label": "Volume",
+      "valeur": "> 20 000"
+    },
+    {
+      "id": "vol_clients_format",
+      "label": "Qualité du format source",
+      "valeur": "Export ERP propre"
+    },
+    {
+      "id": "vol_fournisseurs",
+      "label": "Volume",
+      "valeur": "> 2 000"
+    },
+    {
+      "id": "vol_fourn_format",
+      "label": "Qualité du format source",
+      "valeur": "Fichier Excel manuel"
+    },
+    {
+      "id": "vol_fourn_tarifs",
+      "label": "Tarifs d'achat par fournisseur à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits",
+      "label": "Volume",
+      "valeur": "> 15 000"
+    },
+    {
+      "id": "vol_produits_format",
+      "label": "Qualité du format source",
+      "valeur": "Nomenclature Excel"
+    },
+    {
+      "id": "vol_produits_variantes",
+      "label": "Produits avec variantes à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_var_nb_valeurs_moy",
+      "label": "Valeurs par attribut (en moyenne)",
+      "valeur": 4
+    },
+    {
+      "id": "vol_var_combinaisons",
+      "label": "Variantes par produit",
+      "valeur": "< 10"
+    },
+    {
+      "id": "vol_var_matrice_incomplete",
+      "label": "Certaines combinaisons sont-elles inexistantes (matrice incomplète) ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_images",
+      "label": "Images produits à importer ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_desc",
+      "label": "Descriptions / fiches techniques à intégrer ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_bom",
+      "label": "Nomenclatures (BoM) à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "has_sale",
+      "label": "Besoins Ventes (devis, commandes, facturation) ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_types_produits",
+      "label": "Types de produits vendus",
+      "valeur": [
+        "Biens physiques (stockables)",
+        "Biens consommables",
+        "Services (main d'œuvre, prestation)"
+      ]
+    },
+    {
+      "id": "sale_variantes",
+      "label": "Produits avec variantes (couleur, taille...) ?",
+      "valeur": "Simples (1–2 attributs)"
+    },
+    {
+      "id": "sale_var_nb_attr",
+      "label": "Nombre d'attributs distincts",
+      "valeur": 2
+    },
+    {
+      "id": "sale_var_nb_val",
+      "label": "Valeurs par attribut (en moyenne)",
+      "valeur": 4
+    },
+    {
+      "id": "sale_var_nb_comb",
+      "label": "Variantes par produit",
+      "valeur": "< 10"
+    },
+    {
+      "id": "sale_unites_mesure",
+      "label": "Unités de mesure multiples (achat ≠ vente) ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_conditionnements",
+      "label": "Conditionnements produits (lots, palettes) ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_grilles",
+      "label": "Nombre de listes de prix",
+      "valeur": "1 seul tarif"
+    },
+    {
+      "id": "sale_remises",
+      "label": "Remises sur lignes de commande ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_marges",
+      "label": "Suivi des marges ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_commissions",
+      "label": "Commissions commerciales ?",
+      "valeur": true
+    }
+  ]
+}

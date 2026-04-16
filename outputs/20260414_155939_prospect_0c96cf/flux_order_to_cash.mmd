@@ -1,0 +1,8 @@
+graph LR
+    A[Opportunité CRM] --> B[Devis]
+    B --> C{Validation client}
+    C -->|Accepté| D[Bon de commande]
+    C -->|Refusé| E[Perdu]
+    D --> F[Livraison]
+    F --> G[Facturation]
+    G --> H[Encaissement]

@@ -1,0 +1,493 @@
+{
+  "uo_brut": {
+    "total_uo": 61.0,
+    "par_module": {
+      "_general": {
+        "label": "Paramètres généraux",
+        "uo": 20.0,
+        "actif": true,
+        "lignes_count": 12
+      },
+      "has_sale": {
+        "label": "Besoins Ventes (devis, commandes, facturation) ?",
+        "uo": 6.0,
+        "actif": true,
+        "lignes_count": 6
+      },
+      "has_purchase": {
+        "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+        "uo": 5.0,
+        "actif": true,
+        "lignes_count": 5
+      },
+      "has_account": {
+        "label": "Besoins Comptabilité ?",
+        "uo": 14.5,
+        "actif": true,
+        "lignes_count": 11
+      },
+      "has_stock": {
+        "label": "Besoins Stocks & Logistique ?",
+        "uo": 11.0,
+        "actif": true,
+        "lignes_count": 7
+      },
+      "has_kits_vente": {
+        "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+        "uo": 4.5,
+        "actif": true,
+        "lignes_count": 4
+      }
+    },
+    "lignes": [
+      {
+        "question_id": "langues",
+        "label": "Langues requises (interface / documents)",
+        "module": null,
+        "uo_type": "uo_per_item",
+        "uo_value": 0.5,
+        "detail": "1 items × 0.5j = 0.5j"
+      },
+      {
+        "question_id": "vol_clients",
+        "label": "Volume",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 5.0,
+        "detail": "\"> 20 000\" → 5.0j"
+      },
+      {
+        "question_id": "vol_clients_format",
+        "label": "Qualité du format source",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Fichier Excel manuel\" → 1.0j"
+      },
+      {
+        "question_id": "vol_clients_multi",
+        "label": "Plusieurs contacts / interlocuteurs par client ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "vol_fournisseurs",
+        "label": "Volume",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"100–500\" → 1.0j"
+      },
+      {
+        "question_id": "vol_fourn_format",
+        "label": "Qualité du format source",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Fichier Excel manuel\" → 1.0j"
+      },
+      {
+        "question_id": "vol_fourn_tarifs",
+        "label": "Tarifs d'achat par fournisseur à reprendre ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "vol_produits",
+        "label": "Volume",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 8.0,
+        "detail": "\"> 15 000\" → 8.0j"
+      },
+      {
+        "question_id": "vol_produits_variantes",
+        "label": "Produits avec variantes à reprendre ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "vol_var_combinaisons",
+        "label": "Variantes par produit",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"< 10\" → 0.5j"
+      },
+      {
+        "question_id": "vol_produits_images",
+        "label": "Images produits à importer ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "vol_produits_desc",
+        "label": "Descriptions / fiches techniques à intégrer ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "has_sale",
+        "label": "Besoins Ventes (devis, commandes, facturation) ?",
+        "module": "has_sale",
+        "uo_type": "base_module",
+        "uo_value": 3.0,
+        "detail": "Activation module → 3j"
+      },
+      {
+        "question_id": "sale_variantes",
+        "label": "Produits avec variantes (couleur, taille...) ?",
+        "module": "has_sale",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Simples (1–2 attributs)\" → 1.0j"
+      },
+      {
+        "question_id": "sale_var_nb_comb",
+        "label": "Variantes par produit",
+        "module": "has_sale",
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"< 10\" → 0.5j"
+      },
+      {
+        "question_id": "sale_remises",
+        "label": "Remises sur lignes de commande ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 0.25,
+        "detail": "Fixe → 0.25j"
+      },
+      {
+        "question_id": "sale_marges",
+        "label": "Suivi des marges ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 0.25,
+        "detail": "Fixe → 0.25j"
+      },
+      {
+        "question_id": "sale_relances",
+        "label": "Relances automatiques des factures impayées ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "has_purchase",
+        "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+        "module": "has_purchase",
+        "uo_type": "base_module",
+        "uo_value": 2.0,
+        "detail": "Activation module → 2j"
+      },
+      {
+        "question_id": "purch_multi_fourn",
+        "label": "Plusieurs fournisseurs par produit avec tarifs ?",
+        "module": "has_purchase",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "purch_delais",
+        "label": "Délais d'approvisionnement par fournisseur ?",
+        "module": "has_purchase",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "purch_demandes_achat",
+        "label": "Demandes d'achat avant génération de la commande ?",
+        "module": "has_purchase",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "purch_dropship",
+        "label": "Dropshipping (livraison directe fournisseur → client) ?",
+        "module": "has_purchase",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "has_account",
+        "label": "Besoins Comptabilité ?",
+        "module": "has_account",
+        "uo_type": "base_module",
+        "uo_value": 5.0,
+        "detail": "Activation module → 5j"
+      },
+      {
+        "question_id": "account_plan",
+        "label": "Plan comptable",
+        "module": "has_account",
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"PCG France standard\" → 0.5j"
+      },
+      {
+        "question_id": "account_analytique",
+        "label": "Comptabilité analytique ?",
+        "module": "has_account",
+        "uo_type": "uo",
+        "uo_value": 2.0,
+        "detail": "Fixe → 2.0j"
+      },
+      {
+        "question_id": "account_axes",
+        "label": "Nombre d'axes analytiques",
+        "module": "has_account",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"1 axe\" → 1.0j"
+      },
+      {
+        "question_id": "account_sepa",
+        "label": "Virements SEPA ?",
+        "module": "has_account",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "account_tva",
+        "label": "Régimes de TVA applicables",
+        "module": "has_account",
+        "uo_type": "uo_per_item",
+        "uo_value": 1.0,
+        "detail": "2 items × 0.5j = 1.0j"
+      },
+      {
+        "question_id": "account_facturx",
+        "label": "Factures Factur-X / e-invoicing UE ?",
+        "module": "has_account",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "pdf_facture_compta",
+        "label": "Facture client",
+        "module": "has_account",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Intermédiaire\" → 1.0j"
+      },
+      {
+        "question_id": "pdf_avoir",
+        "label": "Avoir client",
+        "module": "has_account",
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"Standard\" → 0.5j"
+      },
+      {
+        "question_id": "pdf_relance",
+        "label": "Lettre de relance (par niveau)",
+        "module": "has_account",
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"Standard\" → 0.5j"
+      },
+      {
+        "question_id": "pdf_releve",
+        "label": "Relevé de compte client",
+        "module": "has_account",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Intermédiaire\" → 1.0j"
+      },
+      {
+        "question_id": "has_stock",
+        "label": "Besoins Stocks & Logistique ?",
+        "module": "has_stock",
+        "uo_type": "base_module",
+        "uo_value": 3.0,
+        "detail": "Activation module → 3j"
+      },
+      {
+        "question_id": "stock_nb_entrepots",
+        "label": "Nombre d'entrepôts",
+        "module": "has_stock",
+        "uo_type": "uo_per_unit",
+        "uo_value": 1.0,
+        "detail": "1 × 1.0j = 1.0j"
+      },
+      {
+        "question_id": "stock_multi_empl",
+        "label": "Multi-emplacements (allées, étagères) ?",
+        "module": "has_stock",
+        "uo_type": "uo",
+        "uo_value": 2.0,
+        "detail": "Fixe → 2.0j"
+      },
+      {
+        "question_id": "stock_putaway",
+        "label": "Règles de rangement automatique (putaway) ?",
+        "module": "has_stock",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "stock_routes",
+        "label": "Routes logistiques spécifiques",
+        "module": "has_stock",
+        "uo_type": "uo_per_item",
+        "uo_value": 2.0,
+        "detail": "2 items × 1.0j = 2.0j"
+      },
+      {
+        "question_id": "stock_reappro",
+        "label": "Réapprovisionnement automatique (point de commande) ?",
+        "module": "has_stock",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "stock_valorisation",
+        "label": "Méthode de valorisation",
+        "module": "has_stock",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Coût moyen pondéré (AVCO)\" → 1.0j"
+      },
+      {
+        "question_id": "has_kits_vente",
+        "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+        "module": "has_kits_vente",
+        "uo_type": "base_module",
+        "uo_value": 1.0,
+        "detail": "Activation module → 1j"
+      },
+      {
+        "question_id": "kits_nb_kits",
+        "label": "Nombre de kits distincts (ordre de grandeur)",
+        "module": "has_kits_vente",
+        "uo_type": "uo_map",
+        "uo_value": 2.0,
+        "detail": "\"> 200\" → 2.0j"
+      },
+      {
+        "question_id": "kits_explosion_bl",
+        "label": "Explosion des composants sur le bon de livraison ?",
+        "module": "has_kits_vente",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Oui — les composants apparaissent individuellement sur le BL\" → 1.0j"
+      },
+      {
+        "question_id": "kits_stock_composants",
+        "label": "Déstockage des composants à la livraison (pas du kit lui-même) ?",
+        "module": "has_kits_vente",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      }
+    ]
+  },
+  "ajustement": {
+    "total_uo_brut": 61.0,
+    "total_uo_ajuste": 73.2,
+    "ecart_global_pct": 20.0,
+    "justification_globale": "Ajustement +20% justifié par : migration massive de données Excel manuelles (>20k clients), gros volume produits (>15k) avec variantes, >200 kits complexes avec explosion BL, et transition depuis 2 ERP différents (Sage + Quadratus) nécessitant harmonisation des données.",
+    "par_module": {
+      "_general": {
+        "label": "Paramètres généraux",
+        "uo_brut": 20.0,
+        "uo_ajuste": 25.0,
+        "coefficient": 1.25,
+        "justification": "Migration complexe : >20k clients depuis Excel manuel + >15k produits avec variantes + harmonisation données Sage/Quadratus. Nettoyage et dédoublonnage nécessaires."
+      },
+      "has_sale": {
+        "label": "Besoins Ventes (devis, commandes, facturation) ?",
+        "uo_brut": 6.0,
+        "uo_ajuste": 6.6,
+        "coefficient": 1.1,
+        "justification": "Configuration standard avec variantes simples (2 attributs, <10 combinaisons). Ajustement mineur pour intégration avec les >200 kits."
+      },
+      "has_purchase": {
+        "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+        "uo_brut": 5.0,
+        "uo_ajuste": 5.5,
+        "coefficient": 1.1,
+        "justification": "Dropshipping + demandes d'achat + multi-fournisseurs avec tarifs Excel à nettoyer. Complexité modérée mais données sources manuelles."
+      },
+      "has_account": {
+        "label": "Besoins Comptabilité ?",
+        "uo_brut": 14.5,
+        "uo_ajuste": 17.4,
+        "coefficient": 1.2,
+        "justification": "Transition depuis 2 ERP (Sage + Quadratus) nécessitant harmonisation plan comptable et analytique. Factur-X + TVA intracommunautaire + personnalisation PDF intermédiaire."
+      },
+      "has_stock": {
+        "label": "Besoins Stocks & Logistique ?",
+        "uo_brut": 11.0,
+        "uo_ajuste": 13.2,
+        "coefficient": 1.2,
+        "justification": "Multi-emplacements + putaway + routes MTO/dropshipping + réappro auto. Intégration avec >200 kits nécessitant déstockage composants complexe."
+      },
+      "has_kits_vente": {
+        "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+        "uo_brut": 4.5,
+        "uo_ajuste": 5.4,
+        "coefficient": 1.2,
+        "justification": ">200 kits avec explosion BL et déstockage composants. Configuration avancée nécessitant tests approfondis avec le module stock."
+      }
+    },
+    "risques": [
+      {
+        "module": "global",
+        "description": "Qualité des données Excel manuelles : >20k clients et tarifs fournisseurs nécessiteront probablement nettoyage/dédoublonnage supplémentaire",
+        "impact_uo": 5,
+        "probabilite": "élevée"
+      },
+      {
+        "module": "_general",
+        "description": "Harmonisation complexe entre données Sage 50/100/1000 et Quadratus avec structures potentiellement différentes",
+        "impact_uo": 3,
+        "probabilite": "moyenne"
+      },
+      {
+        "module": "has_kits_vente",
+        "description": ">200 kits avec explosion BL : risque de performance et complexité sous-estimée lors des tests en volume",
+        "impact_uo": 2,
+        "probabilite": "moyenne"
+      },
+      {
+        "module": "has_stock",
+        "description": "Intégration kits/stock/variantes : matrice incomplète de variantes peut créer des incohérences stock",
+        "impact_uo": 2,
+        "probabilite": "faible"
+      }
+    ],
+    "recommandations": [
+      "Prévoir audit qualité données dès le début : échantillonnage clients/fournisseurs Excel pour identifier doublons et incohérences",
+      "Planifier migration en 2 phases : d'abord Sage (plus structuré), puis Quadratus avec harmonisation",
+      "Tests de charge obligatoires sur les >200 kits avec explosion BL avant go-live",
+      "Formation renforcée utilisateurs : transition depuis 2 ERP différents nécessite accompagnement changement",
+      "Prévoir buffer 10% supplémentaire pour les ajustements post-tests utilisateurs"
+    ]
+  },
+  "projets_reference": [],
+  "meta": {
+    "nb_projets_historique": 0,
+    "nb_projets_similaires": 0
+  }
+}

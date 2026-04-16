@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Proposition commerciale — Intégration Odoo 19 — Société SIREN 88888</title>
+  <style>
+    @page { size: A4; margin: 2cm 2.5cm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt; line-height: 1.6; color: #333;
+      max-width: 800px; margin: 0 auto; padding: 40px 20px;
+    }
+    .cover {
+      text-align: center; padding: 120px 0 60px;
+      page-break-after: always;
+    }
+    .cover .logo { font-size: 14pt; font-weight: bold; color: #3EC9A7; letter-spacing: 2px; }
+    .cover h1 { font-size: 22pt; color: #1A2B4A; margin: 40px 0 16px; }
+    .cover .client { font-size: 14pt; color: #4a5c7a; }
+    .cover .meta { font-size: 10pt; color: #8496b0; margin-top: 60px; }
+    h2 {
+      font-size: 16pt; color: #1A2B4A; margin: 30px 0 12px;
+      padding-bottom: 6px; border-bottom: 2px solid #3EC9A7;
+    }
+    h3 { font-size: 13pt; color: #1A2B4A; margin: 20px 0 8px; }
+    p { margin-bottom: 10px; }
+    .section { margin-bottom: 24px; }
+    table {
+      width: 100%; border-collapse: collapse; margin: 16px 0;
+      font-size: 10pt;
+    }
+    th {
+      background: #1A2B4A; color: white; padding: 8px 12px;
+      text-align: left; font-weight: bold;
+    }
+    td { padding: 8px 12px; border-bottom: 1px solid #E2E6EA; }
+    tr:nth-child(even) { background: #F0F2F5; }
+    .total-row { background: #3EC9A7 !important; color: white; font-weight: bold; }
+    .footer {
+      margin-top: 60px; padding-top: 16px;
+      border-top: 1px solid #E2E6EA;
+      font-size: 9pt; color: #8496b0; text-align: center;
+    }
+    @media print {
+      body { padding: 0; max-width: none; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cover">
+    <div class="logo">YNOV'IT SERVICES</div>
+    <h1>Proposition commerciale — Intégration Odoo 19 — Société SIREN 88888</h1>
+    <div class="client">Prospect</div>
+    <div class="meta">
+      Réf. PROP-20260416-SIR<br>
+      16/04/2026<br>
+      Document confidentiel
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Synthèse exécutive</h2>
+    <p>Nous proposons l'implémentation d'Odoo 19 pour digitaliser et unifier vos processus commerciaux, achats, stocks et comptables actuellement répartis entre Excel, Sage et Quadratus. Ce projet d'envergure permettra de gérer efficacement vos &gt;20k clients, &gt;15k produits avec variantes et &gt;200 kits, tout en automatisant vos flux Order-to-Cash et Procure-to-Pay. L'investissement estimé se situe entre 61 et 73,2 jours d'intégration pour une transformation digitale complète de votre organisation.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Compréhension du besoin</h2>
+    <p>Votre organisation fait face à un défi de taille : harmoniser et digitaliser des processus métier actuellement éclatés sur plusieurs systèmes (Excel manuel, Sage 50/100/1000, Quadratus). Avec plus de 20 000 clients, 15 000 produits avec variantes et 200 kits complexes, vous avez besoin d'une solution ERP unifiée capable de gérer l'ensemble de vos flux : ventes avec devis et facturation, achats incluant dropshipping, gestion de stocks multi-emplacements, et comptabilité avec TVA intracommunautaire. L'enjeu principal réside dans la migration et l'harmonisation de ces données hétérogènes tout en préservant la continuité d'activité.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution proposée</h2>
+    <p>Nous préconisons une implémentation complète d'Odoo 19 couvrant les modules Ventes, Achats, Stocks, Comptabilité et Kits de vente, avec une approche de migration progressive pour minimiser les risques.</p>
+    <h3>Périmètre fonctionnel</h3>
+    <p>• Module Ventes : gestion complète des devis, commandes et facturation avec support des variantes produits (2 attributs, &lt;10 combinaisons)
+• Module Achats : commandes fournisseurs, réceptions, dropshipping et demandes d'achat avec intégration des tarifs fournisseurs Excel
+• Module Stocks : gestion multi-emplacements avec putaway, routes MTO/dropshipping et réapprovisionnement automatique
+• Module Kits de vente : configuration avancée pour &gt;200 kits avec explosion sur BL et déstockage automatique des composants
+• Module Comptabilité : plan comptable harmonisé, analytique, TVA intracommunautaire, Factur-X et personnalisation PDF</p>
+    <h3>Architecture technique</h3>
+    <p>Solution Odoo 19 Community/Enterprise hébergée avec migration de données en 2 phases : d'abord les données Sage (plus structurées), puis Quadratus avec harmonisation. Mise en place d'outils de nettoyage et dédoublonnage pour les données Excel manuelles. Configuration des flux métier Order-to-Cash, Procure-to-Pay, Gestion-Kits et Réapprovisionnement avec tests de charge obligatoires sur les volumes importants.</p>
+  </div>
+
+  <div class="section">
+    <h2>4. Chiffrage détaillé</h2>
+    <p>Notre estimation se base sur l'analyse approfondie de votre périmètre et des complexités identifiées, notamment la migration depuis 3 systèmes différents et les volumes importants de données.</p>
+    <table>
+      <tr><th>Poste</th><th>UO (jours)</th><th>Détail</th></tr>
+      <tr><td>Paramètres généraux et migration</td><td style='text-align:center'>25.0</td><td>Migration complexe &gt;20k clients Excel + &gt;15k produits + harmonisation Sage/Quadratus</td></tr>
+      <tr><td>Module Ventes</td><td style='text-align:center'>6.6</td><td>Configuration standard avec variantes et intégration kits</td></tr>
+      <tr><td>Module Achats</td><td style='text-align:center'>5.5</td><td>Dropshipping + multi-fournisseurs + nettoyage tarifs Excel</td></tr>
+      <tr><td>Module Comptabilité</td><td style='text-align:center'>17.4</td><td>Harmonisation 2 ERP + TVA intracommunautaire + Factur-X</td></tr>
+      <tr><td>Module Stocks &amp; Logistique</td><td style='text-align:center'>13.2</td><td>Multi-emplacements + routes complexes + intégration kits</td></tr>
+      <tr><td>Kits de vente</td><td style='text-align:center'>5.4</td><td>&gt;200 kits avec explosion BL et déstockage composants</td></tr>
+      <tr class="total-row"><td>TOTAL (fourchette)</td><td style='text-align:center'>61.0 — 73.2 j</td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>5. Licences Odoo</h2>
+    <p>Les licences Odoo seront définies précisément lors du cadrage projet en fonction du nombre d'utilisateurs finaux et des modules Enterprise requis. Pour un projet de cette envergure, nous recommandons généralement Odoo Enterprise pour bénéficier du support officiel et des fonctionnalités avancées (notamment pour la comptabilité et les stocks). Le coût des licences sera communiqué séparément après validation du nombre d'utilisateurs et sera facturé directement par Odoo SA.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. Méthodologie et planning</h2>
+    <p>Notre approche projet privilégie une méthodologie éprouvée avec des jalons de validation pour sécuriser la migration de vos données critiques.</p>
+    <table>
+      <tr><th>Phase</th><th>Durée</th><th>Description</th></tr>
+      <tr><td>Phase 1 - Cadrage et audit données</td><td>2 semaines</td><td>Analyse détaillée des données sources, identification des doublons et incohérences, définition du plan de migration</td></tr>
+      <tr><td>Phase 2 - Paramétrage et développements</td><td>8 semaines</td><td>Configuration des modules, développements spécifiques, migration données Sage puis Quadratus</td></tr>
+      <tr><td>Phase 3 - Tests et recette</td><td>3 semaines</td><td>Tests fonctionnels, tests de charge sur les kits, recette utilisateur, corrections</td></tr>
+      <tr><td>Phase 4 - Formation et go-live</td><td>2 semaines</td><td>Formation utilisateurs, accompagnement démarrage, support post go-live</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>7. Conditions et modalités</h2>
+    <p>• Facturation : 30% à la commande, 40% à la recette fonctionnelle, 30% au go-live
+• Validité de l'offre : 30 jours à compter de la date d'émission
+• Propriété du code : les développements spécifiques restent votre propriété
+• Garantie : 3 mois de garantie sur les développements à compter du go-live
+• Support : 40h de support post go-live incluses dans le forfait
+• Risques identifiés : des ajustements peuvent être nécessaires selon la qualité réelle des données sources (audit préalable recommandé)
+• Prérequis client : mise à disposition d'un référent métier à 50% pendant la durée du projet</p>
+  </div>
+
+
+
+  <div class="footer">
+    Ynov'iT Services — Intégrateur Odoo<br>
+    Ce document est confidentiel et destiné uniquement à son destinataire.
+  </div>
+
+</body>
+</html>

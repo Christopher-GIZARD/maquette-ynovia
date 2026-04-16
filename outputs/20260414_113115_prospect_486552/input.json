@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "genere_le": "2026-04-14T09:31:14.868Z",
+    "version_questionnaire": "5.0",
+    "outil": "Formulaire Avant-Vente Ynov'iT Odoo"
+  },
+  "societe": {
+    "siren": "123"
+  },
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_portail": 0,
+    "has_crm": true,
+    "crm_nb_equipes": 2,
+    "crm_probabilites": true,
+    "has_sale": true,
+    "sale_types_produits": [
+      "Biens physiques (stockables)",
+      "Biens consommables",
+      "Services (main d'œuvre, prestation)"
+    ],
+    "sale_variantes": "Simples (1–2 attributs)",
+    "sale_var_nb_attr": 3,
+    "sale_var_nb_val": 4,
+    "sale_var_nb_comb": "< 10",
+    "sale_unites_mesure": false,
+    "sale_conditionnements": false,
+    "sale_grilles": "1 seul tarif",
+    "sale_remises": true,
+    "sale_marges": true,
+    "sale_multi_devises": false,
+    "sale_acomptes": true,
+    "sale_politique_fact": "À la livraison",
+    "has_purchase": true,
+    "purch_multi_fourn": true,
+    "purch_delais": false,
+    "purch_demandes_achat": true
+  },
+  "reponses_detail": [
+    {
+      "id": "nb_societes",
+      "label": "Nombre de sociétés dans l'instance Odoo",
+      "valeur": 1
+    },
+    {
+      "id": "nb_users_portail",
+      "label": "Nombre d'utilisateurs portail prévus (clients, fournisseurs)",
+      "valeur": 0
+    },
+    {
+      "id": "has_crm",
+      "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+      "valeur": true
+    },
+    {
+      "id": "crm_nb_equipes",
+      "label": "Nombre d'équipes commerciales",
+      "valeur": 2
+    },
+    {
+      "id": "crm_probabilites",
+      "label": "Probabilités de closing sur les opportunités ?",
+      "valeur": true
+    },
+    {
+      "id": "has_sale",
+      "label": "Besoins Ventes (devis, commandes, facturation) ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_types_produits",
+      "label": "Types de produits vendus",
+      "valeur": [
+        "Biens physiques (stockables)",
+        "Biens consommables",
+        "Services (main d'œuvre, prestation)"
+      ]
+    },
+    {
+      "id": "sale_variantes",
+      "label": "Produits avec variantes (couleur, taille...) ?",
+      "valeur": "Simples (1–2 attributs)"
+    },
+    {
+      "id": "sale_var_nb_attr",
+      "label": "Nombre d'attributs distincts",
+      "valeur": 3
+    },
+    {
+      "id": "sale_var_nb_val",
+      "label": "Valeurs par attribut (en moyenne)",
+      "valeur": 4
+    },
+    {
+      "id": "sale_var_nb_comb",
+      "label": "Variantes par produit",
+      "valeur": "< 10"
+    },
+    {
+      "id": "sale_unites_mesure",
+      "label": "Unités de mesure multiples (achat ≠ vente) ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_conditionnements",
+      "label": "Conditionnements produits (lots, palettes) ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_grilles",
+      "label": "Nombre de listes de prix",
+      "valeur": "1 seul tarif"
+    },
+    {
+      "id": "sale_remises",
+      "label": "Remises sur lignes de commande ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_marges",
+      "label": "Suivi des marges ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_multi_devises",
+      "label": "Ventes en devises étrangères ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_acomptes",
+      "label": "Gestion des acomptes sur commande ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_politique_fact",
+      "label": "Politique de facturation principale",
+      "valeur": "À la livraison"
+    },
+    {
+      "id": "has_purchase",
+      "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_multi_fourn",
+      "label": "Plusieurs fournisseurs par produit avec tarifs ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_delais",
+      "label": "Délais d'approvisionnement par fournisseur ?",
+      "valeur": false
+    },
+    {
+      "id": "purch_demandes_achat",
+      "label": "Demandes d'achat avant génération de la commande ?",
+      "valeur": true
+    }
+  ]
+}

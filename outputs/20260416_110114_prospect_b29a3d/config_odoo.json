@@ -1,0 +1,68 @@
+{
+  "manifest": {
+    "name": "Presales Config — Société 88888",
+    "version": "19.0.1.0.0",
+    "category": "Tools",
+    "summary": "Configuration automatique avant-vente",
+    "depends": [
+      "base",
+      "sale_management",
+      "purchase",
+      "account_accountant",
+      "stock",
+      "mrp"
+    ],
+    "data": [
+      "data/config.xml"
+    ],
+    "installable": true,
+    "auto_install": false
+  },
+  "modules_to_install": [
+    "crm",
+    "sale_management",
+    "purchase",
+    "account_accountant",
+    "stock",
+    "mrp"
+  ],
+  "config_xml": "<odoo>\n  <data noupdate=\"0\">\n    <record id=\"presales_config\" model=\"res.config.settings\">\n      <!-- Ventes -->\n      <field name=\"group_discount_per_so_line\">True</field>\n      <field name=\"module_sale_margin\">True</field>\n      <field name=\"default_invoice_policy\">order</field>\n      \n      <!-- Achats -->\n      <field name=\"module_stock_dropshipping\">True</field>\n      \n      <!-- Comptabilité -->\n      <field name=\"module_account_accountant\">True</field>\n      \n      <!-- Stock -->\n      <field name=\"group_stock_multi_locations\">True</field>\n      <field name=\"group_stock_adv_location\">True</field>\n      <field name=\"replenish_on_order\">True</field>\n      \n      <!-- Produits -->\n      <field name=\"group_product_variant\">True</field>\n      \n      <!-- Fabrication (pour kits) -->\n      <field name=\"group_mrp_byproducts\">True</field>\n    </record>\n  </data>\n</odoo>",
+  "settings": {
+    "group_discount_per_so_line": true,
+    "module_sale_margin": true,
+    "default_invoice_policy": "order",
+    "module_stock_dropshipping": true,
+    "module_account_accountant": true,
+    "group_stock_multi_locations": true,
+    "group_stock_adv_location": true,
+    "replenish_on_order": true,
+    "group_product_variant": true,
+    "group_mrp_byproducts": true
+  },
+  "security_groups": [
+    "group_discount_per_so_line",
+    "group_stock_multi_locations",
+    "group_stock_adv_location",
+    "group_product_variant",
+    "group_mrp_byproducts"
+  ],
+  "companies": [
+    {
+      "name": "Société 88888",
+      "currency": "EUR"
+    }
+  ],
+  "notes": [
+    "Plan comptable PCG France à configurer manuellement",
+    "Comptabilité analytique (1 axe) à paramétrer",
+    "SEPA et TVA intracommunautaire à configurer",
+    "Règles de putaway à définir pour les emplacements multiples",
+    "Plus de 200 kits de vente à créer avec nomenclatures",
+    "Migration de plus de 20 000 clients et 15 000 produits à planifier"
+  ],
+  "warnings": [
+    "Volume important de données à migrer (>20k clients, >15k produits)",
+    "Kits avec explosion sur BL nécessite configuration avancée des nomenclatures",
+    "Variantes produits avec matrice incomplète peut nécessiter nettoyage des données"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "titre": "Cahier des charges — Projet Odoo 19 — Société SIREN 88888",
+  "date": "16/04/2026",
+  "version": "1.0",
+  "sections": [
+    {
+      "numero": "1",
+      "titre": "Contexte et objectifs",
+      "contenu": "La société (SIREN 88888) souhaite moderniser son système d'information en remplaçant ses solutions actuelles Sage 50/100/1000 et Quadratus par une solution ERP intégrée Odoo 19. Cette démarche s'inscrit dans une volonté d'optimiser les processus métier et d'améliorer la productivité de l'équipe de 6 utilisateurs internes. Les objectifs business visés sont l'automatisation des flux entre les ventes, achats, stock et comptabilité, l'amélioration du suivi des marges commerciales, et la centralisation des données dans un système unique. Le projet doit permettre une meilleure visibilité sur l'activité et faciliter la prise de décision grâce à des reportings intégrés.",
+      "sous_sections": []
+    },
+    {
+      "numero": "2",
+      "titre": "Périmètre fonctionnel",
+      "contenu": "",
+      "sous_sections": [
+        {
+          "numero": "2.1",
+          "titre": "Module Ventes",
+          "contenu": "Le module Ventes d'Odoo 19 couvrira la gestion complète du cycle commercial avec trois types de produits : biens physiques stockables, biens consommables et services. La gestion des variantes produits sera configurée pour supporter des variantes simples avec 2 attributs maximum et 3 valeurs par attribut, générant moins de 10 combinaisons par produit. Le système gérera un tarif unique avec possibilité d'appliquer des remises et de calculer les marges en temps réel. La politique de facturation sera configurée 'à la commande' et le module intégrera un système de relances automatiques pour les impayés. Les devis et commandes seront générés automatiquement sans nécessiter de modèles personnalisés."
+        },
+        {
+          "numero": "2.2",
+          "titre": "Module Achats",
+          "contenu": "Le module Achats permettra la gestion multi-fournisseurs avec suivi des délais de livraison et gestion des demandes d'achat internes. La fonctionnalité de dropshipping sera activée pour permettre la livraison directe fournisseur vers client sans passage par les stocks internes. Le système gérera les bons de commande, le suivi des réceptions et l'interface avec la comptabilité fournisseurs. Les tarifs fournisseurs seront intégrés dans le système de reprise de données pour optimiser les processus d'approvisionnement."
+        },
+        {
+          "numero": "2.3",
+          "titre": "Module Comptabilité",
+          "contenu": "La comptabilité sera configurée avec le Plan Comptable Général français standard et intégrera la comptabilité analytique sur un axe unique. Le système gérera la TVA sur les débits avec support de la TVA intracommunautaire, conformément à la réglementation française. Les virements SEPA seront activés pour automatiser les paiements. La facturation électronique Factur-X sera mise en place ainsi que la génération de PDF pour les factures (niveau intermédiaire), avoirs (standard), relances (standard) et relevés de compte (niveau intermédiaire). L'intégration avec les modules ventes et achats assurera une comptabilisation automatique des écritures."
+        },
+        {
+          "numero": "2.4",
+          "titre": "Module Stock",
+          "contenu": "La gestion de stock sera configurée pour un entrepôt unique avec gestion multi-emplacements et règles de rangement automatique (putaway rules). Le système supportera les routes de réassort sur commande (MTO) et de dropshipping. La valorisation des stocks sera configurée en coût moyen pondéré (AVCO) et le système gérera le réapprovisionnement automatique basé sur les règles de stock minimum. Aucune traçabilité par lots ou numéros de série n'est requise, et la gestion des dates limite de consommation n'est pas nécessaire. Le système n'intégrera pas la gestion des colis ni l'édition de PDF pour les mouvements de stock."
+        },
+        {
+          "numero": "2.5",
+          "titre": "Module Kits de vente",
+          "contenu": "Le système gérera plus de 200 kits de vente avec en moyenne 3 composants par kit. Les nomenclatures seront configurées à un seul niveau sans sous-assemblages complexes. Lors de la livraison, les composants apparaîtront individuellement sur les bons de livraison pour une meilleure traçabilité. Le stock sera géré au niveau des composants et non des kits assemblés. La facturation se fera au prix forfaitaire du kit sans détail des composants. Les variantes de composants ne seront pas gérées dans cette configuration initiale."
+        }
+      ]
+    },
+    {
+      "numero": "3",
+      "titre": "Reprise de données",
+      "contenu": "Le projet inclut la reprise de données depuis les systèmes actuels sur trois périmètres principaux. Le fichier clients/contacts représente plus de 20 000 enregistrements au format Excel manuel, nécessitant un travail de nettoyage et de dédoublonnage important. Les données fournisseurs (100 à 500 enregistrements) incluront les tarifs associés et devront être consolidées depuis les systèmes sources. Le catalogue produits, composé de plus de 15 000 références, sera extrait via l'export ERP propriétaire et inclura les variantes produits, images et descriptions. La méthodologie comprendra une phase d'extraction et d'analyse de la qualité des données, suivie du nettoyage et de la normalisation, puis de l'import par lots avec validation fonctionnelle. Une attention particulière sera portée à la cohérence des données entre les différents périmètres et à la complétude des informations obligatoires dans Odoo 19.",
+      "sous_sections": []
+    },
+    {
+      "numero": "4",
+      "titre": "Interfaces et intégrations",
+      "contenu": "Le projet ne prévoit pas d'interfaces EDI ou d'intégrations avec des systèmes tiers dans sa phase initiale. L'ensemble des processus métier sera géré nativement dans Odoo 19, permettant une approche intégrée et simplifiée. Cette approche favorise la cohérence des données et réduit la complexité technique du projet. Des intégrations pourront être envisagées ultérieurement selon l'évolution des besoins métier.",
+      "sous_sections": []
+    },
+    {
+      "numero": "5",
+      "titre": "Utilisateurs et droits d'accès",
+      "contenu": "Le système sera configuré pour 6 utilisateurs internes avec des profils adaptés aux différents métiers : commercial, acheteur, gestionnaire de stock, comptable, direction. Aucun utilisateur portail n'est prévu dans la configuration initiale. Les droits d'accès suivront la logique standard d'Odoo 19 avec des groupes de sécurité prédéfinis, sans nécessiter de développements spécifiques de gestion des droits. Chaque utilisateur aura accès aux modules correspondant à ses responsabilités métier avec des niveaux de droits appropriés (lecture, écriture, suppression).",
+      "sous_sections": []
+    },
+    {
+      "numero": "6",
+      "titre": "Contraintes et exigences",
+      "contenu": "Le projet concerne une société unique sans problématique multi-sociétés ni transactions intercompagnies. Le système fonctionnera exclusivement en français pour des activités en France, simplifiant la configuration fiscale et légale. La date de go-live est fixée au 30 avril 2026, imposant un planning serré pour la mise en œuvre. Cette contrainte temporelle nécessitera une mobilisation importante des équipes projet et une validation rapide des étapes clés. Le budget n'étant pas défini à ce stade, les choix techniques privilégieront les fonctionnalités standard d'Odoo 19 pour optimiser le rapport coût/bénéfice.",
+      "sous_sections": []
+    },
+    {
+      "numero": "7",
+      "titre": "Hypothèses de travail",
+      "contenu": "Le projet s'appuie sur plusieurs hypothèses clés qui devront être validées en phase de cadrage. La disponibilité d'un référent métier côté client est supposée pour assurer les validations fonctionnelles et les tests utilisateurs. Les données sources sont présumées exploitables et de qualité suffisante pour la reprise, notamment pour le catalogue produits via l'export ERP propriétaire. L'infrastructure technique (serveurs, réseau, postes utilisateurs) est supposée compatible avec les prérequis Odoo 19. La formation des utilisateurs finaux est considérée comme un prérequis à la réussite du projet mais n'est pas incluse dans ce périmètre. Le projet démarrera sur une instance Odoo 19 Community avec possibilité d'évolution vers Enterprise selon les besoins identifiés.",
+      "sous_sections": []
+    },
+    {
+      "numero": "8",
+      "titre": "Exclusions",
+      "contenu": "Sont explicitement exclus du périmètre : tous les modules non mentionnés dans ce cahier des charges (CRM, Projet, Fabrication, RH, Helpdesk, Field Service, Site web, Maintenance, Réparation, Location), les développements spécifiques et personnalisations non décrites, la formation des utilisateurs finaux, le support et la maintenance post-go-live, les interfaces avec des systèmes tiers, la gestion des unités de mesure et conditionnements multiples, les grilles tarifaires complexes et la gestion des commissions commerciales. La reprise de données se limite aux trois périmètres identifiés (clients, fournisseurs, produits) et n'inclut pas l'historique des transactions, stocks ou écritures comptables.",
+      "sous_sections": []
+    },
+    {
+      "numero": "9",
+      "titre": "Risques identifiés",
+      "contenu": "Plusieurs risques ont été identifiés et devront faire l'objet d'un suivi particulier. Le volume important de données à reprendre (plus de 20 000 clients et 15 000 produits) présente des risques de qualité et de cohérence, particulièrement pour les données clients au format Excel manuel. La gestion de plus de 200 kits de vente avec leurs composants nécessitera une attention particulière lors du paramétrage et des tests. La contrainte de délai avec un go-live au 30 avril 2026 impose un planning serré qui pourrait impacter la qualité des livrables si les validations client sont retardées. L'absence de budget défini peut générer des arbitrages en cours de projet. Le changement d'ERP représente un enjeu de conduite du changement important pour les 6 utilisateurs qui devront s'approprier de nouveaux processus et interfaces.",
+      "sous_sections": []
+    }
+  ]
+}

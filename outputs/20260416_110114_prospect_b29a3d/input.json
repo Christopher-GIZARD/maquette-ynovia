@@ -1,0 +1,536 @@
+{
+  "meta": {
+    "genere_le": "2026-04-16T09:01:13.815Z",
+    "version_questionnaire": "5.0",
+    "outil": "Formulaire Avant-Vente Ynov'iT Odoo"
+  },
+  "societe": {
+    "siren": "88888"
+  },
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_internes": 6,
+    "nb_users_portail": 0,
+    "erp_actuel": [
+      "Sage 50/100/1000",
+      "Quadratus"
+    ],
+    "date_go_live": "2026-04-30",
+    "budget": "Non défini",
+    "pays_activite": [
+      "France"
+    ],
+    "langues": [
+      "Français"
+    ],
+    "migration_donnees": true,
+    "migration_perimetre": [
+      "Clients / contacts",
+      "Fournisseurs",
+      "Catalogue produits"
+    ],
+    "vol_clients": "> 20 000",
+    "vol_clients_format": "Fichier Excel manuel",
+    "vol_clients_multi": true,
+    "vol_clients_pj": false,
+    "vol_fournisseurs": "100–500",
+    "vol_fourn_format": "Fichier Excel manuel",
+    "vol_fourn_tarifs": true,
+    "vol_produits": "> 15 000",
+    "vol_produits_format": "Export ERP propre",
+    "vol_produits_variantes": true,
+    "vol_var_nb_valeurs_moy": 3,
+    "vol_var_combinaisons": "< 10",
+    "vol_var_matrice_incomplete": true,
+    "vol_produits_images": true,
+    "vol_produits_desc": true,
+    "has_sale": true,
+    "sale_types_produits": [
+      "Biens physiques (stockables)",
+      "Biens consommables",
+      "Services (main d'œuvre, prestation)"
+    ],
+    "sale_variantes": "Simples (1–2 attributs)",
+    "sale_var_nb_attr": 2,
+    "sale_var_nb_val": 3,
+    "sale_var_nb_comb": "< 10",
+    "sale_unites_mesure": false,
+    "sale_conditionnements": false,
+    "sale_grilles": "1 seul tarif",
+    "sale_remises": true,
+    "sale_marges": true,
+    "sale_multi_devises": false,
+    "sale_modeles_devis": false,
+    "sale_politique_fact": "À la commande",
+    "sale_relances": true,
+    "sale_commissions": false,
+    "has_purchase": true,
+    "purch_multi_fourn": true,
+    "purch_delais": true,
+    "purch_demandes_achat": true,
+    "purch_dropship": true,
+    "has_account": true,
+    "account_plan": "PCG France standard",
+    "account_analytique": true,
+    "account_axes": "1 axe",
+    "account_budgets": false,
+    "account_multi_devises": false,
+    "account_sepa": true,
+    "account_prelevement": false,
+    "account_tva": [
+      "Débits (standard)",
+      "Intracommunautaire"
+    ],
+    "account_facturx": true,
+    "account_pdf": true,
+    "pdf_facture_compta": "Intermédiaire",
+    "pdf_avoir": "Standard",
+    "pdf_relance": "Standard",
+    "pdf_releve": "Intermédiaire",
+    "has_stock": true,
+    "stock_nb_entrepots": 1,
+    "stock_multi_empl": true,
+    "stock_putaway": true,
+    "stock_tracabilite": "Non requise",
+    "stock_dlc": false,
+    "stock_colis": false,
+    "stock_routes": [
+      "Réassort sur commande (MTO)",
+      "Dropshipping"
+    ],
+    "stock_reappro": true,
+    "stock_valorisation": "Coût moyen pondéré (AVCO)",
+    "stock_pdf": false,
+    "has_kits_vente": true,
+    "kits_nb_kits": "> 200",
+    "kits_nb_composants_moy": 3,
+    "kits_bom_niveaux": false,
+    "kits_explosion_bl": "Oui — les composants apparaissent individuellement sur le BL",
+    "kits_stock_composants": true,
+    "kits_variantes_composants": false,
+    "kits_facturation": "Prix du kit (forfait)"
+  },
+  "reponses_detail": [
+    {
+      "id": "nb_societes",
+      "label": "Nombre de sociétés dans l'instance Odoo",
+      "valeur": 1
+    },
+    {
+      "id": "nb_users_internes",
+      "label": "Nombre d'utilisateurs internes prévus",
+      "valeur": 6
+    },
+    {
+      "id": "nb_users_portail",
+      "label": "Nombre d'utilisateurs portail prévus (clients, fournisseurs)",
+      "valeur": 0
+    },
+    {
+      "id": "erp_actuel",
+      "label": "ERP / logiciels métier actuels",
+      "valeur": [
+        "Sage 50/100/1000",
+        "Quadratus"
+      ]
+    },
+    {
+      "id": "date_go_live",
+      "label": "Date de go-live souhaitée",
+      "valeur": "2026-04-30"
+    },
+    {
+      "id": "budget",
+      "label": "Budget indicatif du projet",
+      "valeur": "Non défini"
+    },
+    {
+      "id": "pays_activite",
+      "label": "Pays dans lesquels l'entreprise est active",
+      "valeur": [
+        "France"
+      ]
+    },
+    {
+      "id": "langues",
+      "label": "Langues requises (interface / documents)",
+      "valeur": [
+        "Français"
+      ]
+    },
+    {
+      "id": "migration_donnees",
+      "label": "Reprise de données depuis l'existant requise ?",
+      "valeur": true
+    },
+    {
+      "id": "migration_perimetre",
+      "label": "Périmètre de la reprise de données",
+      "valeur": [
+        "Clients / contacts",
+        "Fournisseurs",
+        "Catalogue produits"
+      ]
+    },
+    {
+      "id": "vol_clients",
+      "label": "Volume",
+      "valeur": "> 20 000"
+    },
+    {
+      "id": "vol_clients_format",
+      "label": "Qualité du format source",
+      "valeur": "Fichier Excel manuel"
+    },
+    {
+      "id": "vol_clients_multi",
+      "label": "Plusieurs contacts / interlocuteurs par client ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_clients_pj",
+      "label": "Documents attachés aux fiches clients ?",
+      "valeur": false
+    },
+    {
+      "id": "vol_fournisseurs",
+      "label": "Volume",
+      "valeur": "100–500"
+    },
+    {
+      "id": "vol_fourn_format",
+      "label": "Qualité du format source",
+      "valeur": "Fichier Excel manuel"
+    },
+    {
+      "id": "vol_fourn_tarifs",
+      "label": "Tarifs d'achat par fournisseur à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits",
+      "label": "Volume",
+      "valeur": "> 15 000"
+    },
+    {
+      "id": "vol_produits_format",
+      "label": "Qualité du format source",
+      "valeur": "Export ERP propre"
+    },
+    {
+      "id": "vol_produits_variantes",
+      "label": "Produits avec variantes à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_var_nb_valeurs_moy",
+      "label": "Valeurs par attribut (en moyenne)",
+      "valeur": 3
+    },
+    {
+      "id": "vol_var_combinaisons",
+      "label": "Variantes par produit",
+      "valeur": "< 10"
+    },
+    {
+      "id": "vol_var_matrice_incomplete",
+      "label": "Certaines combinaisons sont-elles inexistantes (matrice incomplète) ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_images",
+      "label": "Images produits à importer ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_desc",
+      "label": "Descriptions / fiches techniques à intégrer ?",
+      "valeur": true
+    },
+    {
+      "id": "has_sale",
+      "label": "Besoins Ventes (devis, commandes, facturation) ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_types_produits",
+      "label": "Types de produits vendus",
+      "valeur": [
+        "Biens physiques (stockables)",
+        "Biens consommables",
+        "Services (main d'œuvre, prestation)"
+      ]
+    },
+    {
+      "id": "sale_variantes",
+      "label": "Produits avec variantes (couleur, taille...) ?",
+      "valeur": "Simples (1–2 attributs)"
+    },
+    {
+      "id": "sale_var_nb_attr",
+      "label": "Nombre d'attributs distincts",
+      "valeur": 2
+    },
+    {
+      "id": "sale_var_nb_val",
+      "label": "Valeurs par attribut (en moyenne)",
+      "valeur": 3
+    },
+    {
+      "id": "sale_var_nb_comb",
+      "label": "Variantes par produit",
+      "valeur": "< 10"
+    },
+    {
+      "id": "sale_unites_mesure",
+      "label": "Unités de mesure multiples (achat ≠ vente) ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_conditionnements",
+      "label": "Conditionnements produits (lots, palettes) ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_grilles",
+      "label": "Nombre de listes de prix",
+      "valeur": "1 seul tarif"
+    },
+    {
+      "id": "sale_remises",
+      "label": "Remises sur lignes de commande ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_marges",
+      "label": "Suivi des marges ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_multi_devises",
+      "label": "Ventes en devises étrangères ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_modeles_devis",
+      "label": "Modèles de devis prédéfinis ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_politique_fact",
+      "label": "Politique de facturation principale",
+      "valeur": "À la commande"
+    },
+    {
+      "id": "sale_relances",
+      "label": "Relances automatiques des factures impayées ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_commissions",
+      "label": "Commissions commerciales ?",
+      "valeur": false
+    },
+    {
+      "id": "has_purchase",
+      "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_multi_fourn",
+      "label": "Plusieurs fournisseurs par produit avec tarifs ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_delais",
+      "label": "Délais d'approvisionnement par fournisseur ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_demandes_achat",
+      "label": "Demandes d'achat avant génération de la commande ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_dropship",
+      "label": "Dropshipping (livraison directe fournisseur → client) ?",
+      "valeur": true
+    },
+    {
+      "id": "has_account",
+      "label": "Besoins Comptabilité ?",
+      "valeur": true
+    },
+    {
+      "id": "account_plan",
+      "label": "Plan comptable",
+      "valeur": "PCG France standard"
+    },
+    {
+      "id": "account_analytique",
+      "label": "Comptabilité analytique ?",
+      "valeur": true
+    },
+    {
+      "id": "account_axes",
+      "label": "Nombre d'axes analytiques",
+      "valeur": "1 axe"
+    },
+    {
+      "id": "account_budgets",
+      "label": "Gestion budgétaire ?",
+      "valeur": false
+    },
+    {
+      "id": "account_multi_devises",
+      "label": "Transactions en devises étrangères ?",
+      "valeur": false
+    },
+    {
+      "id": "account_sepa",
+      "label": "Virements SEPA ?",
+      "valeur": true
+    },
+    {
+      "id": "account_prelevement",
+      "label": "Prélèvements SEPA automatiques ?",
+      "valeur": false
+    },
+    {
+      "id": "account_tva",
+      "label": "Régimes de TVA applicables",
+      "valeur": [
+        "Débits (standard)",
+        "Intracommunautaire"
+      ]
+    },
+    {
+      "id": "account_facturx",
+      "label": "Factures Factur-X / e-invoicing UE ?",
+      "valeur": true
+    },
+    {
+      "id": "account_pdf",
+      "label": "Personnalisation des documents PDF Comptabilité ?",
+      "valeur": true
+    },
+    {
+      "id": "pdf_facture_compta",
+      "label": "Facture client",
+      "valeur": "Intermédiaire"
+    },
+    {
+      "id": "pdf_avoir",
+      "label": "Avoir client",
+      "valeur": "Standard"
+    },
+    {
+      "id": "pdf_relance",
+      "label": "Lettre de relance (par niveau)",
+      "valeur": "Standard"
+    },
+    {
+      "id": "pdf_releve",
+      "label": "Relevé de compte client",
+      "valeur": "Intermédiaire"
+    },
+    {
+      "id": "has_stock",
+      "label": "Besoins Stocks & Logistique ?",
+      "valeur": true
+    },
+    {
+      "id": "stock_nb_entrepots",
+      "label": "Nombre d'entrepôts",
+      "valeur": 1
+    },
+    {
+      "id": "stock_multi_empl",
+      "label": "Multi-emplacements (allées, étagères) ?",
+      "valeur": true
+    },
+    {
+      "id": "stock_putaway",
+      "label": "Règles de rangement automatique (putaway) ?",
+      "valeur": true
+    },
+    {
+      "id": "stock_tracabilite",
+      "label": "Traçabilité",
+      "valeur": "Non requise"
+    },
+    {
+      "id": "stock_dlc",
+      "label": "Dates de péremption (DLC / DLUO) ?",
+      "valeur": false
+    },
+    {
+      "id": "stock_colis",
+      "label": "Gestion des colis / unités logistiques ?",
+      "valeur": false
+    },
+    {
+      "id": "stock_routes",
+      "label": "Routes logistiques spécifiques",
+      "valeur": [
+        "Réassort sur commande (MTO)",
+        "Dropshipping"
+      ]
+    },
+    {
+      "id": "stock_reappro",
+      "label": "Réapprovisionnement automatique (point de commande) ?",
+      "valeur": true
+    },
+    {
+      "id": "stock_valorisation",
+      "label": "Méthode de valorisation",
+      "valeur": "Coût moyen pondéré (AVCO)"
+    },
+    {
+      "id": "stock_pdf",
+      "label": "Personnalisation des documents PDF Stock ?",
+      "valeur": false
+    },
+    {
+      "id": "has_kits_vente",
+      "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+      "valeur": true
+    },
+    {
+      "id": "kits_nb_kits",
+      "label": "Nombre de kits distincts (ordre de grandeur)",
+      "valeur": "> 200"
+    },
+    {
+      "id": "kits_nb_composants_moy",
+      "label": "Nombre de composants par kit (en moyenne)",
+      "valeur": 3
+    },
+    {
+      "id": "kits_bom_niveaux",
+      "label": "Les kits ont-ils des sous-kits (nomenclatures multi-niveaux) ?",
+      "valeur": false
+    },
+    {
+      "id": "kits_explosion_bl",
+      "label": "Explosion des composants sur le bon de livraison ?",
+      "valeur": "Oui — les composants apparaissent individuellement sur le BL"
+    },
+    {
+      "id": "kits_stock_composants",
+      "label": "Déstockage des composants à la livraison (pas du kit lui-même) ?",
+      "valeur": true
+    },
+    {
+      "id": "kits_variantes_composants",
+      "label": "Composants variables selon les options choisies par le client ?",
+      "valeur": false
+    },
+    {
+      "id": "kits_facturation",
+      "label": "Facturation du kit",
+      "valeur": "Prix du kit (forfait)"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+graph LR
+    A[Règle réassort] --> B{Stock minimum ?}
+    B -->|Atteint| C[Calcul besoin]
+    B -->|OK| D[Attente]
+    C --> E{Multi-fournisseurs ?}
+    E -->|Oui| F[Sélection meilleur fournisseur]
+    E -->|Non| G[Fournisseur unique]
+    F --> H[Commande automatique]
+    G --> H
+    H --> I[Réception]
+    I --> J[Mise à jour stock]

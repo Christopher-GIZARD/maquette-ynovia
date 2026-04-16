@@ -1,0 +1,187 @@
+{
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_portail": 0
+  },
+  "societe": {
+    "siren": "443061841"
+  },
+  "entreprise": {
+    "siren": "443061841",
+    "siret_siege": "44306184100047",
+    "raison_sociale": "GOOGLE FRANCE",
+    "forme_juridique": "SARL, société à responsabilité limitée",
+    "date_creation": "2002-05-16",
+    "code_naf": "62.02A",
+    "libelle_naf": "Conseil en systèmes et logiciels informatiques",
+    "secteur_activite": "Programmation, conseil et autres activités informatiques",
+    "objet_social": "La fourniture de tous services et/ou conseils relatifs aux logiciels, au réseau internet, aux réseaux télématiques ou en ligne, et en particulier la fourniture de services et/ou conseils relatifs aux logiciels, au réseau : internet, aux réseaux télématiques ou en ligne, notamment l'intermédiation en matière de vente de publicité en ligne, la promotion sous toutes ses formes de la publicité en ligne, la promotion directe de produits et services et la mise en œuvre d'infrastructures techniques , l'achat et la vente d'espaces publicitaires, ainsi que de : tout autre produit ou service, en qualité de revendeur ou par tout autre moyen.",
+    "effectif": 1499,
+    "effectif_tranche": "42",
+    "ca_annuel": 1746656.6,
+    "resultat_net": 63623.3,
+    "adresse": "8 RUE DE LONDRES, 75009 PARIS",
+    "code_postal": "75009",
+    "ville": "PARIS",
+    "dirigeant_principal": "Paul Manicle (Gérant)",
+    "numero_tva": "FR64443061841",
+    "statut": "Inscrit",
+    "capital_social": 1000000,
+    "_source": "pappers"
+  },
+  "cdc": {
+    "titre": "Cahier des charges — Projet Odoo 19 — GOOGLE FRANCE",
+    "sections": [
+      {
+        "titre": "Contexte du projet",
+        "contenu": "La société GOOGLE FRANCE souhaite mettre en place l'ERP Odoo 19 pour couvrir les fonctions suivantes : . Ce projet s'inscrit dans une démarche de digitalisation et de structuration des processus métier."
+      },
+      {
+        "titre": "Périmètre fonctionnel",
+        "contenu": "Le projet couvre les modules suivants :",
+        "sous_sections": []
+      },
+      {
+        "titre": "Hypothèses et prérequis",
+        "contenu": "Le projet est mené sur la base des hypothèses suivantes : disponibilité d'un référent métier côté client, fourniture des données de reprise en format exploitable (CSV/Excel structuré), validation des livrables sous 5 jours ouvrés."
+      },
+      {
+        "titre": "Exclusions",
+        "contenu": "Les éléments suivants sont exclus du périmètre : développements spécifiques non décrits dans ce document, formation des utilisateurs finaux (à chiffrer séparément), maintenance et support post-go-live."
+      },
+      {
+        "titre": "Risques identifiés",
+        "contenu": "Les principaux risques identifiés sont : qualité des données sources pour la reprise, disponibilité des interlocuteurs côté client, évolution du périmètre en cours de projet."
+      }
+    ]
+  },
+  "chiffrage": {
+    "uo_brut": {
+      "total_uo": 0,
+      "par_module": {},
+      "lignes": []
+    },
+    "ajustement": {
+      "total_uo_brut": 0.0,
+      "total_uo_ajuste": 0,
+      "ecart_global_pct": 0.0,
+      "justification_globale": "Ajustement global de +15% à +20% selon les modules. En l'absence de projets historiques comparables, les heuristiques métier standard ont été appliquées. La reprise de données depuis Excel justifie une marge supplémentaire.",
+      "par_module": {},
+      "risques": [
+        {
+          "module": "_general",
+          "description": "Qualité des données sources incertaine — la reprise depuis Excel peut révéler des incohérences nécessitant un nettoyage manuel.",
+          "impact_uo": 3,
+          "probabilite": "moyenne"
+        },
+        {
+          "module": "global",
+          "description": "Aucun projet historique similaire disponible — le chiffrage est basé sur les heuristiques. À affiner après les premiers ateliers.",
+          "impact_uo": 5,
+          "probabilite": "faible"
+        }
+      ],
+      "recommandations": [
+        "Prévoir un atelier de cadrage de 0.5j pour valider le périmètre avant de démarrer.",
+        "Demander un échantillon des données Excel du client pour évaluer la qualité avant la reprise.",
+        "Planifier une marge de 10% pour la conduite du changement si c'est le premier ERP du client."
+      ]
+    },
+    "projets_reference": [],
+    "meta": {
+      "nb_projets_historique": 0,
+      "nb_projets_similaires": 0
+    }
+  },
+  "flux": {
+    "flux": [],
+    "nb_flux": 0
+  },
+  "config": {
+    "manifest": {
+      "name": "Configuration Avant-Vente",
+      "version": "19.0.1.0.0",
+      "category": "Tools",
+      "depends": [
+        "base"
+      ],
+      "data": [
+        "data/res_config_settings.xml"
+      ],
+      "installable": true,
+      "auto_install": false
+    },
+    "modules_to_install": [],
+    "settings": {},
+    "security_groups": [],
+    "notes": [
+      "Module généré automatiquement par le pipeline avant-vente.",
+      "À vérifier et ajuster après les ateliers de cadrage."
+    ]
+  },
+  "licences": {
+    "recommandation": {
+      "plan": "Standard",
+      "licences_internes": 10,
+      "licences_portail": 0.0,
+      "cout_mensuel_estime": {
+        "par_utilisateur_interne": 31.1,
+        "par_utilisateur_portail": 0,
+        "total_mensuel": 311.0,
+        "total_annuel": 3732.0
+      }
+    },
+    "justification": "Avec 10 utilisateurs internes et 0 modules activés, le plan Standard est recommandé. Les utilisateurs portail (0.0) sont inclus sans surcoût.",
+    "details_par_role": [
+      {
+        "role": "Administrateur / Direction",
+        "nb_users": 2,
+        "acces": "Tous les modules",
+        "type_licence": "Interne"
+      },
+      {
+        "role": "Commercial",
+        "nb_users": 3,
+        "acces": "CRM, Ventes, Facturation",
+        "type_licence": "Interne"
+      },
+      {
+        "role": "Opérationnel",
+        "nb_users": 5,
+        "acces": "Stock, Achats, Projet",
+        "type_licence": "Interne"
+      }
+    ],
+    "notes": [
+      "Les tarifs sont indicatifs et basés sur la grille publique Odoo.",
+      "Un plan Custom est recommandé à partir de 6 modules pour optimiser les coûts.",
+      "Les utilisateurs portail (clients/fournisseurs) sont gratuits."
+    ]
+  },
+  "propale": {
+    "total_uo_brut": 0.0,
+    "total_uo_ajuste": 0,
+    "ecart_global_pct": 0.0,
+    "justification_globale": "Ajustement global de +15% à +20% selon les modules. En l'absence de projets historiques comparables, les heuristiques métier standard ont été appliquées. La reprise de données depuis Excel justifie une marge supplémentaire.",
+    "par_module": {},
+    "risques": [
+      {
+        "module": "_general",
+        "description": "Qualité des données sources incertaine — la reprise depuis Excel peut révéler des incohérences nécessitant un nettoyage manuel.",
+        "impact_uo": 3,
+        "probabilite": "moyenne"
+      },
+      {
+        "module": "global",
+        "description": "Aucun projet historique similaire disponible — le chiffrage est basé sur les heuristiques. À affiner après les premiers ateliers.",
+        "impact_uo": 5,
+        "probabilite": "faible"
+      }
+    ],
+    "recommandations": [
+      "Prévoir un atelier de cadrage de 0.5j pour valider le périmètre avant de démarrer.",
+      "Demander un échantillon des données Excel du client pour évaluer la qualité avant la reprise.",
+      "Planifier une marge de 10% pour la conduite du changement si c'est le premier ERP du client."
+    ]
+  }
+}

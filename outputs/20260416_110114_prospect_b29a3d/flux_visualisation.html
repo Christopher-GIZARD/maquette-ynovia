@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Flux métier — Avant-vente Odoo</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+    h1 { color: #1A2B4A; text-align: center; margin-bottom: 30px; }
+    .flux-card {
+      background: white; border-radius: 10px; padding: 24px; margin: 0 auto 24px;
+      max-width: 800px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .flux-card h2 { color: #1A2B4A; margin-top: 0; }
+    .desc { color: #4a5c7a; }
+    .modules { color: #8496b0; font-size: 13px; font-style: italic; margin-bottom: 16px; }
+    .mermaid { text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Flux métier — Projet Odoo 19</h1>
+
+    <div class="flux-card">
+      <h2>Order-to-Cash</h2>
+      <p class="desc">Flux principal de vente depuis la commande client jusqu'à l'encaissement, avec gestion des kits et routes MTO/Dropshipping.</p>
+      <p class="modules">Modules : sale, stock, account, kits_vente</p>
+      <div class="mermaid">
+graph LR
+    A[Commande client] --> B{Type produit ?}
+    B -->|Kit| C[Explosion kit]
+    B -->|Produit simple| D{Route ?}
+    C --> D
+    D -->|MTO| E[Réassort fournisseur]
+    D -->|Dropshipping| F[Commande directe fournisseur]
+    D -->|Stock| G[Picking entrepôt]
+    E --> G
+    F --> H[Livraison directe]
+    G --> I[Livraison client]
+    H --> J[Facture]
+    I --> J
+    J --> K[Encaissement]
+      </div>
+    </div>
+
+    <div class="flux-card">
+      <h2>Procure-to-Pay</h2>
+      <p class="desc">Flux d'achat depuis l'expression du besoin jusqu'au paiement fournisseur, incluant les demandes d'achat et le dropshipping.</p>
+      <p class="modules">Modules : purchase, stock, account</p>
+      <div class="mermaid">
+graph LR
+    A[Demande d'achat] --> B[Validation demande]
+    B --> C[Commande fournisseur]
+    C --> D{Type livraison ?}
+    D -->|Dropshipping| E[Livraison directe client]
+    D -->|Stock| F[Réception entrepôt]
+    E --> G[Facture fournisseur]
+    F --> H[Contrôle réception]
+    H --> G
+    G --> I[Validation facture]
+    I --> J[Paiement fournisseur]
+      </div>
+    </div>
+
+    <div class="flux-card">
+      <h2>Gestion-Kits</h2>
+      <p class="desc">Flux spécifique de traitement des kits de vente avec explosion des composants et gestion du stock.</p>
+      <p class="modules">Modules : kits_vente, sale, stock</p>
+      <div class="mermaid">
+graph TD
+    A[Commande kit] --> B[Explosion nomenclature]
+    B --> C{Stock composants ?}
+    C -->|Insuffisant| D[Réassort composants]
+    C -->|Suffisant| E[Réservation composants]
+    D --> F[Réception composants]
+    F --> E
+    E --> G[Picking composants]
+    G --> H[Livraison détaillée]
+    H --> I[Facturation kit forfait]
+      </div>
+    </div>
+
+    <div class="flux-card">
+      <h2>Réapprovisionnement</h2>
+      <p class="desc">Flux de gestion automatique des stocks avec règles de réassort et gestion multi-fournisseurs.</p>
+      <p class="modules">Modules : stock, purchase</p>
+      <div class="mermaid">
+graph LR
+    A[Règle réassort] --> B{Stock minimum ?}
+    B -->|Atteint| C[Calcul besoin]
+    B -->|OK| D[Attente]
+    C --> E{Multi-fournisseurs ?}
+    E -->|Oui| F[Sélection meilleur fournisseur]
+    E -->|Non| G[Fournisseur unique]
+    F --> H[Commande automatique]
+    G --> H
+    H --> I[Réception]
+    I --> J[Mise à jour stock]
+      </div>
+    </div>
+
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

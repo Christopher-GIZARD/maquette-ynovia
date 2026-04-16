@@ -1,0 +1,3237 @@
+{
+  "meta": {
+    "version": "5.0",
+    "odoo_version": "19",
+    "created_by": "Ynov'iT Services",
+    "uo_unit": "jour consultant",
+    "uo_note": "Valeurs indicatives — à calibrer avec les chiffrages historiques",
+    "last_updated": "2026-04-01",
+    "rendering_rules": {
+      "boolean": "children → affichés si réponse true",
+      "select": "children_map[valeur_choisie] → affiché selon valeur sélectionnée",
+      "multi_select": "children_if_contains[option] → affiché pour chaque option cochée",
+      "number": "children avec show_if: {gt|gte|lt|lte: n} → affiché selon seuil",
+      "show_if": "condition de visibilité de la question elle-même (relative à son parent ou à une question précédente via parent_id)"
+    },
+    "changelog": "V5 : Fabrication splitée (kits vente vs OF traditionnel) + module Droits d'accès (Standard / Moyennement compliqué / Compliqué)"
+  },
+  "pappers_fields": [
+    {
+      "id": "siren",
+      "label": "SIREN",
+      "type": "text",
+      "required": true
+    },
+    {
+      "id": "raison_sociale",
+      "label": "Raison sociale",
+      "type": "text"
+    },
+    {
+      "id": "forme_juridique",
+      "label": "Forme juridique",
+      "type": "text"
+    },
+    {
+      "id": "code_naf",
+      "label": "Code NAF / APE",
+      "type": "text"
+    },
+    {
+      "id": "secteur_activite",
+      "label": "Secteur d'activité",
+      "type": "text"
+    },
+    {
+      "id": "ca_annuel",
+      "label": "Chiffre d'affaires annuel (k€)",
+      "type": "number"
+    },
+    {
+      "id": "resultat_net",
+      "label": "Résultat net (k€)",
+      "type": "number"
+    },
+    {
+      "id": "effectif",
+      "label": "Effectif",
+      "type": "number"
+    },
+    {
+      "id": "date_creation",
+      "label": "Date de création",
+      "type": "date"
+    },
+    {
+      "id": "adresse",
+      "label": "Adresse du siège",
+      "type": "text"
+    }
+  ],
+  "questions": [
+    {
+      "id": "nb_societes",
+      "label": "Nombre de sociétés dans l'instance Odoo",
+      "type": "number",
+      "default": 1,
+      "children": [
+        {
+          "id": "multi_company_interco",
+          "label": "Transactions inter-sociétés (ventes / achats internes) ?",
+          "type": "boolean",
+          "uo": 2,
+          "show_if": {
+            "gt": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "nb_users_internes",
+      "label": "Nombre d'utilisateurs internes prévus",
+      "type": "number"
+    },
+    {
+      "id": "nb_users_portail",
+      "label": "Nombre d'utilisateurs portail prévus (clients, fournisseurs)",
+      "type": "number",
+      "default": 0
+    },
+    {
+      "id": "erp_actuel",
+      "label": "ERP / logiciels métier actuels",
+      "type": "multi_select",
+      "options": [
+        "Sage 50/100/1000",
+        "SAP",
+        "Cegid",
+        "Quadratus",
+        "EBP",
+        "Divalto",
+        "Microsoft Dynamics",
+        "Excel / manuel",
+        "Aucun",
+        "Autre"
+      ]
+    },
+    {
+      "id": "date_go_live",
+      "label": "Date de go-live souhaitée",
+      "type": "date"
+    },
+    {
+      "id": "budget",
+      "label": "Budget indicatif du projet",
+      "type": "select",
+      "options": [
+        "< 10k€",
+        "10–25k€",
+        "25–50k€",
+        "50–100k€",
+        "> 100k€",
+        "Non défini"
+      ]
+    },
+    {
+      "id": "pays_activite",
+      "label": "Pays dans lesquels l'entreprise est active",
+      "type": "multi_select",
+      "options": [
+        "France",
+        "Belgique",
+        "Suisse",
+        "Luxembourg",
+        "Autres pays UE",
+        "Hors UE"
+      ]
+    },
+    {
+      "id": "langues",
+      "label": "Langues requises (interface / documents)",
+      "type": "multi_select",
+      "options": [
+        "Français",
+        "Anglais",
+        "Espagnol",
+        "Allemand",
+        "Autre"
+      ],
+      "uo_per_item": 0.5
+    },
+    {
+      "id": "migration_donnees",
+      "label": "Reprise de données depuis l'existant requise ?",
+      "type": "boolean",
+      "children": [
+        {
+          "id": "migration_perimetre",
+          "label": "Périmètre de la reprise de données",
+          "type": "multi_select",
+          "options": [
+            "Clients / contacts",
+            "Fournisseurs",
+            "Catalogue produits",
+            "Tarifs",
+            "Stocks (quantités)",
+            "Soldes comptables",
+            "Historique commandes",
+            "Historique factures",
+            "Immobilisations",
+            "RH / employés"
+          ],
+          "children_if_contains": {
+            "Clients / contacts": [
+              {
+                "id": "vol_clients",
+                "label": "Volume",
+                "note": "Clients / contacts",
+                "type": "select",
+                "options": [
+                  "< 200",
+                  "200–1 000",
+                  "1 000–5 000",
+                  "5 000–20 000",
+                  "> 20 000"
+                ],
+                "uo_map": {
+                  "< 200": 0.5,
+                  "200–1 000": 1,
+                  "1 000–5 000": 2,
+                  "5 000–20 000": 3,
+                  "> 20 000": 5
+                }
+              },
+              {
+                "id": "vol_clients_format",
+                "label": "Qualité du format source",
+                "note": "Clients / contacts",
+                "type": "select",
+                "options": [
+                  "Export ERP propre",
+                  "Export ERP partiel",
+                  "Fichier Excel manuel",
+                  "Extractions multiples à consolider",
+                  "Inconnu"
+                ],
+                "uo_map": {
+                  "Export ERP propre": 0,
+                  "Export ERP partiel": 1,
+                  "Fichier Excel manuel": 1,
+                  "Extractions multiples à consolider": 2,
+                  "Inconnu": 2
+                }
+              },
+              {
+                "id": "vol_clients_multi",
+                "label": "Plusieurs contacts / interlocuteurs par client ?",
+                "note": "Clients / contacts",
+                "type": "boolean",
+                "uo": 0.5
+              },
+              {
+                "id": "vol_clients_pj",
+                "label": "Documents attachés aux fiches clients ?",
+                "note": "Clients / contacts",
+                "type": "boolean",
+                "uo": 1
+              }
+            ],
+            "Fournisseurs": [
+              {
+                "id": "vol_fournisseurs",
+                "label": "Volume",
+                "note": "Fournisseurs",
+                "type": "select",
+                "options": [
+                  "< 100",
+                  "100–500",
+                  "500–2 000",
+                  "> 2 000"
+                ],
+                "uo_map": {
+                  "< 100": 0.5,
+                  "100–500": 1,
+                  "500–2 000": 2,
+                  "> 2 000": 3
+                }
+              },
+              {
+                "id": "vol_fourn_format",
+                "label": "Qualité du format source",
+                "note": "Fournisseurs",
+                "type": "select",
+                "options": [
+                  "Export ERP propre",
+                  "Export ERP partiel",
+                  "Fichier Excel manuel",
+                  "Extractions multiples",
+                  "Inconnu"
+                ],
+                "uo_map": {
+                  "Export ERP propre": 0,
+                  "Export ERP partiel": 1,
+                  "Fichier Excel manuel": 1,
+                  "Extractions multiples": 2,
+                  "Inconnu": 2
+                }
+              },
+              {
+                "id": "vol_fourn_tarifs",
+                "label": "Tarifs d'achat par fournisseur à reprendre ?",
+                "note": "Fournisseurs",
+                "type": "boolean",
+                "uo": 0.5
+              }
+            ],
+            "Catalogue produits": [
+              {
+                "id": "vol_produits",
+                "label": "Volume",
+                "note": "Produits",
+                "type": "select",
+                "options": [
+                  "< 200",
+                  "200–1 000",
+                  "1 000–5 000",
+                  "5 000–15 000",
+                  "> 15 000"
+                ],
+                "uo_map": {
+                  "< 200": 1,
+                  "200–1 000": 2,
+                  "1 000–5 000": 3,
+                  "5 000–15 000": 5,
+                  "> 15 000": 8
+                }
+              },
+              {
+                "id": "vol_produits_format",
+                "label": "Qualité du format source",
+                "note": "Produits",
+                "type": "select",
+                "options": [
+                  "Export ERP propre",
+                  "Nomenclature Excel",
+                  "Catalogue PDF uniquement",
+                  "Extractions multiples",
+                  "Inconnu"
+                ],
+                "uo_map": {
+                  "Export ERP propre": 0,
+                  "Nomenclature Excel": 1,
+                  "Catalogue PDF uniquement": 3,
+                  "Extractions multiples": 2,
+                  "Inconnu": 2
+                }
+              },
+              {
+                "id": "vol_produits_variantes",
+                "label": "Produits avec variantes à reprendre ?",
+                "type": "boolean",
+                "uo": 1,
+                "children": [
+                  {
+                    "id": "vol_var_nb_attributs",
+                    "label": "Nombre d'attributs distincts",
+                    "type": "number",
+                    "default": 2,
+                    "note": "Ex : 2 → couleur + taille"
+                  },
+                  {
+                    "id": "vol_var_nb_valeurs_moy",
+                    "label": "Valeurs par attribut (en moyenne)",
+                    "type": "number",
+                    "note": "Ex : 5 couleurs × 3 tailles"
+                  },
+                  {
+                    "id": "vol_var_combinaisons",
+                    "label": "Variantes par produit",
+                    "type": "select",
+                    "options": [
+                      "< 10",
+                      "10–50",
+                      "50–200",
+                      "> 200"
+                    ],
+                    "uo_map": {
+                      "< 10": 0.5,
+                      "10–50": 1,
+                      "50–200": 2,
+                      "> 200": 4
+                    }
+                  },
+                  {
+                    "id": "vol_var_matrice_incomplete",
+                    "label": "Certaines combinaisons sont-elles inexistantes (matrice incomplète) ?",
+                    "type": "boolean",
+                    "note": "Matrice incomplète = configuration avancée Odoo"
+                  }
+                ]
+              },
+              {
+                "id": "vol_produits_images",
+                "label": "Images produits à importer ?",
+                "type": "boolean",
+                "uo": 0.5
+              },
+              {
+                "id": "vol_produits_desc",
+                "label": "Descriptions / fiches techniques à intégrer ?",
+                "type": "boolean",
+                "uo": 0.5
+              },
+              {
+                "id": "vol_produits_bom",
+                "label": "Nomenclatures (BoM) à reprendre ?",
+                "type": "boolean",
+                "uo": 2
+              }
+            ],
+            "Tarifs": [
+              {
+                "id": "vol_tarifs_grilles",
+                "label": "Nombre de grilles tarifaires",
+                "type": "select",
+                "options": [
+                  "1 grille",
+                  "2–5 grilles",
+                  "6–15 grilles",
+                  "> 15 grilles"
+                ],
+                "uo_map": {
+                  "1 grille": 0.5,
+                  "2–5 grilles": 1,
+                  "6–15 grilles": 2,
+                  "> 15 grilles": 4
+                }
+              },
+              {
+                "id": "vol_tarifs_lignes",
+                "label": "Volume total de lignes tarifaires",
+                "type": "select",
+                "options": [
+                  "< 500",
+                  "500–2 000",
+                  "2 000–10 000",
+                  "> 10 000"
+                ],
+                "uo_map": {
+                  "< 500": 0.5,
+                  "500–2 000": 1,
+                  "2 000–10 000": 2,
+                  "> 10 000": 4
+                }
+              },
+              {
+                "id": "vol_tarifs_conditions",
+                "label": "Conditions complexes (qté, client, période) ?",
+                "type": "boolean",
+                "uo": 1
+              }
+            ],
+            "Stocks (quantités)": [
+              {
+                "id": "vol_stocks_empl",
+                "label": "Entrepôts / emplacements à initialiser",
+                "type": "select",
+                "options": [
+                  "1 entrepôt / 1 emplacement",
+                  "1 entrepôt multi-empl. (< 20)",
+                  "Multi-entrepôts (2–5)",
+                  "Multi-entrepôts complexe (5+)"
+                ],
+                "uo_map": {
+                  "1 entrepôt / 1 emplacement": 0.5,
+                  "1 entrepôt multi-empl. (< 20)": 1,
+                  "Multi-entrepôts (2–5)": 2,
+                  "Multi-entrepôts complexe (5+)": 3
+                }
+              },
+              {
+                "id": "vol_stocks_lignes",
+                "label": "Lignes de stock (produit × emplacement)",
+                "type": "select",
+                "options": [
+                  "< 500",
+                  "500–2 000",
+                  "2 000–10 000",
+                  "> 10 000"
+                ],
+                "uo_map": {
+                  "< 500": 0.5,
+                  "500–2 000": 1,
+                  "2 000–10 000": 2,
+                  "> 10 000": 3
+                }
+              },
+              {
+                "id": "vol_stocks_lots",
+                "label": "Lots / numéros de série à reprendre ?",
+                "type": "boolean",
+                "uo": 1
+              },
+              {
+                "id": "vol_stocks_valeur",
+                "label": "Valeur unitaire (PUMP / coût standard) ?",
+                "type": "boolean",
+                "uo": 0.5
+              }
+            ],
+            "Soldes comptables": [
+              {
+                "id": "vol_compta",
+                "label": "Niveau de reprise",
+                "type": "select",
+                "options": [
+                  "Soldes agrégés (< 100 comptes)",
+                  "Balance détaillée (100–500 comptes)",
+                  "Balance + lettrage partiels"
+                ],
+                "uo_map": {
+                  "Soldes agrégés (< 100 comptes)": 1,
+                  "Balance détaillée (100–500 comptes)": 2,
+                  "Balance + lettrage partiels": 3
+                }
+              },
+              {
+                "id": "vol_compta_histo",
+                "label": "Écritures historiques (N-1, N-2...) ?",
+                "type": "boolean",
+                "uo": 3,
+                "note": "Complexité élevée — à évaluer au cas par cas"
+              }
+            ],
+            "Historique commandes": [
+              {
+                "id": "vol_cmd_nb",
+                "label": "Volume",
+                "type": "select",
+                "options": [
+                  "< 500",
+                  "500–2 000",
+                  "2 000–10 000",
+                  "> 10 000"
+                ],
+                "uo_map": {
+                  "< 500": 1,
+                  "500–2 000": 2,
+                  "2 000–10 000": 3,
+                  "> 10 000": 5
+                }
+              },
+              {
+                "id": "vol_cmd_profondeur",
+                "label": "Profondeur d'historique",
+                "type": "select",
+                "options": [
+                  "Année en cours",
+                  "1 an",
+                  "2–3 ans",
+                  "> 3 ans"
+                ]
+              },
+              {
+                "id": "vol_cmd_statuts",
+                "label": "Statuts à reprendre",
+                "type": "multi_select",
+                "options": [
+                  "Commandes en cours",
+                  "Commandes soldées",
+                  "Devis non confirmés"
+                ]
+              }
+            ],
+            "Historique factures": [
+              {
+                "id": "vol_fact_nb",
+                "label": "Volume",
+                "type": "select",
+                "options": [
+                  "< 500",
+                  "500–2 000",
+                  "2 000–10 000",
+                  "> 10 000"
+                ],
+                "uo_map": {
+                  "< 500": 1,
+                  "500–2 000": 2,
+                  "2 000–10 000": 3,
+                  "> 10 000": 5
+                }
+              },
+              {
+                "id": "vol_fact_pdf",
+                "label": "PDFs originaux à rattacher aux écritures Odoo ?",
+                "type": "boolean",
+                "uo": 1
+              }
+            ],
+            "Immobilisations": [
+              {
+                "id": "vol_immo_nb",
+                "label": "Volume",
+                "type": "select",
+                "options": [
+                  "< 50",
+                  "50–200",
+                  "200–500",
+                  "> 500"
+                ],
+                "uo_map": {
+                  "< 50": 1,
+                  "50–200": 2,
+                  "200–500": 3,
+                  "> 500": 5
+                }
+              },
+              {
+                "id": "vol_immo_amort",
+                "label": "Plans d'amortissement en cours (VNC) à reprendre ?",
+                "type": "boolean",
+                "uo": 1
+              }
+            ],
+            "RH / employés": [
+              {
+                "id": "vol_rh_nb",
+                "label": "Nombre d'employés",
+                "type": "select",
+                "options": [
+                  "< 20",
+                  "20–100",
+                  "100–500",
+                  "> 500"
+                ],
+                "uo_map": {
+                  "< 20": 0.5,
+                  "20–100": 1,
+                  "100–500": 2,
+                  "> 500": 4
+                }
+              },
+              {
+                "id": "vol_rh_contrats",
+                "label": "Contrats de travail à reprendre ?",
+                "type": "boolean",
+                "uo": 0.5
+              },
+              {
+                "id": "vol_rh_conges",
+                "label": "Soldes de congés à reprendre ?",
+                "type": "boolean",
+                "uo": 0.5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "has_crm",
+      "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+      "type": "boolean",
+      "uo_base_module": 2,
+      "children": [
+        {
+          "id": "crm_nb_equipes",
+          "label": "Nombre d'équipes commerciales",
+          "type": "number",
+          "default": 1,
+          "uo_per_unit": 0.5,
+          "children": [
+            {
+              "id": "crm_etapes_custom",
+              "label": "Étapes de pipeline spécifiques à configurer ?",
+              "type": "boolean",
+              "uo": 0.5,
+              "children": [
+                {
+                  "id": "crm_nb_etapes",
+                  "label": "Nombre d'étapes",
+                  "type": "number",
+                  "default": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "crm_probabilites",
+          "label": "Probabilités de closing sur les opportunités ?",
+          "type": "boolean",
+          "uo": 0.25
+        },
+        {
+          "id": "crm_ia_scoring",
+          "label": "Scoring IA des leads (Odoo V19 natif) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "crm_sources_leads",
+          "label": "Sources d'entrée des leads",
+          "type": "multi_select",
+          "options": [
+            "Saisie manuelle",
+            "Formulaire site web",
+            "Import CSV",
+            "E-mail entrant (alias)",
+            "Lead mining Odoo",
+            "Intégration LinkedIn",
+            "CRM externe (migration)"
+          ]
+        },
+        {
+          "id": "crm_alias_email",
+          "label": "Création automatique de leads depuis e-mail ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "crm_activites",
+          "label": "Types d'activités commerciales",
+          "type": "multi_select",
+          "options": [
+            "Appel téléphonique",
+            "Réunion / Démo",
+            "Envoi d'e-mail",
+            "Envoi de devis",
+            "Relance",
+            "Autre"
+          ],
+          "uo": 0.5
+        },
+        {
+          "id": "crm_sequences_relance",
+          "label": "Séquences de relance automatisées (marketing automation) ?",
+          "type": "boolean",
+          "uo": 2
+        },
+        {
+          "id": "crm_objectifs",
+          "label": "Objectifs commerciaux par vendeur / équipe ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "crm_reporting_custom",
+          "label": "Tableaux de bord ou rapports CRM spécifiques ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "crm_voip",
+          "label": "Intégration téléphonie VoIP ?",
+          "type": "boolean",
+          "uo": 2,
+          "children": [
+            {
+              "id": "voip_provider",
+              "label": "Opérateur / IPBX",
+              "type": "select",
+              "options": [
+                "Axivox",
+                "OnSIP",
+                "3CX",
+                "Autre SIP compatible"
+              ]
+            },
+            {
+              "id": "voip_nb_users",
+              "label": "Nombre d'utilisateurs softphone",
+              "type": "number",
+              "uo_per_unit": 0.25
+            },
+            {
+              "id": "voip_cti",
+              "label": "Remontée de fiche à l'appel entrant (CTI) ?",
+              "type": "boolean",
+              "uo": 0.5
+            },
+            {
+              "id": "voip_click_to_call",
+              "label": "Click-to-call depuis les fiches CRM ?",
+              "type": "boolean",
+              "uo": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_sale",
+      "label": "Besoins Ventes (devis, commandes, facturation) ?",
+      "type": "boolean",
+      "uo_base_module": 3,
+      "children": [
+        {
+          "id": "sale_types_produits",
+          "label": "Types de produits vendus",
+          "type": "multi_select",
+          "options": [
+            "Biens physiques (stockables)",
+            "Biens consommables",
+            "Services (main d'œuvre, prestation)",
+            "Abonnements / récurrents",
+            "Produits numériques"
+          ]
+        },
+        {
+          "id": "sale_variantes",
+          "label": "Produits avec variantes (couleur, taille...) ?",
+          "type": "select",
+          "options": [
+            "Non",
+            "Simples (1–2 attributs)",
+            "Complexes (3+ attributs)"
+          ],
+          "uo_map": {
+            "Non": 0,
+            "Simples (1–2 attributs)": 1,
+            "Complexes (3+ attributs)": 3
+          },
+          "children_map": {
+            "Simples (1–2 attributs)": [
+              {
+                "id": "sale_var_nb_attr",
+                "label": "Nombre d'attributs distincts",
+                "type": "number",
+                "default": 2,
+                "note": "Ex : 2 → couleur + taille"
+              },
+              {
+                "id": "sale_var_nb_val",
+                "label": "Valeurs par attribut (en moyenne)",
+                "type": "number",
+                "note": "Ex : 5 couleurs, 3 tailles → 4"
+              },
+              {
+                "id": "sale_var_nb_comb",
+                "label": "Variantes par produit",
+                "type": "select",
+                "options": [
+                  "< 10",
+                  "10–50",
+                  "50–200",
+                  "> 200"
+                ],
+                "uo_map": {
+                  "< 10": 0.5,
+                  "10–50": 1,
+                  "50–200": 2,
+                  "> 200": 4
+                }
+              }
+            ],
+            "Complexes (3+ attributs)": [
+              {
+                "id": "sale_var_nb_attr_c",
+                "label": "Nombre d'attributs distincts",
+                "type": "number",
+                "default": 3
+              },
+              {
+                "id": "sale_var_nb_val_c",
+                "label": "Valeurs par attribut (en moyenne)",
+                "type": "number"
+              },
+              {
+                "id": "sale_var_nb_comb_c",
+                "label": "Variantes par produit",
+                "type": "select",
+                "options": [
+                  "10–50",
+                  "50–200",
+                  "200–1 000",
+                  "> 1 000"
+                ],
+                "uo_map": {
+                  "10–50": 1,
+                  "50–200": 2,
+                  "200–1 000": 4,
+                  "> 1 000": 6
+                }
+              },
+              {
+                "id": "sale_var_matrice_incomplete",
+                "label": "Certaines combinaisons n'existent pas (matrice incomplète) ?",
+                "type": "boolean",
+                "note": "Matrice incomplète = configuration avancée requise"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sale_unites_mesure",
+          "label": "Unités de mesure multiples (achat ≠ vente) ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "sale_conditionnements",
+          "label": "Conditionnements produits (lots, palettes) ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "sale_grilles",
+          "label": "Nombre de listes de prix",
+          "type": "select",
+          "options": [
+            "1 seul tarif",
+            "2–5 grilles",
+            "6–15 grilles",
+            "> 15 grilles"
+          ],
+          "uo_map": {
+            "1 seul tarif": 0,
+            "2–5 grilles": 1,
+            "6–15 grilles": 2,
+            "> 15 grilles": 3
+          },
+          "children_map": {
+            "2–5 grilles": [
+              {
+                "id": "sale_tarifs_cond",
+                "label": "Conditions de prix (qté, période, client) ?",
+                "type": "boolean",
+                "uo": 0.5
+              }
+            ],
+            "6–15 grilles": [
+              {
+                "id": "sale_tarifs_cond2",
+                "label": "Conditions de prix (qté, période, client) ?",
+                "type": "boolean",
+                "uo": 1
+              },
+              {
+                "id": "sale_tarifs_formules",
+                "label": "Formules / calculs automatiques sur les prix ?",
+                "type": "boolean",
+                "uo": 1.5
+              }
+            ],
+            "> 15 grilles": [
+              {
+                "id": "sale_grilles_nb",
+                "label": "Nombre exact de grilles",
+                "type": "number"
+              },
+              {
+                "id": "sale_tarifs_formules2",
+                "label": "Formules / calculs automatiques ?",
+                "type": "boolean",
+                "uo": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "sale_remises",
+          "label": "Remises sur lignes de commande ?",
+          "type": "boolean",
+          "uo": 0.25
+        },
+        {
+          "id": "sale_marges",
+          "label": "Suivi des marges ?",
+          "type": "boolean",
+          "uo": 0.25
+        },
+        {
+          "id": "sale_multi_devises",
+          "label": "Ventes en devises étrangères ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "sale_modeles_devis",
+          "label": "Modèles de devis prédéfinis ?",
+          "type": "boolean",
+          "uo": 1,
+          "children": [
+            {
+              "id": "sale_nb_modeles",
+              "label": "Nombre de modèles",
+              "type": "number",
+              "default": 2,
+              "uo_per_unit": 0.5
+            },
+            {
+              "id": "sale_produits_optionnels",
+              "label": "Produits optionnels sur les modèles ?",
+              "type": "boolean",
+              "uo": 0.5
+            }
+          ]
+        },
+        {
+          "id": "sale_signature_elec",
+          "label": "Signature électronique des devis par le client ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "sale_paiement_ligne",
+          "label": "Paiement en ligne depuis le portail client ?",
+          "type": "boolean",
+          "uo": 2,
+          "children": [
+            {
+              "id": "sale_acquereurs",
+              "label": "Acquéreurs de paiement",
+              "type": "multi_select",
+              "options": [
+                "Stripe",
+                "PayPal",
+                "Adyen",
+                "Mollie",
+                "Virement bancaire",
+                "Autre"
+              ],
+              "uo_per_item": 1
+            }
+          ]
+        },
+        {
+          "id": "sale_acomptes",
+          "label": "Gestion des acomptes sur commande ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "sale_politique_fact",
+          "label": "Politique de facturation principale",
+          "type": "select",
+          "options": [
+            "À la commande",
+            "À la livraison",
+            "Sur jalons / avancement projet",
+            "Mixte"
+          ]
+        },
+        {
+          "id": "sale_relances",
+          "label": "Relances automatiques des factures impayées ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "sale_portail_client",
+          "label": "Portail client (suivi commandes, factures en ligne) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "has_subscription",
+          "label": "Abonnements / facturation récurrente ?",
+          "type": "boolean",
+          "uo_base_module": 3,
+          "children": [
+            {
+              "id": "sub_periodicites",
+              "label": "Périodicités",
+              "type": "multi_select",
+              "options": [
+                "Mensuel",
+                "Trimestriel",
+                "Annuel",
+                "Sur mesure"
+              ]
+            },
+            {
+              "id": "sub_renouvellement_auto",
+              "label": "Renouvellement automatique ?",
+              "type": "boolean"
+            },
+            {
+              "id": "sub_paiement_auto",
+              "label": "Paiement automatique (CB enregistrée / tokenisation) ?",
+              "type": "boolean",
+              "uo": 2,
+              "note": "Stripe ou acquéreur supportant la tokenisation requis"
+            },
+            {
+              "id": "sub_portail",
+              "label": "Gestion par le client depuis le portail ?",
+              "type": "boolean",
+              "uo": 1
+            },
+            {
+              "id": "sub_churn",
+              "label": "Suivi du churn / résiliations (dashboard) ?",
+              "type": "boolean",
+              "uo": 1
+            }
+          ]
+        },
+        {
+          "id": "sale_intercompany",
+          "label": "Ventes inter-sociétés ?",
+          "type": "boolean",
+          "uo": 2,
+          "show_if": {
+            "parent_id": "nb_societes",
+            "gt": 1
+          }
+        },
+        {
+          "id": "sale_commissions",
+          "label": "Commissions commerciales ?",
+          "type": "boolean",
+          "uo": 5,
+          "requires_dev": true
+        },
+        {
+          "id": "sale_pdf",
+          "label": "Personnalisation des documents PDF Ventes ?",
+          "type": "boolean",
+          "children": [
+            {
+              "id": "pdf_devis",
+              "label": "Devis / Offre commerciale",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_confirmation_cmd",
+              "label": "Confirmation de commande",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_facture_client",
+              "label": "Facture client",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_avoir_client",
+              "label": "Avoir client",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_facture_acompte",
+              "label": "Facture d'acompte",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_proforma",
+              "label": "Facture pro-forma",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_nb_langues_vente",
+              "label": "Documents requis en combien de langues ?",
+              "type": "number",
+              "default": 1,
+              "uo_per_unit": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_purchase",
+      "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+      "type": "boolean",
+      "uo_base_module": 2,
+      "children": [
+        {
+          "id": "purch_multi_fourn",
+          "label": "Plusieurs fournisseurs par produit avec tarifs ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "purch_delais",
+          "label": "Délais d'approvisionnement par fournisseur ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "purch_validation",
+          "label": "Circuit de validation des BC",
+          "type": "select",
+          "options": [
+            "Aucune",
+            "Validation à partir d'un seuil",
+            "2 niveaux hiérarchiques"
+          ],
+          "uo_map": {
+            "Aucune": 0,
+            "Validation à partir d'un seuil": 0.5,
+            "2 niveaux hiérarchiques": 1
+          },
+          "children_map": {
+            "Validation à partir d'un seuil": [
+              {
+                "id": "purch_seuil",
+                "label": "Montant seuil (€)",
+                "type": "number"
+              }
+            ]
+          }
+        },
+        {
+          "id": "purch_demandes_achat",
+          "label": "Demandes d'achat avant génération de la commande ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "purch_accords_cadres",
+          "label": "Accords-cadres / appels d'offres ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "purch_dropship",
+          "label": "Dropshipping (livraison directe fournisseur → client) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "purch_politique_fact",
+          "label": "Contrôle des factures fournisseurs",
+          "type": "select",
+          "options": [
+            "Sur quantités commandées",
+            "Sur quantités reçues"
+          ]
+        },
+        {
+          "id": "purch_pdf",
+          "label": "Personnalisation des documents PDF Achats ?",
+          "type": "boolean",
+          "children": [
+            {
+              "id": "pdf_bc_fourn",
+              "label": "Bon de commande fournisseur",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_da",
+              "label": "Demande d'achat",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              },
+              "note": "Si circuit d'approbation activé"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_account",
+      "label": "Besoins Comptabilité ?",
+      "type": "boolean",
+      "uo_base_module": 5,
+      "children": [
+        {
+          "id": "account_plan",
+          "label": "Plan comptable",
+          "type": "select",
+          "options": [
+            "PCG France standard",
+            "PCG France adapté",
+            "Plan étranger"
+          ],
+          "uo_map": {
+            "PCG France standard": 0.5,
+            "PCG France adapté": 2,
+            "Plan étranger": 4
+          }
+        },
+        {
+          "id": "account_analytique",
+          "label": "Comptabilité analytique ?",
+          "type": "boolean",
+          "uo": 2,
+          "children": [
+            {
+              "id": "account_axes",
+              "label": "Nombre d'axes analytiques",
+              "type": "select",
+              "options": [
+                "1 axe",
+                "2 axes",
+                "3 axes ou plus"
+              ],
+              "uo_map": {
+                "1 axe": 1,
+                "2 axes": 2,
+                "3 axes ou plus": 4
+              }
+            },
+            {
+              "id": "account_budgets",
+              "label": "Gestion budgétaire ?",
+              "type": "boolean",
+              "uo": 2
+            }
+          ]
+        },
+        {
+          "id": "account_immo",
+          "label": "Immobilisations et amortissements ?",
+          "type": "boolean",
+          "uo": 2
+        },
+        {
+          "id": "account_multi_devises",
+          "label": "Transactions en devises étrangères ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "account_sepa",
+          "label": "Virements SEPA ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "account_prelevement",
+          "label": "Prélèvements SEPA automatiques ?",
+          "type": "boolean",
+          "uo": 2
+        },
+        {
+          "id": "account_synchro_banque",
+          "label": "Synchronisation bancaire automatique ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "account_tva",
+          "label": "Régimes de TVA applicables",
+          "type": "multi_select",
+          "options": [
+            "Débits (standard)",
+            "Encaissements",
+            "Intracommunautaire",
+            "Autoliquidation",
+            "Exonération"
+          ],
+          "uo_per_item": 0.5
+        },
+        {
+          "id": "account_chorus",
+          "label": "Factures Chorus Pro (marchés publics) ?",
+          "type": "boolean",
+          "uo": 2
+        },
+        {
+          "id": "account_facturx",
+          "label": "Factures Factur-X / e-invoicing UE ?",
+          "type": "boolean",
+          "uo": 1,
+          "note": "Obligatoire progressivement en France à partir de 2026"
+        },
+        {
+          "id": "account_pdf",
+          "label": "Personnalisation des documents PDF Comptabilité ?",
+          "type": "boolean",
+          "children": [
+            {
+              "id": "pdf_facture_compta",
+              "label": "Facture client",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              },
+              "note": "Mutualisable avec PDF Ventes"
+            },
+            {
+              "id": "pdf_avoir",
+              "label": "Avoir client",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_relance",
+              "label": "Lettre de relance (par niveau)",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_releve",
+              "label": "Relevé de compte client",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_stock",
+      "label": "Besoins Stocks & Logistique ?",
+      "type": "boolean",
+      "uo_base_module": 3,
+      "children": [
+        {
+          "id": "stock_nb_entrepots",
+          "label": "Nombre d'entrepôts",
+          "type": "number",
+          "default": 1,
+          "uo_per_unit": 1
+        },
+        {
+          "id": "stock_multi_empl",
+          "label": "Multi-emplacements (allées, étagères) ?",
+          "type": "boolean",
+          "uo": 2,
+          "children": [
+            {
+              "id": "stock_putaway",
+              "label": "Règles de rangement automatique (putaway) ?",
+              "type": "boolean",
+              "uo": 1
+            }
+          ]
+        },
+        {
+          "id": "stock_tracabilite",
+          "label": "Traçabilité",
+          "type": "select",
+          "options": [
+            "Non requise",
+            "Lots",
+            "Numéros de série",
+            "Mixte"
+          ],
+          "uo_map": {
+            "Non requise": 0,
+            "Lots": 1,
+            "Numéros de série": 2,
+            "Mixte": 2.5
+          }
+        },
+        {
+          "id": "stock_dlc",
+          "label": "Dates de péremption (DLC / DLUO) ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "stock_colis",
+          "label": "Gestion des colis / unités logistiques ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "stock_routes",
+          "label": "Routes logistiques spécifiques",
+          "type": "multi_select",
+          "options": [
+            "Réassort sur commande (MTO)",
+            "Dropshipping",
+            "Cross-docking",
+            "Consignation"
+          ],
+          "uo_per_item": 1
+        },
+        {
+          "id": "stock_reappro",
+          "label": "Réapprovisionnement automatique (point de commande) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "stock_valorisation",
+          "label": "Méthode de valorisation",
+          "type": "select",
+          "options": [
+            "Prix standard",
+            "Coût moyen pondéré (AVCO)",
+            "FIFO"
+          ],
+          "uo_map": {
+            "Prix standard": 0.5,
+            "Coût moyen pondéré (AVCO)": 1,
+            "FIFO": 1
+          }
+        },
+        {
+          "id": "stock_barcodes",
+          "label": "Codes-barres / douchettes ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "stock_pdf",
+          "label": "Personnalisation des documents PDF Stock ?",
+          "type": "boolean",
+          "children": [
+            {
+              "id": "pdf_bl",
+              "label": "Bon de livraison (BL) client",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_br",
+              "label": "Bon de réception fournisseur",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_transfert",
+              "label": "Bordereau de transfert interne",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_etiquette",
+              "label": "Étiquette produit (code-barres)",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              },
+              "note": "Format Zebra ZPL ou PDF selon imprimante"
+            },
+            {
+              "id": "pdf_etiq_lot",
+              "label": "Étiquette lot / numéro de série",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_inventaire",
+              "label": "Feuille d'inventaire physique",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_project",
+      "label": "Besoins Projets & Feuilles de temps ?",
+      "type": "boolean",
+      "uo_base_module": 2,
+      "children": [
+        {
+          "id": "project_types",
+          "label": "Types de projets",
+          "type": "multi_select",
+          "options": [
+            "Internes",
+            "Client (facturables)",
+            "Forfaitaires",
+            "En régie",
+            "Mixtes"
+          ]
+        },
+        {
+          "id": "project_etapes",
+          "label": "Étapes / colonnes de tâches spécifiques ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "project_sous_taches",
+          "label": "Sous-tâches (décomposition hiérarchique) ?",
+          "type": "boolean",
+          "uo": 0.25
+        },
+        {
+          "id": "project_gantt",
+          "label": "Vue Gantt ?",
+          "type": "boolean",
+          "uo": 0.5,
+          "note": "Module Enterprise"
+        },
+        {
+          "id": "project_budget",
+          "label": "Suivi budgétaire des projets ?",
+          "type": "boolean",
+          "uo": 2
+        },
+        {
+          "id": "has_timesheet",
+          "label": "Feuilles de temps ?",
+          "type": "boolean",
+          "uo_base_module": 1,
+          "children": [
+            {
+              "id": "ts_mode",
+              "label": "Mode de saisie",
+              "type": "multi_select",
+              "options": [
+                "Back-office Odoo",
+                "Portail client",
+                "Application mobile"
+              ]
+            },
+            {
+              "id": "ts_validation",
+              "label": "Circuit de validation ?",
+              "type": "boolean",
+              "uo": 1,
+              "note": "Enterprise"
+            },
+            {
+              "id": "ts_facturation",
+              "label": "Facturation des temps aux clients ?",
+              "type": "boolean",
+              "uo": 1
+            }
+          ]
+        },
+        {
+          "id": "project_pdf",
+          "label": "Personnalisation des documents PDF Projets ?",
+          "type": "boolean",
+          "children": [
+            {
+              "id": "pdf_rapport_ts",
+              "label": "Rapport de feuilles de temps",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_recap_projet",
+              "label": "Récapitulatif d'avancement de projet",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_bon_regie",
+              "label": "Bon de régie / relevé d'heures facturable",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_kits_vente",
+      "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+      "type": "boolean",
+      "triggers_module": "sale_mrp",
+      "uo_base_module": 1,
+      "note": "Module sale_mrp — ne nécessite pas le module Fabrication complet",
+      "children": [
+        {
+          "id": "kits_nb_kits",
+          "label": "Nombre de kits distincts (ordre de grandeur)",
+          "type": "select",
+          "options": [
+            "< 10",
+            "10–50",
+            "50–200",
+            "> 200"
+          ],
+          "uo_map": {
+            "< 10": 0.5,
+            "10–50": 1,
+            "50–200": 1.5,
+            "> 200": 2
+          }
+        },
+        {
+          "id": "kits_nb_composants_moy",
+          "label": "Nombre de composants par kit (en moyenne)",
+          "type": "number",
+          "default": 5,
+          "note": "Impacte la complexité des nomenclatures"
+        },
+        {
+          "id": "kits_bom_niveaux",
+          "label": "Les kits ont-ils des sous-kits (nomenclatures multi-niveaux) ?",
+          "type": "boolean",
+          "uo": 1,
+          "note": "Exemple : kit A contient kit B + composant C"
+        },
+        {
+          "id": "kits_explosion_bl",
+          "label": "Explosion des composants sur le bon de livraison ?",
+          "type": "select",
+          "options": [
+            "Non — le kit apparaît comme 1 ligne sur le BL",
+            "Oui — les composants apparaissent individuellement sur le BL",
+            "Selon les produits (mixte)"
+          ],
+          "uo_map": {
+            "Non — le kit apparaît comme 1 ligne sur le BL": 0.5,
+            "Oui — les composants apparaissent individuellement sur le BL": 1,
+            "Selon les produits (mixte)": 1.5
+          }
+        },
+        {
+          "id": "kits_stock_composants",
+          "label": "Déstockage des composants à la livraison (pas du kit lui-même) ?",
+          "type": "boolean",
+          "uo": 0.5,
+          "note": "Comportement standard Odoo pour les kits : on livre les composants"
+        },
+        {
+          "id": "kits_variantes_composants",
+          "label": "Composants variables selon les options choisies par le client ?",
+          "type": "boolean",
+          "uo": 2,
+          "note": "Ex : kit bureau avec choix couleur plateau → composant différent selon option",
+          "children": [
+            {
+              "id": "kits_variantes_nb_options",
+              "label": "Nombre d'options variables par kit (en moyenne)",
+              "type": "number",
+              "default": 2
+            }
+          ]
+        },
+        {
+          "id": "kits_facturation",
+          "label": "Facturation du kit",
+          "type": "select",
+          "options": [
+            "Prix du kit (forfait)",
+            "Prix calculé à partir des composants",
+            "Les deux selon les kits"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_manufacturing",
+      "label": "Fabrication (ordres de fabrication, gammes, ateliers) ?",
+      "type": "boolean",
+      "triggers_module": "mrp",
+      "uo_base_module": 5,
+      "note": "Module Odoo Manufacturing — gestion complète des OF",
+      "children": [
+        {
+          "id": "mrp_bom_niveaux",
+          "label": "Profondeur des nomenclatures (BoM)",
+          "type": "select",
+          "options": [
+            "Niveau unique (assemblage simple — 1 seule BoM par produit fini)",
+            "Multi-niveaux (composants qui sont eux-mêmes fabriqués)"
+          ],
+          "uo_map": {
+            "Niveau unique (assemblage simple — 1 seule BoM par produit fini)": 1,
+            "Multi-niveaux (composants qui sont eux-mêmes fabriqués)": 3
+          }
+        },
+        {
+          "id": "mrp_nb_bom",
+          "label": "Nombre de nomenclatures à créer / migrer",
+          "type": "select",
+          "options": [
+            "< 20",
+            "20–100",
+            "100–500",
+            "> 500"
+          ],
+          "uo_map": {
+            "< 20": 1,
+            "20–100": 2,
+            "100–500": 3,
+            "> 500": 5
+          }
+        },
+        {
+          "id": "mrp_bom_variantes",
+          "label": "Nomenclatures liées aux variantes produits (composants variables selon variante) ?",
+          "type": "boolean",
+          "uo": 2,
+          "note": "Ex : produit rouge → composant peinture rouge ; bleu → peinture bleue"
+        },
+        {
+          "id": "mrp_of_declenchement",
+          "label": "Déclenchement des ordres de fabrication",
+          "type": "multi_select",
+          "options": [
+            "Manuel (saisie directe)",
+            "Depuis une commande client (MTO — fabrication à la commande)",
+            "Depuis le réapprovisionnement automatique (MRP / stock min)",
+            "Planification manuelle par le responsable de production"
+          ]
+        },
+        {
+          "id": "mrp_sous_produits",
+          "label": "Sous-produits générés lors de la fabrication (co-produits, rebuts valorisés) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "mrp_gammes",
+          "label": "Gammes opératoires (séquence d'opérations sur postes de charge) ?",
+          "type": "boolean",
+          "uo": 3,
+          "children": [
+            {
+              "id": "mrp_nb_postes",
+              "label": "Nombre de postes de charge (centres de travail)",
+              "type": "number",
+              "uo_per_unit": 0.5
+            },
+            {
+              "id": "mrp_nb_operations_moy",
+              "label": "Nombre d'opérations par gamme (en moyenne)",
+              "type": "number",
+              "default": 3
+            },
+            {
+              "id": "mrp_capacite",
+              "label": "Gestion de la capacité des postes de charge ?",
+              "type": "boolean",
+              "uo": 1,
+              "note": "Permet de détecter les surcharges et sous-charges"
+            },
+            {
+              "id": "mrp_tablette_atelier",
+              "label": "Tablettes dans l'atelier pour saisir l'avancement en temps réel ?",
+              "type": "boolean",
+              "uo": 1,
+              "note": "Module mrp_workorder — interface opérateur simplifiée"
+            },
+            {
+              "id": "mrp_oee",
+              "label": "Suivi du TRS / OEE (Taux de Rendement Synthétique) ?",
+              "type": "boolean",
+              "uo": 2,
+              "note": "Enterprise — nécessite des arrêts et pertes enregistrés par poste"
+            }
+          ]
+        },
+        {
+          "id": "mrp_sous_traitance",
+          "label": "Sous-traitance (opérations ou OF confiés à un prestataire externe) ?",
+          "type": "boolean",
+          "uo": 2,
+          "children": [
+            {
+              "id": "mrp_st_type",
+              "label": "Type de sous-traitance",
+              "type": "select",
+              "options": [
+                "Sous-traitance partielle (1 opération externalisée dans la gamme)",
+                "Sous-traitance totale (OF complet chez le prestataire)",
+                "Les deux"
+              ]
+            },
+            {
+              "id": "mrp_st_envoi_composants",
+              "label": "Envoi de composants chez le sous-traitant (consignation) ?",
+              "type": "boolean",
+              "uo": 1
+            }
+          ]
+        },
+        {
+          "id": "mrp_qualite",
+          "label": "Contrôle qualité intégré aux ordres de fabrication ?",
+          "type": "boolean",
+          "uo": 2,
+          "children": [
+            {
+              "id": "mrp_qualite_etapes",
+              "label": "À quelles étapes les contrôles qualité interviennent-ils ?",
+              "type": "multi_select",
+              "options": [
+                "En début d'OF (matières premières)",
+                "En cours d'opération",
+                "En fin d'OF (produit fini)",
+                "À la réception fournisseur"
+              ]
+            },
+            {
+              "id": "mrp_rebuts",
+              "label": "Gestion des rebuts / non-conformités en production ?",
+              "type": "boolean",
+              "uo": 1
+            }
+          ]
+        },
+        {
+          "id": "mrp_mrp_calcul",
+          "label": "Calcul des besoins (MRP) automatique ?",
+          "type": "boolean",
+          "uo": 3,
+          "note": "Génère automatiquement des OF et des DA selon la demande et les stocks"
+        },
+        {
+          "id": "mrp_couts_revient",
+          "label": "Suivi des coûts de revient de production ?",
+          "type": "boolean",
+          "uo": 1,
+          "children": [
+            {
+              "id": "mrp_couts_composants",
+              "label": "Éléments de coût à suivre",
+              "type": "multi_select",
+              "options": [
+                "Matières premières",
+                "Main d'œuvre (temps opérateurs)",
+                "Frais généraux / overhead",
+                "Sous-traitance"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mrp_plm",
+          "label": "PLM — Gestion du cycle de vie produit (ECO, révisions de nomenclatures) ?",
+          "type": "boolean",
+          "uo": 3,
+          "note": "Enterprise"
+        },
+        {
+          "id": "mrp_pdf",
+          "label": "Personnalisation des documents PDF Fabrication ?",
+          "type": "boolean",
+          "children": [
+            {
+              "id": "pdf_of",
+              "label": "Ordre de fabrication (OF)",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              }
+            },
+            {
+              "id": "pdf_bon_travail",
+              "label": "Bon de travail / fiche opération",
+              "type": "select",
+              "note": "Si gammes activées",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              }
+            },
+            {
+              "id": "pdf_picking_compo",
+              "label": "Liste de prélèvement des composants",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              }
+            },
+            {
+              "id": "pdf_etiq_pf",
+              "label": "Étiquette produit fini (post-fabrication)",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_hr",
+      "label": "Besoins RH (employés, contrats, congés) ?",
+      "type": "boolean",
+      "uo_base_module": 2,
+      "children": [
+        {
+          "id": "hr_contrats",
+          "label": "Gestion des contrats de travail ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "hr_conges",
+          "label": "Gestion des congés et absences ?",
+          "type": "boolean",
+          "uo": 1.5,
+          "children": [
+            {
+              "id": "hr_types_conges",
+              "label": "Types de congés",
+              "type": "multi_select",
+              "options": [
+                "Congés payés",
+                "RTT",
+                "Maladie",
+                "Maternité / Paternité",
+                "Sans solde",
+                "Autre"
+              ],
+              "uo_per_item": 0.25
+            }
+          ]
+        },
+        {
+          "id": "has_attendance",
+          "label": "Présences / badgeage ?",
+          "type": "boolean",
+          "uo_base_module": 1,
+          "children": [
+            {
+              "id": "attendance_mode",
+              "label": "Mode de pointage",
+              "type": "multi_select",
+              "options": [
+                "Saisie manuelle",
+                "Badge RFID",
+                "Application mobile",
+                "Kiosque tablette"
+              ]
+            },
+            {
+              "id": "attendance_heures_sup",
+              "label": "Calcul des heures supplémentaires ?",
+              "type": "boolean",
+              "uo": 0.5
+            }
+          ]
+        },
+        {
+          "id": "has_expenses",
+          "label": "Notes de frais ?",
+          "type": "boolean",
+          "uo_base_module": 1,
+          "children": [
+            {
+              "id": "expense_categories",
+              "label": "Catégories de frais",
+              "type": "multi_select",
+              "options": [
+                "Transport",
+                "Hébergement",
+                "Repas",
+                "Téléphone",
+                "Fournitures",
+                "Autre"
+              ],
+              "uo_per_item": 0.1
+            },
+            {
+              "id": "expense_ocr",
+              "label": "Scan de reçus via mobile (OCR) ?",
+              "type": "boolean",
+              "uo": 0.5
+            },
+            {
+              "id": "expense_validation",
+              "label": "Circuit de validation",
+              "type": "select",
+              "options": [
+                "Manager direct",
+                "Double validation (manager + DAF)"
+              ],
+              "uo_map": {
+                "Manager direct": 0.5,
+                "Double validation (manager + DAF)": 1
+              }
+            },
+            {
+              "id": "expense_refact",
+              "label": "Refacturation aux clients / projets ?",
+              "type": "boolean",
+              "uo": 1
+            }
+          ]
+        },
+        {
+          "id": "hr_recrutement",
+          "label": "Module Recrutement ?",
+          "type": "boolean",
+          "uo": 1.5,
+          "children": [
+            {
+              "id": "hr_recrutement_web",
+              "label": "Publication des offres sur le site web ?",
+              "type": "boolean",
+              "uo": 1
+            }
+          ]
+        },
+        {
+          "id": "hr_evaluations",
+          "label": "Évaluations / entretiens annuels ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "has_payroll",
+          "label": "Module Paie ?",
+          "type": "boolean",
+          "uo_base_module": 5,
+          "note": "Enterprise — l10n_fr_hr_payroll",
+          "children": [
+            {
+              "id": "paie_logiciel",
+              "label": "Logiciel de paie actuel",
+              "type": "select",
+              "options": [
+                "Aucun (nouveau)",
+                "Silae",
+                "Sage Paie",
+                "Cegid",
+                "ADP",
+                "Autre"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hr_pdf",
+          "label": "Personnalisation des documents PDF RH ?",
+          "type": "boolean",
+          "children": [
+            {
+              "id": "pdf_contrat",
+              "label": "Contrat de travail",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1.5,
+                "Complexe": 3
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_avenant",
+              "label": "Avenant au contrat",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_bulletin",
+              "label": "Bulletin de salaire",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              },
+              "note": "Si paie Odoo"
+            },
+            {
+              "id": "pdf_attest_conges",
+              "label": "Attestation de solde de congés",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            },
+            {
+              "id": "pdf_rapport_frais",
+              "label": "Rapport de notes de frais",
+              "type": "select",
+              "options": [
+                "Non requis",
+                "Standard",
+                "Intermédiaire",
+                "Complexe"
+              ],
+              "uo_map": {
+                "Non requis": 0,
+                "Standard": 0.5,
+                "Intermédiaire": 1,
+                "Complexe": 2
+              },
+              "option_descriptions": {
+                "Standard": "Logo, couleurs, coordonnées société",
+                "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+                "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "has_helpdesk",
+      "label": "Besoins Helpdesk / SAV (tickets clients) ?",
+      "type": "boolean",
+      "uo_base_module": 2,
+      "children": [
+        {
+          "id": "helpdesk_nb_equipes",
+          "label": "Nombre d'équipes support",
+          "type": "number",
+          "default": 1,
+          "uo_per_unit": 0.5
+        },
+        {
+          "id": "helpdesk_sla",
+          "label": "SLA (délais de réponse / résolution) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "helpdesk_portail",
+          "label": "Tickets via portail client ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "helpdesk_email",
+          "label": "Tickets depuis e-mails entrants ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "has_knowledge",
+          "label": "Base de connaissance (Knowledge) ?",
+          "type": "boolean",
+          "uo_base_module": 1,
+          "children": [
+            {
+              "id": "knowledge_acces",
+              "label": "Accès",
+              "type": "select",
+              "options": [
+                "Interne uniquement",
+                "Clients via portail",
+                "Public (site web)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pdf_ticket",
+          "label": "Rapport de ticket / fiche intervention SAV",
+          "type": "select",
+          "options": [
+            "Non requis",
+            "Standard",
+            "Intermédiaire",
+            "Complexe"
+          ],
+          "uo_map": {
+            "Non requis": 0,
+            "Standard": 0.5,
+            "Intermédiaire": 1,
+            "Complexe": 2
+          },
+          "option_descriptions": {
+            "Standard": "Logo, couleurs, coordonnées société",
+            "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+            "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "has_field_service",
+      "label": "Besoins Service sur site (interventions terrain) ?",
+      "type": "boolean",
+      "uo_base_module": 3,
+      "children": [
+        {
+          "id": "fsm_creation",
+          "label": "Source des interventions",
+          "type": "multi_select",
+          "options": [
+            "Saisie manuelle",
+            "Depuis un ticket Helpdesk",
+            "Depuis une commande client",
+            "Depuis un abonnement",
+            "Via portail client"
+          ]
+        },
+        {
+          "id": "fsm_planning",
+          "label": "Planification des techniciens (carte / agenda) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "fsm_mobile",
+          "label": "Application mobile pour les techniciens ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "fsm_signature",
+          "label": "Signature du bon d'intervention sur site ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "fsm_photos",
+          "label": "Photos avant / après ?",
+          "type": "boolean",
+          "uo": 0.25
+        },
+        {
+          "id": "fsm_pieces",
+          "label": "Consommation de pièces liée au stock ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "fsm_facturation",
+          "label": "Facturation des interventions ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "fsm_contrats",
+          "label": "Contrats de maintenance récurrents ?",
+          "type": "boolean",
+          "uo": 2
+        },
+        {
+          "id": "pdf_bon_interv",
+          "label": "Bon d'intervention terrain",
+          "type": "select",
+          "options": [
+            "Non requis",
+            "Standard",
+            "Intermédiaire",
+            "Complexe"
+          ],
+          "uo_map": {
+            "Non requis": 0,
+            "Standard": 0.5,
+            "Intermédiaire": 1,
+            "Complexe": 2
+          },
+          "option_descriptions": {
+            "Standard": "Logo, couleurs, coordonnées société",
+            "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+            "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+          }
+        },
+        {
+          "id": "pdf_rapport_interv",
+          "label": "Rapport d'intervention (compte-rendu)",
+          "type": "select",
+          "options": [
+            "Non requis",
+            "Standard",
+            "Intermédiaire",
+            "Complexe"
+          ],
+          "uo_map": {
+            "Non requis": 0,
+            "Standard": 0.5,
+            "Intermédiaire": 1,
+            "Complexe": 2
+          },
+          "option_descriptions": {
+            "Standard": "Logo, couleurs, coordonnées société",
+            "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+            "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "has_website",
+      "label": "Besoins Site web / e-Commerce ?",
+      "type": "boolean",
+      "uo_base_module": 5,
+      "children": [
+        {
+          "id": "website_mode",
+          "label": "Nature du site",
+          "type": "select",
+          "options": [
+            "Vitrine uniquement",
+            "e-Commerce B2C",
+            "e-Commerce B2B (avec portail)",
+            "Vitrine + boutique"
+          ],
+          "uo_map": {
+            "Vitrine uniquement": 2,
+            "e-Commerce B2C": 5,
+            "e-Commerce B2B (avec portail)": 6,
+            "Vitrine + boutique": 7
+          }
+        },
+        {
+          "id": "website_nb_pages",
+          "label": "Nombre de pages de contenu (hors catalogue)",
+          "type": "number",
+          "uo_per_unit": 0.5
+        },
+        {
+          "id": "website_theme",
+          "label": "Thème graphique",
+          "type": "select",
+          "options": [
+            "Standard Odoo",
+            "Personnalisé (couleurs, typo, logo)",
+            "Sur mesure (développement)"
+          ],
+          "uo_map": {
+            "Standard Odoo": 0,
+            "Personnalisé (couleurs, typo, logo)": 3,
+            "Sur mesure (développement)": 10
+          }
+        },
+        {
+          "id": "website_jobs",
+          "label": "Offres d'emploi en ligne ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "website_blog",
+          "label": "Blog / actualités ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "website_seo",
+          "label": "Optimisation SEO ?",
+          "type": "boolean",
+          "uo": 1
+        }
+      ]
+    },
+    {
+      "id": "has_maintenance",
+      "label": "Besoins Maintenance / GMAO ?",
+      "type": "boolean",
+      "uo_base_module": 2,
+      "children": [
+        {
+          "id": "maint_nb",
+          "label": "Nombre d'équipements",
+          "type": "select",
+          "options": [
+            "< 20",
+            "20–100",
+            "100–500",
+            "> 500"
+          ],
+          "uo_map": {
+            "< 20": 0.5,
+            "20–100": 1,
+            "100–500": 2,
+            "> 500": 4
+          }
+        },
+        {
+          "id": "maint_types",
+          "label": "Types de maintenance",
+          "type": "multi_select",
+          "options": [
+            "Corrective (pannes)",
+            "Préventive (planifiée)",
+            "Prédictive"
+          ]
+        },
+        {
+          "id": "maint_pieces",
+          "label": "Consommation de pièces liée au stock ?",
+          "type": "boolean",
+          "uo": 1
+        }
+      ]
+    },
+    {
+      "id": "has_repair",
+      "label": "Besoins Réparations / SAV produit ?",
+      "type": "boolean",
+      "uo_base_module": 2,
+      "children": [
+        {
+          "id": "repair_diag",
+          "label": "Diagnostic / devis avant réparation ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "repair_pieces",
+          "label": "Consommation de pièces (liée au stock) ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "repair_fact",
+          "label": "Facturation des réparations ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "repair_garantie",
+          "label": "Gestion des garanties ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "pdf_devis_rep",
+          "label": "Devis de réparation",
+          "type": "select",
+          "options": [
+            "Non requis",
+            "Standard",
+            "Intermédiaire",
+            "Complexe"
+          ],
+          "uo_map": {
+            "Non requis": 0,
+            "Standard": 0.5,
+            "Intermédiaire": 1,
+            "Complexe": 2
+          },
+          "option_descriptions": {
+            "Standard": "Logo, couleurs, coordonnées société",
+            "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+            "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+          }
+        },
+        {
+          "id": "pdf_bon_rep",
+          "label": "Bon / ordre de réparation",
+          "type": "select",
+          "options": [
+            "Non requis",
+            "Standard",
+            "Intermédiaire",
+            "Complexe"
+          ],
+          "uo_map": {
+            "Non requis": 0,
+            "Standard": 0.5,
+            "Intermédiaire": 1,
+            "Complexe": 2
+          },
+          "option_descriptions": {
+            "Standard": "Logo, couleurs, coordonnées société",
+            "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+            "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "has_rental",
+      "label": "Besoins Location de matériel / biens ?",
+      "type": "boolean",
+      "uo_base_module": 3,
+      "children": [
+        {
+          "id": "rental_types",
+          "label": "Types de biens loués",
+          "type": "multi_select",
+          "options": [
+            "Matériel / équipements",
+            "Véhicules",
+            "Immobilier",
+            "Outillage",
+            "Autre"
+          ]
+        },
+        {
+          "id": "rental_tarif",
+          "label": "Type de tarification",
+          "type": "select",
+          "options": [
+            "Fixe par période",
+            "Dégressif (volume / durée)",
+            "À l'usage (compteur)",
+            "Mixte"
+          ],
+          "uo_map": {
+            "Fixe par période": 0.5,
+            "Dégressif (volume / durée)": 1,
+            "À l'usage (compteur)": 2,
+            "Mixte": 2
+          }
+        },
+        {
+          "id": "rental_caution",
+          "label": "Cautions / dépôts de garantie ?",
+          "type": "boolean",
+          "uo": 0.5
+        },
+        {
+          "id": "rental_etat_lieux",
+          "label": "État des lieux (départ + retour) ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "rental_dispo",
+          "label": "Calendrier de disponibilité des biens ?",
+          "type": "boolean",
+          "uo": 1
+        },
+        {
+          "id": "pdf_contrat_loc",
+          "label": "Contrat de location",
+          "type": "select",
+          "options": [
+            "Non requis",
+            "Standard",
+            "Intermédiaire",
+            "Complexe"
+          ],
+          "uo_map": {
+            "Non requis": 0,
+            "Standard": 0.5,
+            "Intermédiaire": 1,
+            "Complexe": 2
+          },
+          "option_descriptions": {
+            "Standard": "Logo, couleurs, coordonnées société",
+            "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+            "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+          }
+        },
+        {
+          "id": "pdf_etat_lieux",
+          "label": "État des lieux",
+          "type": "select",
+          "options": [
+            "Non requis",
+            "Standard",
+            "Intermédiaire",
+            "Complexe"
+          ],
+          "uo_map": {
+            "Non requis": 0,
+            "Standard": 0.5,
+            "Intermédiaire": 1,
+            "Complexe": 2
+          },
+          "option_descriptions": {
+            "Standard": "Logo, couleurs, coordonnées société",
+            "Intermédiaire": "Champs additionnels, conditions, mentions spécifiques",
+            "Complexe": "Layout sur mesure, colonnes personnalisées, calculs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "has_droits_acces_specifiques",
+      "label": "Des droits d'accès spécifiques (au-delà des profils Odoo natifs) sont-ils requis ?",
+      "type": "boolean",
+      "triggers_module": "access_rights",
+      "note": "Si non : paramétrage standard Odoo (Utilisateur / Responsable / Administrateur par app)",
+      "children": [
+        {
+          "id": "droits_niveau",
+          "label": "Niveau de complexité des droits d'accès",
+          "type": "select",
+          "options": [
+            "Moyennement compliqué — restrictions de menus, champs masqués, profils métier",
+            "Compliqué — record rules, restrictions par enregistrement, multi-société avancé"
+          ],
+          "uo_map": {
+            "Moyennement compliqué — restrictions de menus, champs masqués, profils métier": 3,
+            "Compliqué — record rules, restrictions par enregistrement, multi-société avancé": 8
+          },
+          "children_map": {
+            "Moyennement compliqué — restrictions de menus, champs masqués, profils métier": [
+              {
+                "id": "droits_nb_profils",
+                "label": "Nombre de profils utilisateurs distincts à configurer",
+                "type": "number",
+                "default": 3,
+                "uo_per_unit": 0.5
+              },
+              {
+                "id": "droits_restrictions_menus",
+                "label": "Restrictions de menus / applications par profil ?",
+                "type": "boolean",
+                "uo": 1,
+                "note": "Ex : commerciaux n'ont pas accès au module Comptabilité"
+              },
+              {
+                "id": "droits_champs_masques",
+                "label": "Champs sensibles à masquer selon le profil ?",
+                "type": "boolean",
+                "uo": 1,
+                "children": [
+                  {
+                    "id": "droits_champs_masques_liste",
+                    "label": "Champs à masquer",
+                    "type": "multi_select",
+                    "options": [
+                      "Prix d'achat / coût des produits",
+                      "Marges sur devis / commandes",
+                      "Salaires / données RH",
+                      "Soldes comptables",
+                      "Tarifs fournisseurs",
+                      "Autre"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "droits_lecture_seule",
+                "label": "Accès en lecture seule sur certains modules pour certains profils ?",
+                "type": "boolean",
+                "uo": 0.5
+              },
+              {
+                "id": "droits_groupes_custom",
+                "label": "Création de groupes de sécurité personnalisés ?",
+                "type": "boolean",
+                "uo": 1.5,
+                "note": "Ex : groupe 'Validateur de devis' avec droits de confirmation uniquement"
+              }
+            ],
+            "Compliqué — record rules, restrictions par enregistrement, multi-société avancé": [
+              {
+                "id": "droits_nb_profils_c",
+                "label": "Nombre de profils utilisateurs distincts",
+                "type": "number",
+                "default": 5,
+                "uo_per_unit": 0.5
+              },
+              {
+                "id": "droits_record_rules",
+                "label": "Record rules (filtrage des données par enregistrement selon le profil) ?",
+                "type": "boolean",
+                "uo": 3,
+                "note": "Ex : un commercial ne voit que les clients de son équipe / sa région",
+                "children": [
+                  {
+                    "id": "droits_record_rules_criteres",
+                    "label": "Critères de filtrage des enregistrements",
+                    "type": "multi_select",
+                    "options": [
+                      "Par équipe commerciale",
+                      "Par région / territoire",
+                      "Par société (multi-société)",
+                      "Par responsable assigné",
+                      "Par statut / état du document",
+                      "Autre"
+                    ],
+                    "uo_per_item": 1
+                  }
+                ]
+              },
+              {
+                "id": "droits_multicompany_acces",
+                "label": "Accès croisés entre sociétés (un utilisateur voit plusieurs sociétés) ?",
+                "type": "boolean",
+                "uo": 2,
+                "show_if": {
+                  "parent_id": "nb_societes",
+                  "gt": 1
+                }
+              },
+              {
+                "id": "droits_champs_masques_c",
+                "label": "Champs sensibles à masquer selon le profil ?",
+                "type": "boolean",
+                "uo": 1,
+                "children": [
+                  {
+                    "id": "droits_champs_masques_liste_c",
+                    "label": "Champs à masquer",
+                    "type": "multi_select",
+                    "options": [
+                      "Prix d'achat / coût des produits",
+                      "Marges sur devis / commandes",
+                      "Salaires / données RH",
+                      "Soldes comptables",
+                      "Tarifs fournisseurs",
+                      "Autre"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "droits_workflow_validation",
+                "label": "Workflows de validation avec droits différenciés par étape ?",
+                "type": "boolean",
+                "uo": 2,
+                "note": "Ex : rédaction → validation N+1 → validation DAF → clôture"
+              },
+              {
+                "id": "droits_portail_restreint",
+                "label": "Portail client avec accès restreint à certains documents / projets ?",
+                "type": "boolean",
+                "uo": 2
+              },
+              {
+                "id": "droits_audit_trail",
+                "label": "Traçabilité des accès / journal d'audit requis ?",
+                "type": "boolean",
+                "uo": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "has_edi",
+      "label": "Besoins EDI / Interfaces avec systèmes tiers ?",
+      "type": "boolean",
+      "children": [
+        {
+          "id": "edi_systemes",
+          "label": "Systèmes à interfacer",
+          "type": "multi_select",
+          "options": [
+            "ERP client/fournisseur (EDIFACT/X12)",
+            "WMS externe",
+            "Marketplace",
+            "CRM externe",
+            "BI / Reporting",
+            "SIRH",
+            "Banque (EBICS, Swift)",
+            "Autre"
+          ],
+          "uo_per_item": 5
+        },
+        {
+          "id": "edi_format",
+          "label": "Format(s) d'échange",
+          "type": "multi_select",
+          "options": [
+            "EDIFACT",
+            "XML",
+            "CSV / Excel",
+            "JSON / REST API",
+            "SOAP",
+            "Fichier plat"
+          ]
+        },
+        {
+          "id": "edi_frequence",
+          "label": "Fréquence des échanges",
+          "type": "select",
+          "options": [
+            "Temps réel",
+            "Quasi temps réel (< 15 min)",
+            "Toutes les heures",
+            "Quotidien",
+            "Hebdomadaire / ponctuel"
+          ]
+        },
+        {
+          "id": "edi_middleware",
+          "label": "Middleware / ESB à prévoir ?",
+          "type": "boolean",
+          "uo": 5,
+          "requires_dev": true
+        }
+      ]
+    }
+  ]
+}

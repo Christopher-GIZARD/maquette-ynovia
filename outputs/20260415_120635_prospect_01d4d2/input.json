@@ -1,0 +1,572 @@
+{
+  "meta": {
+    "genere_le": "2026-04-15T10:06:35.096Z",
+    "version_questionnaire": "5.0",
+    "outil": "Formulaire Avant-Vente Ynov'iT Odoo"
+  },
+  "societe": {
+    "siren": "443061841"
+  },
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_internes": 10,
+    "nb_users_portail": 0,
+    "erp_actuel": [
+      "Cegid",
+      "Excel / manuel"
+    ],
+    "date_go_live": "2026-05-01",
+    "budget": "25–50k€",
+    "pays_activite": [
+      "France"
+    ],
+    "langues": [
+      "Français",
+      "Anglais"
+    ],
+    "migration_donnees": true,
+    "migration_perimetre": [
+      "Clients / contacts",
+      "Fournisseurs",
+      "Catalogue produits",
+      "Historique commandes",
+      "Tarifs"
+    ],
+    "vol_clients": "> 20 000",
+    "vol_clients_format": "Fichier Excel manuel",
+    "vol_clients_multi": true,
+    "vol_clients_pj": false,
+    "vol_fournisseurs": "100–500",
+    "vol_fourn_format": "Fichier Excel manuel",
+    "vol_fourn_tarifs": true,
+    "vol_produits": "> 15 000",
+    "vol_produits_format": "Nomenclature Excel",
+    "vol_produits_variantes": true,
+    "vol_var_nb_valeurs_moy": 3,
+    "vol_var_combinaisons": "< 10",
+    "vol_var_matrice_incomplete": true,
+    "vol_produits_images": true,
+    "vol_produits_desc": true,
+    "vol_produits_bom": true,
+    "vol_tarifs_grilles": "1 grille",
+    "vol_tarifs_lignes": "> 10 000",
+    "vol_tarifs_conditions": true,
+    "vol_cmd_nb": "> 10 000",
+    "vol_cmd_profondeur": "2–3 ans",
+    "vol_cmd_statuts": [
+      "Commandes en cours",
+      "Commandes soldées"
+    ],
+    "has_crm": true,
+    "crm_nb_equipes": 3,
+    "crm_probabilites": true,
+    "crm_ia_scoring": false,
+    "crm_sources_leads": [
+      "Formulaire site web",
+      "Saisie manuelle",
+      "Import CSV"
+    ],
+    "crm_alias_email": true,
+    "crm_activites": [
+      "Envoi de devis",
+      "Relance",
+      "Appel téléphonique",
+      "Envoi d'e-mail"
+    ],
+    "crm_sequences_relance": false,
+    "crm_objectifs": false,
+    "crm_reporting_custom": true,
+    "crm_voip": false,
+    "has_sale": true,
+    "sale_types_produits": [
+      "Biens physiques (stockables)",
+      "Biens consommables",
+      "Services (main d'œuvre, prestation)"
+    ],
+    "sale_variantes": "Simples (1–2 attributs)",
+    "sale_var_nb_attr": 2,
+    "sale_var_nb_val": 3,
+    "sale_var_nb_comb": "< 10",
+    "sale_unites_mesure": false,
+    "sale_conditionnements": false,
+    "sale_grilles": "1 seul tarif",
+    "sale_remises": true,
+    "sale_marges": true,
+    "sale_multi_devises": false,
+    "sale_modeles_devis": false,
+    "sale_signature_elec": false,
+    "sale_paiement_ligne": false,
+    "sale_acomptes": true,
+    "sale_politique_fact": "À la commande",
+    "sale_relances": true,
+    "sale_portail_client": true,
+    "has_subscription": false,
+    "sale_commissions": false,
+    "sale_pdf": false,
+    "has_purchase": true,
+    "purch_multi_fourn": true,
+    "purch_delais": true,
+    "purch_validation": "Aucune",
+    "purch_demandes_achat": false,
+    "purch_accords_cadres": false,
+    "purch_dropship": false,
+    "has_account": true,
+    "account_plan": "PCG France standard",
+    "account_analytique": false,
+    "has_stock": false,
+    "has_kits_vente": true,
+    "kits_nb_kits": "> 200",
+    "kits_nb_composants_moy": 2,
+    "kits_bom_niveaux": false,
+    "kits_explosion_bl": "Oui — les composants apparaissent individuellement sur le BL",
+    "kits_stock_composants": true,
+    "kits_facturation": "Prix du kit (forfait)"
+  },
+  "reponses_detail": [
+    {
+      "id": "nb_societes",
+      "label": "Nombre de sociétés dans l'instance Odoo",
+      "valeur": 1
+    },
+    {
+      "id": "nb_users_internes",
+      "label": "Nombre d'utilisateurs internes prévus",
+      "valeur": 10
+    },
+    {
+      "id": "nb_users_portail",
+      "label": "Nombre d'utilisateurs portail prévus (clients, fournisseurs)",
+      "valeur": 0
+    },
+    {
+      "id": "erp_actuel",
+      "label": "ERP / logiciels métier actuels",
+      "valeur": [
+        "Cegid",
+        "Excel / manuel"
+      ]
+    },
+    {
+      "id": "date_go_live",
+      "label": "Date de go-live souhaitée",
+      "valeur": "2026-05-01"
+    },
+    {
+      "id": "budget",
+      "label": "Budget indicatif du projet",
+      "valeur": "25–50k€"
+    },
+    {
+      "id": "pays_activite",
+      "label": "Pays dans lesquels l'entreprise est active",
+      "valeur": [
+        "France"
+      ]
+    },
+    {
+      "id": "langues",
+      "label": "Langues requises (interface / documents)",
+      "valeur": [
+        "Français",
+        "Anglais"
+      ]
+    },
+    {
+      "id": "migration_donnees",
+      "label": "Reprise de données depuis l'existant requise ?",
+      "valeur": true
+    },
+    {
+      "id": "migration_perimetre",
+      "label": "Périmètre de la reprise de données",
+      "valeur": [
+        "Clients / contacts",
+        "Fournisseurs",
+        "Catalogue produits",
+        "Historique commandes",
+        "Tarifs"
+      ]
+    },
+    {
+      "id": "vol_clients",
+      "label": "Volume",
+      "valeur": "> 20 000"
+    },
+    {
+      "id": "vol_clients_format",
+      "label": "Qualité du format source",
+      "valeur": "Fichier Excel manuel"
+    },
+    {
+      "id": "vol_clients_multi",
+      "label": "Plusieurs contacts / interlocuteurs par client ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_clients_pj",
+      "label": "Documents attachés aux fiches clients ?",
+      "valeur": false
+    },
+    {
+      "id": "vol_fournisseurs",
+      "label": "Volume",
+      "valeur": "100–500"
+    },
+    {
+      "id": "vol_fourn_format",
+      "label": "Qualité du format source",
+      "valeur": "Fichier Excel manuel"
+    },
+    {
+      "id": "vol_fourn_tarifs",
+      "label": "Tarifs d'achat par fournisseur à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits",
+      "label": "Volume",
+      "valeur": "> 15 000"
+    },
+    {
+      "id": "vol_produits_format",
+      "label": "Qualité du format source",
+      "valeur": "Nomenclature Excel"
+    },
+    {
+      "id": "vol_produits_variantes",
+      "label": "Produits avec variantes à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_var_nb_valeurs_moy",
+      "label": "Valeurs par attribut (en moyenne)",
+      "valeur": 3
+    },
+    {
+      "id": "vol_var_combinaisons",
+      "label": "Variantes par produit",
+      "valeur": "< 10"
+    },
+    {
+      "id": "vol_var_matrice_incomplete",
+      "label": "Certaines combinaisons sont-elles inexistantes (matrice incomplète) ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_images",
+      "label": "Images produits à importer ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_desc",
+      "label": "Descriptions / fiches techniques à intégrer ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_produits_bom",
+      "label": "Nomenclatures (BoM) à reprendre ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_tarifs_grilles",
+      "label": "Nombre de grilles tarifaires",
+      "valeur": "1 grille"
+    },
+    {
+      "id": "vol_tarifs_lignes",
+      "label": "Volume total de lignes tarifaires",
+      "valeur": "> 10 000"
+    },
+    {
+      "id": "vol_tarifs_conditions",
+      "label": "Conditions complexes (qté, client, période) ?",
+      "valeur": true
+    },
+    {
+      "id": "vol_cmd_nb",
+      "label": "Volume",
+      "valeur": "> 10 000"
+    },
+    {
+      "id": "vol_cmd_profondeur",
+      "label": "Profondeur d'historique",
+      "valeur": "2–3 ans"
+    },
+    {
+      "id": "vol_cmd_statuts",
+      "label": "Statuts à reprendre",
+      "valeur": [
+        "Commandes en cours",
+        "Commandes soldées"
+      ]
+    },
+    {
+      "id": "has_crm",
+      "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+      "valeur": true
+    },
+    {
+      "id": "crm_nb_equipes",
+      "label": "Nombre d'équipes commerciales",
+      "valeur": 3
+    },
+    {
+      "id": "crm_probabilites",
+      "label": "Probabilités de closing sur les opportunités ?",
+      "valeur": true
+    },
+    {
+      "id": "crm_ia_scoring",
+      "label": "Scoring IA des leads (Odoo V19 natif) ?",
+      "valeur": false
+    },
+    {
+      "id": "crm_sources_leads",
+      "label": "Sources d'entrée des leads",
+      "valeur": [
+        "Formulaire site web",
+        "Saisie manuelle",
+        "Import CSV"
+      ]
+    },
+    {
+      "id": "crm_alias_email",
+      "label": "Création automatique de leads depuis e-mail ?",
+      "valeur": true
+    },
+    {
+      "id": "crm_activites",
+      "label": "Types d'activités commerciales",
+      "valeur": [
+        "Envoi de devis",
+        "Relance",
+        "Appel téléphonique",
+        "Envoi d'e-mail"
+      ]
+    },
+    {
+      "id": "crm_sequences_relance",
+      "label": "Séquences de relance automatisées (marketing automation) ?",
+      "valeur": false
+    },
+    {
+      "id": "crm_objectifs",
+      "label": "Objectifs commerciaux par vendeur / équipe ?",
+      "valeur": false
+    },
+    {
+      "id": "crm_reporting_custom",
+      "label": "Tableaux de bord ou rapports CRM spécifiques ?",
+      "valeur": true
+    },
+    {
+      "id": "crm_voip",
+      "label": "Intégration téléphonie VoIP ?",
+      "valeur": false
+    },
+    {
+      "id": "has_sale",
+      "label": "Besoins Ventes (devis, commandes, facturation) ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_types_produits",
+      "label": "Types de produits vendus",
+      "valeur": [
+        "Biens physiques (stockables)",
+        "Biens consommables",
+        "Services (main d'œuvre, prestation)"
+      ]
+    },
+    {
+      "id": "sale_variantes",
+      "label": "Produits avec variantes (couleur, taille...) ?",
+      "valeur": "Simples (1–2 attributs)"
+    },
+    {
+      "id": "sale_var_nb_attr",
+      "label": "Nombre d'attributs distincts",
+      "valeur": 2
+    },
+    {
+      "id": "sale_var_nb_val",
+      "label": "Valeurs par attribut (en moyenne)",
+      "valeur": 3
+    },
+    {
+      "id": "sale_var_nb_comb",
+      "label": "Variantes par produit",
+      "valeur": "< 10"
+    },
+    {
+      "id": "sale_unites_mesure",
+      "label": "Unités de mesure multiples (achat ≠ vente) ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_conditionnements",
+      "label": "Conditionnements produits (lots, palettes) ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_grilles",
+      "label": "Nombre de listes de prix",
+      "valeur": "1 seul tarif"
+    },
+    {
+      "id": "sale_remises",
+      "label": "Remises sur lignes de commande ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_marges",
+      "label": "Suivi des marges ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_multi_devises",
+      "label": "Ventes en devises étrangères ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_modeles_devis",
+      "label": "Modèles de devis prédéfinis ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_signature_elec",
+      "label": "Signature électronique des devis par le client ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_paiement_ligne",
+      "label": "Paiement en ligne depuis le portail client ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_acomptes",
+      "label": "Gestion des acomptes sur commande ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_politique_fact",
+      "label": "Politique de facturation principale",
+      "valeur": "À la commande"
+    },
+    {
+      "id": "sale_relances",
+      "label": "Relances automatiques des factures impayées ?",
+      "valeur": true
+    },
+    {
+      "id": "sale_portail_client",
+      "label": "Portail client (suivi commandes, factures en ligne) ?",
+      "valeur": true
+    },
+    {
+      "id": "has_subscription",
+      "label": "Abonnements / facturation récurrente ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_commissions",
+      "label": "Commissions commerciales ?",
+      "valeur": false
+    },
+    {
+      "id": "sale_pdf",
+      "label": "Personnalisation des documents PDF Ventes ?",
+      "valeur": false
+    },
+    {
+      "id": "has_purchase",
+      "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_multi_fourn",
+      "label": "Plusieurs fournisseurs par produit avec tarifs ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_delais",
+      "label": "Délais d'approvisionnement par fournisseur ?",
+      "valeur": true
+    },
+    {
+      "id": "purch_validation",
+      "label": "Circuit de validation des BC",
+      "valeur": "Aucune"
+    },
+    {
+      "id": "purch_demandes_achat",
+      "label": "Demandes d'achat avant génération de la commande ?",
+      "valeur": false
+    },
+    {
+      "id": "purch_accords_cadres",
+      "label": "Accords-cadres / appels d'offres ?",
+      "valeur": false
+    },
+    {
+      "id": "purch_dropship",
+      "label": "Dropshipping (livraison directe fournisseur → client) ?",
+      "valeur": false
+    },
+    {
+      "id": "has_account",
+      "label": "Besoins Comptabilité ?",
+      "valeur": true
+    },
+    {
+      "id": "account_plan",
+      "label": "Plan comptable",
+      "valeur": "PCG France standard"
+    },
+    {
+      "id": "account_analytique",
+      "label": "Comptabilité analytique ?",
+      "valeur": false
+    },
+    {
+      "id": "has_stock",
+      "label": "Besoins Stocks & Logistique ?",
+      "valeur": false
+    },
+    {
+      "id": "has_kits_vente",
+      "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+      "valeur": true
+    },
+    {
+      "id": "kits_nb_kits",
+      "label": "Nombre de kits distincts (ordre de grandeur)",
+      "valeur": "> 200"
+    },
+    {
+      "id": "kits_nb_composants_moy",
+      "label": "Nombre de composants par kit (en moyenne)",
+      "valeur": 2
+    },
+    {
+      "id": "kits_bom_niveaux",
+      "label": "Les kits ont-ils des sous-kits (nomenclatures multi-niveaux) ?",
+      "valeur": false
+    },
+    {
+      "id": "kits_explosion_bl",
+      "label": "Explosion des composants sur le bon de livraison ?",
+      "valeur": "Oui — les composants apparaissent individuellement sur le BL"
+    },
+    {
+      "id": "kits_stock_composants",
+      "label": "Déstockage des composants à la livraison (pas du kit lui-même) ?",
+      "valeur": true
+    },
+    {
+      "id": "kits_facturation",
+      "label": "Facturation du kit",
+      "valeur": "Prix du kit (forfait)"
+    }
+  ]
+}

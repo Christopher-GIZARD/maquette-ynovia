@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "genere_le": "2026-04-16T07:52:46.689Z",
+    "version_questionnaire": "5.0",
+    "outil": "Formulaire Avant-Vente Ynov'iT Odoo"
+  },
+  "societe": {
+    "siren": "1234"
+  },
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_portail": 2,
+    "has_crm": true,
+    "crm_nb_equipes": 1
+  },
+  "reponses_detail": [
+    {
+      "id": "nb_societes",
+      "label": "Nombre de sociétés dans l'instance Odoo",
+      "valeur": 1
+    },
+    {
+      "id": "nb_users_portail",
+      "label": "Nombre d'utilisateurs portail prévus (clients, fournisseurs)",
+      "valeur": 2
+    },
+    {
+      "id": "has_crm",
+      "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+      "valeur": true
+    },
+    {
+      "id": "crm_nb_equipes",
+      "label": "Nombre d'équipes commerciales",
+      "valeur": 1
+    }
+  ]
+}

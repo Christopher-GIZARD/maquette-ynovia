@@ -1,0 +1,453 @@
+{
+  "uo_brut": {
+    "total_uo": 60.25,
+    "par_module": {
+      "_general": {
+        "label": "Paramètres généraux",
+        "uo": 34.0,
+        "actif": true,
+        "lignes_count": 18
+      },
+      "has_crm": {
+        "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+        "uo": 5.75,
+        "actif": true,
+        "lignes_count": 6
+      },
+      "has_sale": {
+        "label": "Besoins Ventes (devis, commandes, facturation) ?",
+        "uo": 7.5,
+        "actif": true,
+        "lignes_count": 8
+      },
+      "has_purchase": {
+        "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+        "uo": 3.0,
+        "actif": true,
+        "lignes_count": 3
+      },
+      "has_account": {
+        "label": "Besoins Comptabilité ?",
+        "uo": 5.5,
+        "actif": true,
+        "lignes_count": 2
+      },
+      "has_kits_vente": {
+        "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+        "uo": 4.5,
+        "actif": true,
+        "lignes_count": 4
+      },
+      "has_stock": {
+        "label": "Besoins Stocks & Logistique ?",
+        "uo": 0,
+        "actif": false,
+        "lignes_count": 0
+      }
+    },
+    "lignes": [
+      {
+        "question_id": "langues",
+        "label": "Langues requises (interface / documents)",
+        "module": null,
+        "uo_type": "uo_per_item",
+        "uo_value": 1.0,
+        "detail": "2 items × 0.5j = 1.0j"
+      },
+      {
+        "question_id": "vol_clients",
+        "label": "Volume",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 5.0,
+        "detail": "\"> 20 000\" → 5.0j"
+      },
+      {
+        "question_id": "vol_clients_format",
+        "label": "Qualité du format source",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Fichier Excel manuel\" → 1.0j"
+      },
+      {
+        "question_id": "vol_clients_multi",
+        "label": "Plusieurs contacts / interlocuteurs par client ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "vol_fournisseurs",
+        "label": "Volume",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"100–500\" → 1.0j"
+      },
+      {
+        "question_id": "vol_fourn_format",
+        "label": "Qualité du format source",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Fichier Excel manuel\" → 1.0j"
+      },
+      {
+        "question_id": "vol_fourn_tarifs",
+        "label": "Tarifs d'achat par fournisseur à reprendre ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "vol_produits",
+        "label": "Volume",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 8.0,
+        "detail": "\"> 15 000\" → 8.0j"
+      },
+      {
+        "question_id": "vol_produits_format",
+        "label": "Qualité du format source",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Nomenclature Excel\" → 1.0j"
+      },
+      {
+        "question_id": "vol_produits_variantes",
+        "label": "Produits avec variantes à reprendre ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "vol_var_combinaisons",
+        "label": "Variantes par produit",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"< 10\" → 0.5j"
+      },
+      {
+        "question_id": "vol_produits_images",
+        "label": "Images produits à importer ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "vol_produits_desc",
+        "label": "Descriptions / fiches techniques à intégrer ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "vol_produits_bom",
+        "label": "Nomenclatures (BoM) à reprendre ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 2.0,
+        "detail": "Fixe → 2.0j"
+      },
+      {
+        "question_id": "vol_tarifs_grilles",
+        "label": "Nombre de grilles tarifaires",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"1 grille\" → 0.5j"
+      },
+      {
+        "question_id": "vol_tarifs_lignes",
+        "label": "Volume total de lignes tarifaires",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 4.0,
+        "detail": "\"> 10 000\" → 4.0j"
+      },
+      {
+        "question_id": "vol_tarifs_conditions",
+        "label": "Conditions complexes (qté, client, période) ?",
+        "module": null,
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "vol_cmd_nb",
+        "label": "Volume",
+        "module": null,
+        "uo_type": "uo_map",
+        "uo_value": 5.0,
+        "detail": "\"> 10 000\" → 5.0j"
+      },
+      {
+        "question_id": "has_crm",
+        "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+        "module": "has_crm",
+        "uo_type": "base_module",
+        "uo_value": 2.0,
+        "detail": "Activation module → 2j"
+      },
+      {
+        "question_id": "crm_nb_equipes",
+        "label": "Nombre d'équipes commerciales",
+        "module": "has_crm",
+        "uo_type": "uo_per_unit",
+        "uo_value": 1.5,
+        "detail": "3 × 0.5j = 1.5j"
+      },
+      {
+        "question_id": "crm_probabilites",
+        "label": "Probabilités de closing sur les opportunités ?",
+        "module": "has_crm",
+        "uo_type": "uo",
+        "uo_value": 0.25,
+        "detail": "Fixe → 0.25j"
+      },
+      {
+        "question_id": "crm_alias_email",
+        "label": "Création automatique de leads depuis e-mail ?",
+        "module": "has_crm",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "crm_activites",
+        "label": "Types d'activités commerciales",
+        "module": "has_crm",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "crm_reporting_custom",
+        "label": "Tableaux de bord ou rapports CRM spécifiques ?",
+        "module": "has_crm",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "has_sale",
+        "label": "Besoins Ventes (devis, commandes, facturation) ?",
+        "module": "has_sale",
+        "uo_type": "base_module",
+        "uo_value": 3.0,
+        "detail": "Activation module → 3j"
+      },
+      {
+        "question_id": "sale_variantes",
+        "label": "Produits avec variantes (couleur, taille...) ?",
+        "module": "has_sale",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Simples (1–2 attributs)\" → 1.0j"
+      },
+      {
+        "question_id": "sale_var_nb_comb",
+        "label": "Variantes par produit",
+        "module": "has_sale",
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"< 10\" → 0.5j"
+      },
+      {
+        "question_id": "sale_remises",
+        "label": "Remises sur lignes de commande ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 0.25,
+        "detail": "Fixe → 0.25j"
+      },
+      {
+        "question_id": "sale_marges",
+        "label": "Suivi des marges ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 0.25,
+        "detail": "Fixe → 0.25j"
+      },
+      {
+        "question_id": "sale_acomptes",
+        "label": "Gestion des acomptes sur commande ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "sale_relances",
+        "label": "Relances automatiques des factures impayées ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "sale_portail_client",
+        "label": "Portail client (suivi commandes, factures en ligne) ?",
+        "module": "has_sale",
+        "uo_type": "uo",
+        "uo_value": 1.0,
+        "detail": "Fixe → 1.0j"
+      },
+      {
+        "question_id": "has_purchase",
+        "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+        "module": "has_purchase",
+        "uo_type": "base_module",
+        "uo_value": 2.0,
+        "detail": "Activation module → 2j"
+      },
+      {
+        "question_id": "purch_multi_fourn",
+        "label": "Plusieurs fournisseurs par produit avec tarifs ?",
+        "module": "has_purchase",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "purch_delais",
+        "label": "Délais d'approvisionnement par fournisseur ?",
+        "module": "has_purchase",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      },
+      {
+        "question_id": "has_account",
+        "label": "Besoins Comptabilité ?",
+        "module": "has_account",
+        "uo_type": "base_module",
+        "uo_value": 5.0,
+        "detail": "Activation module → 5j"
+      },
+      {
+        "question_id": "account_plan",
+        "label": "Plan comptable",
+        "module": "has_account",
+        "uo_type": "uo_map",
+        "uo_value": 0.5,
+        "detail": "\"PCG France standard\" → 0.5j"
+      },
+      {
+        "question_id": "has_kits_vente",
+        "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+        "module": "has_kits_vente",
+        "uo_type": "base_module",
+        "uo_value": 1.0,
+        "detail": "Activation module → 1j"
+      },
+      {
+        "question_id": "kits_nb_kits",
+        "label": "Nombre de kits distincts (ordre de grandeur)",
+        "module": "has_kits_vente",
+        "uo_type": "uo_map",
+        "uo_value": 2.0,
+        "detail": "\"> 200\" → 2.0j"
+      },
+      {
+        "question_id": "kits_explosion_bl",
+        "label": "Explosion des composants sur le bon de livraison ?",
+        "module": "has_kits_vente",
+        "uo_type": "uo_map",
+        "uo_value": 1.0,
+        "detail": "\"Oui — les composants apparaissent individuellement sur le BL\" → 1.0j"
+      },
+      {
+        "question_id": "kits_stock_composants",
+        "label": "Déstockage des composants à la livraison (pas du kit lui-même) ?",
+        "module": "has_kits_vente",
+        "uo_type": "uo",
+        "uo_value": 0.5,
+        "detail": "Fixe → 0.5j"
+      }
+    ]
+  },
+  "ajustement": {
+    "total_uo_brut": 60.2,
+    "total_uo_ajuste": 70.9,
+    "ecart_global_pct": 17.7,
+    "justification_globale": "Ajustement global de +15% à +20% selon les modules. En l'absence de projets historiques comparables, les heuristiques métier standard ont été appliquées. La reprise de données depuis Excel justifie une marge supplémentaire.",
+    "par_module": {
+      "has_account": {
+        "label": "Account",
+        "uo_brut": 5.5,
+        "uo_ajuste": 6.3,
+        "coefficient": 1.15,
+        "justification": "Ajustement de +15% : marge de sécurité standard en l'absence de données historiques."
+      },
+      "has_crm": {
+        "label": "Crm",
+        "uo_brut": 5.75,
+        "uo_ajuste": 6.6,
+        "coefficient": 1.15,
+        "justification": "Ajustement de +15% : marge de sécurité standard en l'absence de données historiques."
+      },
+      "has_kits_vente": {
+        "label": "Kits Vente",
+        "uo_brut": 4.5,
+        "uo_ajuste": 5.2,
+        "coefficient": 1.15,
+        "justification": "Ajustement de +15% : marge de sécurité standard en l'absence de données historiques."
+      },
+      "has_purchase": {
+        "label": "Purchase",
+        "uo_brut": 3.0,
+        "uo_ajuste": 3.4,
+        "coefficient": 1.15,
+        "justification": "Ajustement de +15% : marge de sécurité standard en l'absence de données historiques."
+      },
+      "has_sale": {
+        "label": "Sale",
+        "uo_brut": 7.5,
+        "uo_ajuste": 8.6,
+        "coefficient": 1.15,
+        "justification": "Ajustement de +15% : marge de sécurité standard en l'absence de données historiques."
+      },
+      "_general": {
+        "label": "Paramètres généraux",
+        "uo_brut": 34.0,
+        "uo_ajuste": 40.8,
+        "coefficient": 1.2,
+        "justification": "Ajustement de +20% : la reprise de données et la configuration générale sont souvent sous-estimées."
+      }
+    },
+    "risques": [
+      {
+        "module": "_general",
+        "description": "Qualité des données sources incertaine — la reprise depuis Excel peut révéler des incohérences nécessitant un nettoyage manuel.",
+        "impact_uo": 3,
+        "probabilite": "moyenne"
+      },
+      {
+        "module": "global",
+        "description": "Aucun projet historique similaire disponible — le chiffrage est basé sur les heuristiques. À affiner après les premiers ateliers.",
+        "impact_uo": 5,
+        "probabilite": "faible"
+      }
+    ],
+    "recommandations": [
+      "Prévoir un atelier de cadrage de 0.5j pour valider le périmètre avant de démarrer.",
+      "Demander un échantillon des données Excel du client pour évaluer la qualité avant la reprise.",
+      "Planifier une marge de 10% pour la conduite du changement si c'est le premier ERP du client."
+    ]
+  },
+  "projets_reference": [],
+  "meta": {
+    "nb_projets_historique": 0,
+    "nb_projets_similaires": 0
+  }
+}

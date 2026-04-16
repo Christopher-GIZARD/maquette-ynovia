@@ -1,0 +1,14 @@
+graph LR
+    A[Commande client] --> B{Type produit ?}
+    B -->|Kit| C[Explosion kit]
+    B -->|Produit simple| D{Route ?}
+    C --> D
+    D -->|MTO| E[Réassort fournisseur]
+    D -->|Dropshipping| F[Commande directe fournisseur]
+    D -->|Stock| G[Picking entrepôt]
+    E --> G
+    F --> H[Livraison directe]
+    G --> I[Livraison client]
+    H --> J[Facture]
+    I --> J
+    J --> K[Encaissement]

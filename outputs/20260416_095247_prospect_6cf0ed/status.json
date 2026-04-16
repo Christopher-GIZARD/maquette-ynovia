@@ -1,0 +1,12 @@
+{
+  "state": "done",
+  "message": "Tous les livrables ont été générés avec succès.",
+  "progress": 100,
+  "updated_at": "2026-04-16T09:52:49.048437",
+  "files": [
+    "cahier_des_charges.docx",
+    "chiffrage.xlsx",
+    "module_odoo_config.zip",
+    "proposition.html"
+  ]
+}

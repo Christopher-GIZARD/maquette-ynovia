@@ -1,0 +1,14 @@
+{
+  "state": "done",
+  "message": "Tous les livrables ont été générés avec succès.",
+  "progress": 100,
+  "updated_at": "2026-04-14T15:08:22.356699",
+  "files": [
+    "cahier_des_charges.json",
+    "chiffrage.json",
+    "config_odoo.json",
+    "flux_metier.json",
+    "licences.json",
+    "proposition.json"
+  ]
+}

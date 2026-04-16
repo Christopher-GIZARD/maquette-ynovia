@@ -1,0 +1,25 @@
+{
+  "titre": "Proposition commerciale — Intégration Odoo 19 — Prospect",
+  "sections": [
+    {
+      "titre": "Synthèse du projet",
+      "contenu": "Ynov'iT Services propose à Prospect la mise en place de l'ERP Odoo 19 couvrant 4 domaines fonctionnels. Le projet inclut le paramétrage, la reprise de données, la formation et l'accompagnement au démarrage."
+    },
+    {
+      "titre": "Périmètre",
+      "contenu": "Modules inclus : Account, Purchase, Sale, Stock"
+    },
+    {
+      "titre": "Méthodologie",
+      "contenu": "Le projet sera mené en 4 phases : 1) Cadrage et spécifications détaillées, 2) Paramétrage et développements, 3) Recette et reprise de données, 4) Formation et mise en production."
+    },
+    {
+      "titre": "Planning prévisionnel",
+      "contenu": "Durée estimée : 8 à 12 semaines selon la disponibilité des équipes."
+    },
+    {
+      "titre": "Conditions",
+      "contenu": "Facturation au temps passé sur la base du chiffrage présenté. Tout dépassement de périmètre fera l'objet d'un avenant."
+    }
+  ]
+}

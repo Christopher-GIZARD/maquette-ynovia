@@ -1,0 +1,305 @@
+[
+  {
+    "module": "account",
+    "settings": [
+      "has_accounting_entries",
+      "has_chart_of_accounts -- Company has a chart of accounts",
+      "chart_template",
+      "account_price_include -- Default Sales Price Include",
+      "tax_calculation_rounding_method -- Tax calculation rounding method",
+      "module_account_accountant -> installe account_accountant (Accounting)",
+      "group_cash_rounding -- Cash Rounding — groupe: account.group_cash_rounding",
+      "show_sale_receipts -- Sale Receipt",
+      "module_account_budget -> installe account_budget (Budget Management)",
+      "module_account_payment -> installe account_payment (Invoice Online Payment)",
+      "module_account_reports -> installe account_reports",
+      "module_account_check_printing -> installe account_check_printing",
+      "module_account_batch_payment -> installe account_batch_payment (Use batch payments)",
+      "module_account_iso20022 -> installe account_iso20022 (SEPA Credit Transfer / ISO20022)",
+      "module_account_sepa_direct_debit -> installe account_sepa_direct_debit (Use SEPA Direct Debit)",
+      "module_account_bank_statement_import_qif -> installe account_bank_statement_import_qif",
+      "module_currency_rate_live -> installe currency_rate_live (Automatic Currency Rates)",
+      "module_account_intrastat -> installe account_intrastat (Intrastat)",
+      "module_product_margin -> installe product_margin (Allow Product Margin)",
+      "module_account_extract -> installe account_extract (Document Digitization)",
+      "module_account_invoice_extract -> installe account_invoice_extract",
+      "module_account_bank_statement_extract -> installe account_bank_statement_extract",
+      "module_snailmail_account -> installe snailmail_account (Snailmail)",
+      "module_account_peppol -> installe account_peppol (PEPPOL Invoicing)",
+      "tax_exigibility -- Cash Basis",
+      "qr_code -- Display SEPA QR-code",
+      "link_qr_code -- Display Link QR-code",
+      "terms_type",
+      "display_invoice_amount_total_words -- Total amount of invoice in letters",
+      "display_invoice_tax_company_currency -- Taxes in company currency",
+      "preview_ready -- Display preview button",
+      "use_invoice_terms -- Default Terms & Conditions",
+      "account_use_credit_limit -- Sales Credit Limit — Enable the use of credit limit on partners.",
+      "account_storno -- Storno accounting",
+      "display_account_storno",
+      "group_sale_delivery_address -- groupe: account.group_delivery_invoice_address",
+      "quick_edit_mode -- Quick encoding",
+      "is_account_peppol_eligible -- PEPPOL eligible",
+      "restrictive_audit_trail -- Restricted Audit Trail",
+      "force_restrictive_audit_trail -- Forced Audit Trail",
+      "autopost_bills"
+    ]
+  },
+  {
+    "module": "base_setup",
+    "settings": [
+      "is_root_company",
+      "module_base_import -> installe base_import",
+      "module_google_calendar -> installe google_calendar (Allow the users to synchronize their calendar  with Google Calendar)",
+      "module_microsoft_calendar -> installe microsoft_calendar (Allow the users to synchronize their calendar with Outlook Calendar)",
+      "module_mail_plugin -> installe mail_plugin (Allow integration with the mail plugins)",
+      "module_auth_oauth -> installe auth_oauth",
+      "module_auth_ldap -> installe auth_ldap",
+      "module_account_inter_company_rules -> installe account_inter_company_rules",
+      "module_voip -> installe voip",
+      "module_web_unsplash -> installe web_unsplash",
+      "module_sms -> installe sms",
+      "module_partner_autocomplete -> installe partner_autocomplete",
+      "module_base_geolocalize -> installe base_geolocalize",
+      "module_google_recaptcha -> installe google_recaptcha",
+      "module_website_cf_turnstile -> installe website_cf_turnstile",
+      "module_google_address_autocomplete -> installe google_address_autocomplete",
+      "group_multi_currency -- Multi-Currencies — Allows to work in a multi currency environment — groupe: base.group_multi_currency",
+      "show_effect -- Show Effect"
+    ]
+  },
+  {
+    "module": "crm",
+    "settings": [
+      "group_use_lead -- Leads — groupe: crm.group_use_lead",
+      "group_use_recurring_revenues -- Recurring Revenues — groupe: crm.group_use_recurring_revenues",
+      "is_membership_multi -- Multi Teams",
+      "module_partnership -> installe partnership",
+      "crm_use_auto_assignment -- Rule-Based Assignment",
+      "crm_auto_assignment_action -- Auto Assignment Action",
+      "crm_auto_assignment_interval_type -- Auto Assignment Interval Unit — Interval type between each cron run (e.g. each 2 days or each 2 hours)",
+      "module_crm_iap_mine -> installe crm_iap_mine",
+      "module_crm_iap_enrich -> installe crm_iap_enrich",
+      "module_website_crm_iap_reveal -> installe website_crm_iap_reveal",
+      "lead_enrich_auto -- Enrich lead automatically",
+      "lead_mining_in_pipeline"
+    ]
+  },
+  {
+    "module": "hr",
+    "settings": [
+      "module_hr_presence -> installe hr_presence (Advanced Presence Control)",
+      "module_hr_skills -> installe hr_skills (Skills Management)",
+      "hr_presence_control_login",
+      "hr_presence_control_email",
+      "hr_presence_control_ip",
+      "module_hr_attendance -> installe hr_attendance"
+    ]
+  },
+  {
+    "module": "hr_attendance",
+    "settings": [
+      "hr_attendance_display_overtime",
+      "attendance_kiosk_mode",
+      "attendance_barcode_source",
+      "attendance_kiosk_use_pin",
+      "attendance_from_systray",
+      "attendance_overtime_validation",
+      "auto_check_out",
+      "absence_management",
+      "attendance_device_tracking"
+    ]
+  },
+  {
+    "module": "hr_expense",
+    "settings": [
+      "hr_expense_use_mailgateway -- Let your employees record expenses by email",
+      "module_hr_payroll_expense -> installe hr_payroll_expense (Reimburse Expenses in Payslip)",
+      "module_hr_expense_extract -> installe hr_expense_extract (Send bills to OCR to generate expenses)",
+      "module_hr_expense_stripe -> installe hr_expense_stripe (Link your stripe issuing account to manage company credit cards for your employees through Odoo)"
+    ]
+  },
+  {
+    "module": "hr_recruitment",
+    "settings": [
+      "module_website_hr_recruitment -> installe website_hr_recruitment (Online Posting)",
+      "module_hr_recruitment_survey -> installe hr_recruitment_survey (Interview Forms)",
+      "module_hr_recruitment_extract -> installe hr_recruitment_extract (Send CV to OCR to fill applications)"
+    ]
+  },
+  {
+    "module": "hr_timesheet",
+    "settings": [
+      "module_project_timesheet_holidays -> installe project_timesheet_holidays",
+      "reminder_user_allow -- Employee Reminder",
+      "reminder_allow -- Approver Reminder",
+      "is_encode_uom_days",
+      "timesheet_encode_method -- Encoding Method"
+    ]
+  },
+  {
+    "module": "maintenance",
+    "settings": [
+      "module_maintenance_worksheet -> installe maintenance_worksheet (Custom Maintenance Worksheets)"
+    ]
+  },
+  {
+    "module": "mrp",
+    "settings": [
+      "group_mrp_byproducts -- groupe: mrp.group_mrp_byproducts",
+      "module_mrp_mps -> installe mrp_mps",
+      "module_mrp_plm -> installe mrp_plm",
+      "module_quality_control -> installe quality_control",
+      "module_quality_control_worksheet -> installe quality_control_worksheet",
+      "module_mrp_subcontracting -> installe mrp_subcontracting",
+      "group_mrp_routings -- groupe: mrp.group_mrp_routings",
+      "group_unlocked_by_default -- groupe: mrp.group_unlocked_by_default",
+      "group_mrp_reception_report -- groupe: mrp.group_mrp_reception_report",
+      "group_mrp_workorder_dependencies -- groupe: mrp.group_mrp_workorder_dependencies"
+    ]
+  },
+  {
+    "module": "product",
+    "settings": [
+      "group_uom -- groupe: uom.group_uom",
+      "group_product_variant -- groupe: product.group_product_variant",
+      "module_loyalty -> installe loyalty",
+      "group_product_pricelist -- groupe: product.group_product_pricelist",
+      "product_weight_in_lbs",
+      "product_volume_volume_in_cubic_feet"
+    ]
+  },
+  {
+    "module": "project",
+    "settings": [
+      "module_hr_timesheet -> installe hr_timesheet (Task Logs)",
+      "group_project_stages -- groupe: project.group_project_stages"
+    ]
+  },
+  {
+    "module": "purchase",
+    "settings": [
+      "lock_confirmed_po",
+      "po_lock -- Purchase Order Modification *",
+      "po_order_approval",
+      "po_double_validation -- Levels of Approvals *",
+      "group_warning_purchase -- groupe: purchase.group_warning_purchase",
+      "module_account_3way_match -> installe account_3way_match",
+      "module_purchase_requisition -> installe purchase_requisition",
+      "module_purchase_product_matrix -> installe purchase_product_matrix",
+      "group_send_reminder -- Allow automatically send email to remind your vendor the receipt date — groupe: purchase.group_send_reminder"
+    ]
+  },
+  {
+    "module": "purchase_stock",
+    "settings": [
+      "module_stock_dropshipping -> installe stock_dropshipping",
+      "is_installed_sale -- Is the Sale Module Installed"
+    ]
+  },
+  {
+    "module": "sale",
+    "settings": [
+      "default_invoice_policy -- Invoicing Policy",
+      "group_auto_done_setting -- Lock Confirmed Sales — groupe: sale.group_auto_done_setting",
+      "group_discount_per_so_line -- Discounts — groupe: sale.group_discount_per_so_line",
+      "group_proforma_sales -- Pro-Forma Invoice — Allows you to send pro-forma invoice. — groupe: sale.group_proforma_sales",
+      "group_warning_sale -- Sale Order Warnings — groupe: sale.group_warning_sale",
+      "automatic_invoice -- Automatic Invoice",
+      "portal_confirmation_sign",
+      "portal_confirmation_pay",
+      "module_delivery -> installe delivery",
+      "module_product_email_template -> installe product_email_template",
+      "module_sale_amazon -> installe sale_amazon",
+      "module_sale_commission -> installe sale_commission",
+      "module_sale_gelato -> installe sale_gelato",
+      "module_sale_loyalty -> installe sale_loyalty",
+      "module_sale_margin -> installe sale_margin",
+      "module_sale_pdf_quote_builder -> installe sale_pdf_quote_builder",
+      "module_sale_product_matrix -> installe sale_product_matrix",
+      "module_sale_shopee -> installe sale_shopee"
+    ]
+  },
+  {
+    "module": "sale_management",
+    "settings": [
+      "group_sale_order_template -- groupe: sale_management.group_sale_order_template"
+    ]
+  },
+  {
+    "module": "sale_stock",
+    "settings": [
+      "use_security_lead -- Security Lead Time for Sales",
+      "default_picking_policy"
+    ]
+  },
+  {
+    "module": "stock",
+    "settings": [
+      "module_product_expiry -> installe product_expiry",
+      "group_stock_production_lot -- groupe: stock.group_production_lot",
+      "group_stock_lot_print_gs1 -- groupe: stock.group_stock_lot_print_gs1",
+      "group_lot_on_delivery_slip -- groupe: stock.group_lot_on_delivery_slip",
+      "group_stock_tracking_lot -- groupe: stock.group_tracking_lot",
+      "group_stock_tracking_owner -- groupe: stock.group_tracking_owner",
+      "group_stock_adv_location -- groupe: stock.group_adv_location",
+      "group_warning_stock -- groupe: stock.group_warning_stock",
+      "group_stock_sign_delivery -- groupe: stock.group_stock_sign_delivery",
+      "module_stock_picking_batch -> installe stock_picking_batch",
+      "module_stock_barcode -> installe stock_barcode",
+      "module_stock_barcode_barcodelookup -> installe stock_barcode_barcodelookup",
+      "stock_move_email_validation",
+      "module_stock_sms -> installe stock_sms",
+      "module_delivery -> installe delivery",
+      "module_quality_control -> installe quality_control",
+      "module_quality_control_worksheet -> installe quality_control_worksheet",
+      "group_stock_multi_locations -- groupe: stock.group_stock_multi_locations",
+      "annual_inventory_month",
+      "group_stock_reception_report -- groupe: stock.group_reception_report",
+      "module_stock_dropshipping -> installe stock_dropshipping",
+      "module_stock_fleet -> installe stock_fleet",
+      "replenish_on_order",
+      "stock_text_confirmation -- Stock Text Validation with stock move",
+      "stock_confirmation_type -- Stock Text Validation type"
+    ]
+  },
+  {
+    "module": "stock_account",
+    "settings": [
+      "module_stock_landed_costs -> installe stock_landed_costs",
+      "group_lot_on_invoice -- groupe: stock_account.group_lot_on_invoice"
+    ]
+  },
+  {
+    "module": "website",
+    "settings": [
+      "shared_user_account -- Shared Customer Accounts",
+      "website_cookies_bar",
+      "website_block_third_party_domains",
+      "cdn_activated",
+      "auth_signup_uninvited",
+      "group_multi_website -- groupe: website.group_multi_website",
+      "has_google_analytics",
+      "has_google_search_console",
+      "has_default_share_image",
+      "has_plausible_shared_key",
+      "module_website_livechat -> installe website_livechat"
+    ]
+  },
+  {
+    "module": "website_sale",
+    "settings": [
+      "group_show_uom_price -- Base Unit Price — groupe: website_sale.group_show_uom_price",
+      "group_product_price_comparison -- Comparison Price — groupe: website_sale.group_product_price_comparison",
+      "group_gmc_feed -- Google Merchant Center — groupe: website_sale.group_product_feed",
+      "module_website_sale_autocomplete -> installe website_sale_autocomplete",
+      "module_website_sale_collect -> installe website_sale_collect",
+      "add_to_cart_action",
+      "send_abandoned_cart_email -- Abandoned Email",
+      "website_sale_prevent_zero_price_sale -- Prevent Sale of Zero Priced Product",
+      "show_line_subtotals_tax_selection",
+      "account_on_checkout -- Customer Accounts",
+      "ecommerce_access"
+    ]
+  }
+]

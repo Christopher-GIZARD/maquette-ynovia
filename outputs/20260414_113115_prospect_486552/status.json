@@ -1,0 +1,9 @@
+{
+  "state": "done",
+  "message": "Tous les livrables ont été générés avec succès.",
+  "progress": 100,
+  "updated_at": "2026-04-14T11:31:22.337910",
+  "files": [
+    "resume_projet.json"
+  ]
+}

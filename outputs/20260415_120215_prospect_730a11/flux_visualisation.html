@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Flux métier — Avant-vente Odoo</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+    h1 { color: #1A2B4A; text-align: center; margin-bottom: 30px; }
+    .flux-card {
+      background: white; border-radius: 10px; padding: 24px; margin: 0 auto 24px;
+      max-width: 800px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .flux-card h2 { color: #1A2B4A; margin-top: 0; }
+    .desc { color: #4a5c7a; }
+    .modules { color: #8496b0; font-size: 13px; font-style: italic; margin-bottom: 16px; }
+    .mermaid { text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Flux métier — Projet Odoo 19</h1>
+
+    <div class="flux-card">
+      <h2>Order-to-Cash</h2>
+      <p class="desc">Flux de vente complet : du devis à l'encaissement</p>
+      <p class="modules">Modules : crm, sale, stock, account</p>
+      <div class="mermaid">
+graph LR
+    A[Opportunité CRM] --> B[Devis]
+    B --> C{Validation client}
+    C -->|Accepté| D[Bon de commande]
+    C -->|Refusé| E[Perdu]
+    D --> F[Livraison]
+    F --> G[Facturation]
+    G --> H[Encaissement]
+      </div>
+    </div>
+
+    <div class="flux-card">
+      <h2>Procure-to-Pay</h2>
+      <p class="desc">Flux d'achat complet : de la demande au paiement fournisseur</p>
+      <p class="modules">Modules : purchase, stock, account</p>
+      <div class="mermaid">
+graph LR
+    A[Besoin] --> B[Demande de prix]
+    B --> C[Bon de commande fournisseur]
+    C --> D[Réception]
+    D --> E[Contrôle facture]
+    E --> F[Paiement fournisseur]
+      </div>
+    </div>
+
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

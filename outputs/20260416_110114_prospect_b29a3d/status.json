@@ -1,0 +1,17 @@
+{
+  "state": "done",
+  "message": "Tous les livrables ont été générés avec succès.",
+  "progress": 100,
+  "updated_at": "2026-04-16T11:03:36.711483",
+  "files": [
+    "cahier_des_charges.docx",
+    "chiffrage.xlsx",
+    "flux_gestion_kits.mmd",
+    "flux_order_to_cash.mmd",
+    "flux_procure_to_pay.mmd",
+    "flux_réapprovisionnement.mmd",
+    "flux_visualisation.html",
+    "module_odoo_config.zip",
+    "proposition.html"
+  ]
+}

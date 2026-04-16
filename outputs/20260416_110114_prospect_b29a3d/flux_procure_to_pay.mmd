@@ -1,0 +1,11 @@
+graph LR
+    A[Demande d'achat] --> B[Validation demande]
+    B --> C[Commande fournisseur]
+    C --> D{Type livraison ?}
+    D -->|Dropshipping| E[Livraison directe client]
+    D -->|Stock| F[Réception entrepôt]
+    E --> G[Facture fournisseur]
+    F --> H[Contrôle réception]
+    H --> G
+    G --> I[Validation facture]
+    I --> J[Paiement fournisseur]

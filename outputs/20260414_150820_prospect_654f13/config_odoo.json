@@ -1,0 +1,39 @@
+{
+  "manifest": {
+    "name": "Configuration Avant-Vente",
+    "version": "19.0.1.0.0",
+    "category": "Tools",
+    "depends": [
+      "base",
+      "account_accountant",
+      "purchase",
+      "sale",
+      "sale_management",
+      "stock"
+    ],
+    "data": [
+      "data/res_config_settings.xml"
+    ],
+    "installable": true,
+    "auto_install": false
+  },
+  "modules_to_install": [
+    "account_accountant",
+    "purchase",
+    "sale",
+    "sale_management",
+    "stock"
+  ],
+  "settings": {
+    "group_sale_order_template": true,
+    "group_product_variant": true,
+    "group_uom": true,
+    "group_stock_multi_locations": true,
+    "group_purchase_order_template": true
+  },
+  "security_groups": [],
+  "notes": [
+    "Module généré automatiquement par le pipeline avant-vente.",
+    "À vérifier et ajuster après les ateliers de cadrage."
+  ]
+}

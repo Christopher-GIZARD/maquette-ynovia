@@ -1,0 +1,35 @@
+{
+  "flux": [
+    {
+      "nom": "Order-to-Cash",
+      "description": "Flux de vente complet : du devis à l'encaissement",
+      "mermaid": "graph LR\n    A[Opportunité CRM] --> B[Devis]\n    B --> C{Validation client}\n    C -->|Accepté| D[Bon de commande]\n    C -->|Refusé| E[Perdu]\n    D --> F[Livraison]\n    F --> G[Facturation]\n    G --> H[Encaissement]",
+      "modules_impliques": [
+        "crm",
+        "sale",
+        "stock",
+        "account"
+      ]
+    },
+    {
+      "nom": "Procure-to-Pay",
+      "description": "Flux d'achat complet : de la demande au paiement fournisseur",
+      "mermaid": "graph LR\n    A[Besoin] --> B[Demande de prix]\n    B --> C[Bon de commande fournisseur]\n    C --> D[Réception]\n    D --> E[Contrôle facture]\n    E --> F[Paiement fournisseur]",
+      "modules_impliques": [
+        "purchase",
+        "stock",
+        "account"
+      ]
+    },
+    {
+      "nom": "Flux logistique",
+      "description": "Processus de gestion des entrepôts et expéditions",
+      "mermaid": "graph TD\n    A[Commande confirmée] --> B[Picking]\n    B --> C[Colisage]\n    C --> D[Expédition]\n    D --> E[Mise à jour stock]\n    E --> F[Notification client]",
+      "modules_impliques": [
+        "stock",
+        "sale"
+      ]
+    }
+  ],
+  "nb_flux": 3
+}

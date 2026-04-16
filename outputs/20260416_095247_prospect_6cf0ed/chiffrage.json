@@ -1,0 +1,70 @@
+{
+  "uo_brut": {
+    "total_uo": 2.5,
+    "par_module": {
+      "has_crm": {
+        "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+        "uo": 2.5,
+        "actif": true,
+        "lignes_count": 2
+      }
+    },
+    "lignes": [
+      {
+        "question_id": "has_crm",
+        "label": "Besoins CRM (prospects, opportunités commerciales) ?",
+        "module": "has_crm",
+        "uo_type": "base_module",
+        "uo_value": 2.0,
+        "detail": "Activation module → 2j"
+      },
+      {
+        "question_id": "crm_nb_equipes",
+        "label": "Nombre d'équipes commerciales",
+        "module": "has_crm",
+        "uo_type": "uo_per_unit",
+        "uo_value": 0.5,
+        "detail": "1 × 0.5j = 0.5j"
+      }
+    ]
+  },
+  "ajustement": {
+    "total_uo_brut": 2.5,
+    "total_uo_ajuste": 2.9,
+    "ecart_global_pct": 16.0,
+    "justification_globale": "Ajustement global de +15% à +20% selon les modules. En l'absence de projets historiques comparables, les heuristiques métier standard ont été appliquées. La reprise de données depuis Excel justifie une marge supplémentaire.",
+    "par_module": {
+      "has_crm": {
+        "label": "Crm",
+        "uo_brut": 2.5,
+        "uo_ajuste": 2.9,
+        "coefficient": 1.15,
+        "justification": "Ajustement de +15% : marge de sécurité standard en l'absence de données historiques."
+      }
+    },
+    "risques": [
+      {
+        "module": "_general",
+        "description": "Qualité des données sources incertaine — la reprise depuis Excel peut révéler des incohérences nécessitant un nettoyage manuel.",
+        "impact_uo": 3,
+        "probabilite": "moyenne"
+      },
+      {
+        "module": "global",
+        "description": "Aucun projet historique similaire disponible — le chiffrage est basé sur les heuristiques. À affiner après les premiers ateliers.",
+        "impact_uo": 5,
+        "probabilite": "faible"
+      }
+    ],
+    "recommandations": [
+      "Prévoir un atelier de cadrage de 0.5j pour valider le périmètre avant de démarrer.",
+      "Demander un échantillon des données Excel du client pour évaluer la qualité avant la reprise.",
+      "Planifier une marge de 10% pour la conduite du changement si c'est le premier ERP du client."
+    ]
+  },
+  "projets_reference": [],
+  "meta": {
+    "nb_projets_historique": 0,
+    "nb_projets_similaires": 0
+  }
+}

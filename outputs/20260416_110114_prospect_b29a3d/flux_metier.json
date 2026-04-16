@@ -1,0 +1,45 @@
+{
+  "flux": [
+    {
+      "nom": "Order-to-Cash",
+      "description": "Flux principal de vente depuis la commande client jusqu'à l'encaissement, avec gestion des kits et routes MTO/Dropshipping.",
+      "modules_impliques": [
+        "sale",
+        "stock",
+        "account",
+        "kits_vente"
+      ],
+      "mermaid": "graph LR\n    A[Commande client] --> B{Type produit ?}\n    B -->|Kit| C[Explosion kit]\n    B -->|Produit simple| D{Route ?}\n    C --> D\n    D -->|MTO| E[Réassort fournisseur]\n    D -->|Dropshipping| F[Commande directe fournisseur]\n    D -->|Stock| G[Picking entrepôt]\n    E --> G\n    F --> H[Livraison directe]\n    G --> I[Livraison client]\n    H --> J[Facture]\n    I --> J\n    J --> K[Encaissement]"
+    },
+    {
+      "nom": "Procure-to-Pay",
+      "description": "Flux d'achat depuis l'expression du besoin jusqu'au paiement fournisseur, incluant les demandes d'achat et le dropshipping.",
+      "modules_impliques": [
+        "purchase",
+        "stock",
+        "account"
+      ],
+      "mermaid": "graph LR\n    A[Demande d'achat] --> B[Validation demande]\n    B --> C[Commande fournisseur]\n    C --> D{Type livraison ?}\n    D -->|Dropshipping| E[Livraison directe client]\n    D -->|Stock| F[Réception entrepôt]\n    E --> G[Facture fournisseur]\n    F --> H[Contrôle réception]\n    H --> G\n    G --> I[Validation facture]\n    I --> J[Paiement fournisseur]"
+    },
+    {
+      "nom": "Gestion-Kits",
+      "description": "Flux spécifique de traitement des kits de vente avec explosion des composants et gestion du stock.",
+      "modules_impliques": [
+        "kits_vente",
+        "sale",
+        "stock"
+      ],
+      "mermaid": "graph TD\n    A[Commande kit] --> B[Explosion nomenclature]\n    B --> C{Stock composants ?}\n    C -->|Insuffisant| D[Réassort composants]\n    C -->|Suffisant| E[Réservation composants]\n    D --> F[Réception composants]\n    F --> E\n    E --> G[Picking composants]\n    G --> H[Livraison détaillée]\n    H --> I[Facturation kit forfait]"
+    },
+    {
+      "nom": "Réapprovisionnement",
+      "description": "Flux de gestion automatique des stocks avec règles de réassort et gestion multi-fournisseurs.",
+      "modules_impliques": [
+        "stock",
+        "purchase"
+      ],
+      "mermaid": "graph LR\n    A[Règle réassort] --> B{Stock minimum ?}\n    B -->|Atteint| C[Calcul besoin]\n    B -->|OK| D[Attente]\n    C --> E{Multi-fournisseurs ?}\n    E -->|Oui| F[Sélection meilleur fournisseur]\n    E -->|Non| G[Fournisseur unique]\n    F --> H[Commande automatique]\n    G --> H\n    H --> I[Réception]\n    I --> J[Mise à jour stock]"
+    }
+  ],
+  "nb_flux": 4
+}

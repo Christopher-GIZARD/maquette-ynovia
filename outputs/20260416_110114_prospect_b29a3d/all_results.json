@@ -1,0 +1,915 @@
+{
+  "reponses": {
+    "nb_societes": 1,
+    "nb_users_internes": 6,
+    "nb_users_portail": 0,
+    "erp_actuel": [
+      "Sage 50/100/1000",
+      "Quadratus"
+    ],
+    "date_go_live": "2026-04-30",
+    "budget": "Non défini",
+    "pays_activite": [
+      "France"
+    ],
+    "langues": [
+      "Français"
+    ],
+    "migration_donnees": true,
+    "migration_perimetre": [
+      "Clients / contacts",
+      "Fournisseurs",
+      "Catalogue produits"
+    ],
+    "vol_clients": "> 20 000",
+    "vol_clients_format": "Fichier Excel manuel",
+    "vol_clients_multi": true,
+    "vol_clients_pj": false,
+    "vol_fournisseurs": "100–500",
+    "vol_fourn_format": "Fichier Excel manuel",
+    "vol_fourn_tarifs": true,
+    "vol_produits": "> 15 000",
+    "vol_produits_format": "Export ERP propre",
+    "vol_produits_variantes": true,
+    "vol_var_nb_valeurs_moy": 3,
+    "vol_var_combinaisons": "< 10",
+    "vol_var_matrice_incomplete": true,
+    "vol_produits_images": true,
+    "vol_produits_desc": true,
+    "has_sale": true,
+    "sale_types_produits": [
+      "Biens physiques (stockables)",
+      "Biens consommables",
+      "Services (main d'œuvre, prestation)"
+    ],
+    "sale_variantes": "Simples (1–2 attributs)",
+    "sale_var_nb_attr": 2,
+    "sale_var_nb_val": 3,
+    "sale_var_nb_comb": "< 10",
+    "sale_unites_mesure": false,
+    "sale_conditionnements": false,
+    "sale_grilles": "1 seul tarif",
+    "sale_remises": true,
+    "sale_marges": true,
+    "sale_multi_devises": false,
+    "sale_modeles_devis": false,
+    "sale_politique_fact": "À la commande",
+    "sale_relances": true,
+    "sale_commissions": false,
+    "has_purchase": true,
+    "purch_multi_fourn": true,
+    "purch_delais": true,
+    "purch_demandes_achat": true,
+    "purch_dropship": true,
+    "has_account": true,
+    "account_plan": "PCG France standard",
+    "account_analytique": true,
+    "account_axes": "1 axe",
+    "account_budgets": false,
+    "account_multi_devises": false,
+    "account_sepa": true,
+    "account_prelevement": false,
+    "account_tva": [
+      "Débits (standard)",
+      "Intracommunautaire"
+    ],
+    "account_facturx": true,
+    "account_pdf": true,
+    "pdf_facture_compta": "Intermédiaire",
+    "pdf_avoir": "Standard",
+    "pdf_relance": "Standard",
+    "pdf_releve": "Intermédiaire",
+    "has_stock": true,
+    "stock_nb_entrepots": 1,
+    "stock_multi_empl": true,
+    "stock_putaway": true,
+    "stock_tracabilite": "Non requise",
+    "stock_dlc": false,
+    "stock_colis": false,
+    "stock_routes": [
+      "Réassort sur commande (MTO)",
+      "Dropshipping"
+    ],
+    "stock_reappro": true,
+    "stock_valorisation": "Coût moyen pondéré (AVCO)",
+    "stock_pdf": false,
+    "has_kits_vente": true,
+    "kits_nb_kits": "> 200",
+    "kits_nb_composants_moy": 3,
+    "kits_bom_niveaux": false,
+    "kits_explosion_bl": "Oui — les composants apparaissent individuellement sur le BL",
+    "kits_stock_composants": true,
+    "kits_variantes_composants": false,
+    "kits_facturation": "Prix du kit (forfait)"
+  },
+  "societe": {
+    "siren": "88888"
+  },
+  "entreprise": {
+    "siren": "88888"
+  },
+  "cdc": {
+    "titre": "Cahier des charges — Projet Odoo 19 — Société SIREN 88888",
+    "date": "16/04/2026",
+    "version": "1.0",
+    "sections": [
+      {
+        "numero": "1",
+        "titre": "Contexte et objectifs",
+        "contenu": "La société (SIREN 88888) souhaite moderniser son système d'information en remplaçant ses solutions actuelles Sage 50/100/1000 et Quadratus par une solution ERP intégrée Odoo 19. Cette démarche s'inscrit dans une volonté d'optimiser les processus métier et d'améliorer la productivité de l'équipe de 6 utilisateurs internes. Les objectifs business visés sont l'automatisation des flux entre les ventes, achats, stock et comptabilité, l'amélioration du suivi des marges commerciales, et la centralisation des données dans un système unique. Le projet doit permettre une meilleure visibilité sur l'activité et faciliter la prise de décision grâce à des reportings intégrés.",
+        "sous_sections": []
+      },
+      {
+        "numero": "2",
+        "titre": "Périmètre fonctionnel",
+        "contenu": "",
+        "sous_sections": [
+          {
+            "numero": "2.1",
+            "titre": "Module Ventes",
+            "contenu": "Le module Ventes d'Odoo 19 couvrira la gestion complète du cycle commercial avec trois types de produits : biens physiques stockables, biens consommables et services. La gestion des variantes produits sera configurée pour supporter des variantes simples avec 2 attributs maximum et 3 valeurs par attribut, générant moins de 10 combinaisons par produit. Le système gérera un tarif unique avec possibilité d'appliquer des remises et de calculer les marges en temps réel. La politique de facturation sera configurée 'à la commande' et le module intégrera un système de relances automatiques pour les impayés. Les devis et commandes seront générés automatiquement sans nécessiter de modèles personnalisés."
+          },
+          {
+            "numero": "2.2",
+            "titre": "Module Achats",
+            "contenu": "Le module Achats permettra la gestion multi-fournisseurs avec suivi des délais de livraison et gestion des demandes d'achat internes. La fonctionnalité de dropshipping sera activée pour permettre la livraison directe fournisseur vers client sans passage par les stocks internes. Le système gérera les bons de commande, le suivi des réceptions et l'interface avec la comptabilité fournisseurs. Les tarifs fournisseurs seront intégrés dans le système de reprise de données pour optimiser les processus d'approvisionnement."
+          },
+          {
+            "numero": "2.3",
+            "titre": "Module Comptabilité",
+            "contenu": "La comptabilité sera configurée avec le Plan Comptable Général français standard et intégrera la comptabilité analytique sur un axe unique. Le système gérera la TVA sur les débits avec support de la TVA intracommunautaire, conformément à la réglementation française. Les virements SEPA seront activés pour automatiser les paiements. La facturation électronique Factur-X sera mise en place ainsi que la génération de PDF pour les factures (niveau intermédiaire), avoirs (standard), relances (standard) et relevés de compte (niveau intermédiaire). L'intégration avec les modules ventes et achats assurera une comptabilisation automatique des écritures."
+          },
+          {
+            "numero": "2.4",
+            "titre": "Module Stock",
+            "contenu": "La gestion de stock sera configurée pour un entrepôt unique avec gestion multi-emplacements et règles de rangement automatique (putaway rules). Le système supportera les routes de réassort sur commande (MTO) et de dropshipping. La valorisation des stocks sera configurée en coût moyen pondéré (AVCO) et le système gérera le réapprovisionnement automatique basé sur les règles de stock minimum. Aucune traçabilité par lots ou numéros de série n'est requise, et la gestion des dates limite de consommation n'est pas nécessaire. Le système n'intégrera pas la gestion des colis ni l'édition de PDF pour les mouvements de stock."
+          },
+          {
+            "numero": "2.5",
+            "titre": "Module Kits de vente",
+            "contenu": "Le système gérera plus de 200 kits de vente avec en moyenne 3 composants par kit. Les nomenclatures seront configurées à un seul niveau sans sous-assemblages complexes. Lors de la livraison, les composants apparaîtront individuellement sur les bons de livraison pour une meilleure traçabilité. Le stock sera géré au niveau des composants et non des kits assemblés. La facturation se fera au prix forfaitaire du kit sans détail des composants. Les variantes de composants ne seront pas gérées dans cette configuration initiale."
+          }
+        ]
+      },
+      {
+        "numero": "3",
+        "titre": "Reprise de données",
+        "contenu": "Le projet inclut la reprise de données depuis les systèmes actuels sur trois périmètres principaux. Le fichier clients/contacts représente plus de 20 000 enregistrements au format Excel manuel, nécessitant un travail de nettoyage et de dédoublonnage important. Les données fournisseurs (100 à 500 enregistrements) incluront les tarifs associés et devront être consolidées depuis les systèmes sources. Le catalogue produits, composé de plus de 15 000 références, sera extrait via l'export ERP propriétaire et inclura les variantes produits, images et descriptions. La méthodologie comprendra une phase d'extraction et d'analyse de la qualité des données, suivie du nettoyage et de la normalisation, puis de l'import par lots avec validation fonctionnelle. Une attention particulière sera portée à la cohérence des données entre les différents périmètres et à la complétude des informations obligatoires dans Odoo 19.",
+        "sous_sections": []
+      },
+      {
+        "numero": "4",
+        "titre": "Interfaces et intégrations",
+        "contenu": "Le projet ne prévoit pas d'interfaces EDI ou d'intégrations avec des systèmes tiers dans sa phase initiale. L'ensemble des processus métier sera géré nativement dans Odoo 19, permettant une approche intégrée et simplifiée. Cette approche favorise la cohérence des données et réduit la complexité technique du projet. Des intégrations pourront être envisagées ultérieurement selon l'évolution des besoins métier.",
+        "sous_sections": []
+      },
+      {
+        "numero": "5",
+        "titre": "Utilisateurs et droits d'accès",
+        "contenu": "Le système sera configuré pour 6 utilisateurs internes avec des profils adaptés aux différents métiers : commercial, acheteur, gestionnaire de stock, comptable, direction. Aucun utilisateur portail n'est prévu dans la configuration initiale. Les droits d'accès suivront la logique standard d'Odoo 19 avec des groupes de sécurité prédéfinis, sans nécessiter de développements spécifiques de gestion des droits. Chaque utilisateur aura accès aux modules correspondant à ses responsabilités métier avec des niveaux de droits appropriés (lecture, écriture, suppression).",
+        "sous_sections": []
+      },
+      {
+        "numero": "6",
+        "titre": "Contraintes et exigences",
+        "contenu": "Le projet concerne une société unique sans problématique multi-sociétés ni transactions intercompagnies. Le système fonctionnera exclusivement en français pour des activités en France, simplifiant la configuration fiscale et légale. La date de go-live est fixée au 30 avril 2026, imposant un planning serré pour la mise en œuvre. Cette contrainte temporelle nécessitera une mobilisation importante des équipes projet et une validation rapide des étapes clés. Le budget n'étant pas défini à ce stade, les choix techniques privilégieront les fonctionnalités standard d'Odoo 19 pour optimiser le rapport coût/bénéfice.",
+        "sous_sections": []
+      },
+      {
+        "numero": "7",
+        "titre": "Hypothèses de travail",
+        "contenu": "Le projet s'appuie sur plusieurs hypothèses clés qui devront être validées en phase de cadrage. La disponibilité d'un référent métier côté client est supposée pour assurer les validations fonctionnelles et les tests utilisateurs. Les données sources sont présumées exploitables et de qualité suffisante pour la reprise, notamment pour le catalogue produits via l'export ERP propriétaire. L'infrastructure technique (serveurs, réseau, postes utilisateurs) est supposée compatible avec les prérequis Odoo 19. La formation des utilisateurs finaux est considérée comme un prérequis à la réussite du projet mais n'est pas incluse dans ce périmètre. Le projet démarrera sur une instance Odoo 19 Community avec possibilité d'évolution vers Enterprise selon les besoins identifiés.",
+        "sous_sections": []
+      },
+      {
+        "numero": "8",
+        "titre": "Exclusions",
+        "contenu": "Sont explicitement exclus du périmètre : tous les modules non mentionnés dans ce cahier des charges (CRM, Projet, Fabrication, RH, Helpdesk, Field Service, Site web, Maintenance, Réparation, Location), les développements spécifiques et personnalisations non décrites, la formation des utilisateurs finaux, le support et la maintenance post-go-live, les interfaces avec des systèmes tiers, la gestion des unités de mesure et conditionnements multiples, les grilles tarifaires complexes et la gestion des commissions commerciales. La reprise de données se limite aux trois périmètres identifiés (clients, fournisseurs, produits) et n'inclut pas l'historique des transactions, stocks ou écritures comptables.",
+        "sous_sections": []
+      },
+      {
+        "numero": "9",
+        "titre": "Risques identifiés",
+        "contenu": "Plusieurs risques ont été identifiés et devront faire l'objet d'un suivi particulier. Le volume important de données à reprendre (plus de 20 000 clients et 15 000 produits) présente des risques de qualité et de cohérence, particulièrement pour les données clients au format Excel manuel. La gestion de plus de 200 kits de vente avec leurs composants nécessitera une attention particulière lors du paramétrage et des tests. La contrainte de délai avec un go-live au 30 avril 2026 impose un planning serré qui pourrait impacter la qualité des livrables si les validations client sont retardées. L'absence de budget défini peut générer des arbitrages en cours de projet. Le changement d'ERP représente un enjeu de conduite du changement important pour les 6 utilisateurs qui devront s'approprier de nouveaux processus et interfaces.",
+        "sous_sections": []
+      }
+    ]
+  },
+  "chiffrage": {
+    "uo_brut": {
+      "total_uo": 61.0,
+      "par_module": {
+        "_general": {
+          "label": "Paramètres généraux",
+          "uo": 20.0,
+          "actif": true,
+          "lignes_count": 12
+        },
+        "has_sale": {
+          "label": "Besoins Ventes (devis, commandes, facturation) ?",
+          "uo": 6.0,
+          "actif": true,
+          "lignes_count": 6
+        },
+        "has_purchase": {
+          "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+          "uo": 5.0,
+          "actif": true,
+          "lignes_count": 5
+        },
+        "has_account": {
+          "label": "Besoins Comptabilité ?",
+          "uo": 14.5,
+          "actif": true,
+          "lignes_count": 11
+        },
+        "has_stock": {
+          "label": "Besoins Stocks & Logistique ?",
+          "uo": 11.0,
+          "actif": true,
+          "lignes_count": 7
+        },
+        "has_kits_vente": {
+          "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+          "uo": 4.5,
+          "actif": true,
+          "lignes_count": 4
+        }
+      },
+      "lignes": [
+        {
+          "question_id": "langues",
+          "label": "Langues requises (interface / documents)",
+          "module": null,
+          "uo_type": "uo_per_item",
+          "uo_value": 0.5,
+          "detail": "1 items × 0.5j = 0.5j"
+        },
+        {
+          "question_id": "vol_clients",
+          "label": "Volume",
+          "module": null,
+          "uo_type": "uo_map",
+          "uo_value": 5.0,
+          "detail": "\"> 20 000\" → 5.0j"
+        },
+        {
+          "question_id": "vol_clients_format",
+          "label": "Qualité du format source",
+          "module": null,
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"Fichier Excel manuel\" → 1.0j"
+        },
+        {
+          "question_id": "vol_clients_multi",
+          "label": "Plusieurs contacts / interlocuteurs par client ?",
+          "module": null,
+          "uo_type": "uo",
+          "uo_value": 0.5,
+          "detail": "Fixe → 0.5j"
+        },
+        {
+          "question_id": "vol_fournisseurs",
+          "label": "Volume",
+          "module": null,
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"100–500\" → 1.0j"
+        },
+        {
+          "question_id": "vol_fourn_format",
+          "label": "Qualité du format source",
+          "module": null,
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"Fichier Excel manuel\" → 1.0j"
+        },
+        {
+          "question_id": "vol_fourn_tarifs",
+          "label": "Tarifs d'achat par fournisseur à reprendre ?",
+          "module": null,
+          "uo_type": "uo",
+          "uo_value": 0.5,
+          "detail": "Fixe → 0.5j"
+        },
+        {
+          "question_id": "vol_produits",
+          "label": "Volume",
+          "module": null,
+          "uo_type": "uo_map",
+          "uo_value": 8.0,
+          "detail": "\"> 15 000\" → 8.0j"
+        },
+        {
+          "question_id": "vol_produits_variantes",
+          "label": "Produits avec variantes à reprendre ?",
+          "module": null,
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "vol_var_combinaisons",
+          "label": "Variantes par produit",
+          "module": null,
+          "uo_type": "uo_map",
+          "uo_value": 0.5,
+          "detail": "\"< 10\" → 0.5j"
+        },
+        {
+          "question_id": "vol_produits_images",
+          "label": "Images produits à importer ?",
+          "module": null,
+          "uo_type": "uo",
+          "uo_value": 0.5,
+          "detail": "Fixe → 0.5j"
+        },
+        {
+          "question_id": "vol_produits_desc",
+          "label": "Descriptions / fiches techniques à intégrer ?",
+          "module": null,
+          "uo_type": "uo",
+          "uo_value": 0.5,
+          "detail": "Fixe → 0.5j"
+        },
+        {
+          "question_id": "has_sale",
+          "label": "Besoins Ventes (devis, commandes, facturation) ?",
+          "module": "has_sale",
+          "uo_type": "base_module",
+          "uo_value": 3.0,
+          "detail": "Activation module → 3j"
+        },
+        {
+          "question_id": "sale_variantes",
+          "label": "Produits avec variantes (couleur, taille...) ?",
+          "module": "has_sale",
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"Simples (1–2 attributs)\" → 1.0j"
+        },
+        {
+          "question_id": "sale_var_nb_comb",
+          "label": "Variantes par produit",
+          "module": "has_sale",
+          "uo_type": "uo_map",
+          "uo_value": 0.5,
+          "detail": "\"< 10\" → 0.5j"
+        },
+        {
+          "question_id": "sale_remises",
+          "label": "Remises sur lignes de commande ?",
+          "module": "has_sale",
+          "uo_type": "uo",
+          "uo_value": 0.25,
+          "detail": "Fixe → 0.25j"
+        },
+        {
+          "question_id": "sale_marges",
+          "label": "Suivi des marges ?",
+          "module": "has_sale",
+          "uo_type": "uo",
+          "uo_value": 0.25,
+          "detail": "Fixe → 0.25j"
+        },
+        {
+          "question_id": "sale_relances",
+          "label": "Relances automatiques des factures impayées ?",
+          "module": "has_sale",
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "has_purchase",
+          "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+          "module": "has_purchase",
+          "uo_type": "base_module",
+          "uo_value": 2.0,
+          "detail": "Activation module → 2j"
+        },
+        {
+          "question_id": "purch_multi_fourn",
+          "label": "Plusieurs fournisseurs par produit avec tarifs ?",
+          "module": "has_purchase",
+          "uo_type": "uo",
+          "uo_value": 0.5,
+          "detail": "Fixe → 0.5j"
+        },
+        {
+          "question_id": "purch_delais",
+          "label": "Délais d'approvisionnement par fournisseur ?",
+          "module": "has_purchase",
+          "uo_type": "uo",
+          "uo_value": 0.5,
+          "detail": "Fixe → 0.5j"
+        },
+        {
+          "question_id": "purch_demandes_achat",
+          "label": "Demandes d'achat avant génération de la commande ?",
+          "module": "has_purchase",
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "purch_dropship",
+          "label": "Dropshipping (livraison directe fournisseur → client) ?",
+          "module": "has_purchase",
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "has_account",
+          "label": "Besoins Comptabilité ?",
+          "module": "has_account",
+          "uo_type": "base_module",
+          "uo_value": 5.0,
+          "detail": "Activation module → 5j"
+        },
+        {
+          "question_id": "account_plan",
+          "label": "Plan comptable",
+          "module": "has_account",
+          "uo_type": "uo_map",
+          "uo_value": 0.5,
+          "detail": "\"PCG France standard\" → 0.5j"
+        },
+        {
+          "question_id": "account_analytique",
+          "label": "Comptabilité analytique ?",
+          "module": "has_account",
+          "uo_type": "uo",
+          "uo_value": 2.0,
+          "detail": "Fixe → 2.0j"
+        },
+        {
+          "question_id": "account_axes",
+          "label": "Nombre d'axes analytiques",
+          "module": "has_account",
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"1 axe\" → 1.0j"
+        },
+        {
+          "question_id": "account_sepa",
+          "label": "Virements SEPA ?",
+          "module": "has_account",
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "account_tva",
+          "label": "Régimes de TVA applicables",
+          "module": "has_account",
+          "uo_type": "uo_per_item",
+          "uo_value": 1.0,
+          "detail": "2 items × 0.5j = 1.0j"
+        },
+        {
+          "question_id": "account_facturx",
+          "label": "Factures Factur-X / e-invoicing UE ?",
+          "module": "has_account",
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "pdf_facture_compta",
+          "label": "Facture client",
+          "module": "has_account",
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"Intermédiaire\" → 1.0j"
+        },
+        {
+          "question_id": "pdf_avoir",
+          "label": "Avoir client",
+          "module": "has_account",
+          "uo_type": "uo_map",
+          "uo_value": 0.5,
+          "detail": "\"Standard\" → 0.5j"
+        },
+        {
+          "question_id": "pdf_relance",
+          "label": "Lettre de relance (par niveau)",
+          "module": "has_account",
+          "uo_type": "uo_map",
+          "uo_value": 0.5,
+          "detail": "\"Standard\" → 0.5j"
+        },
+        {
+          "question_id": "pdf_releve",
+          "label": "Relevé de compte client",
+          "module": "has_account",
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"Intermédiaire\" → 1.0j"
+        },
+        {
+          "question_id": "has_stock",
+          "label": "Besoins Stocks & Logistique ?",
+          "module": "has_stock",
+          "uo_type": "base_module",
+          "uo_value": 3.0,
+          "detail": "Activation module → 3j"
+        },
+        {
+          "question_id": "stock_nb_entrepots",
+          "label": "Nombre d'entrepôts",
+          "module": "has_stock",
+          "uo_type": "uo_per_unit",
+          "uo_value": 1.0,
+          "detail": "1 × 1.0j = 1.0j"
+        },
+        {
+          "question_id": "stock_multi_empl",
+          "label": "Multi-emplacements (allées, étagères) ?",
+          "module": "has_stock",
+          "uo_type": "uo",
+          "uo_value": 2.0,
+          "detail": "Fixe → 2.0j"
+        },
+        {
+          "question_id": "stock_putaway",
+          "label": "Règles de rangement automatique (putaway) ?",
+          "module": "has_stock",
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "stock_routes",
+          "label": "Routes logistiques spécifiques",
+          "module": "has_stock",
+          "uo_type": "uo_per_item",
+          "uo_value": 2.0,
+          "detail": "2 items × 1.0j = 2.0j"
+        },
+        {
+          "question_id": "stock_reappro",
+          "label": "Réapprovisionnement automatique (point de commande) ?",
+          "module": "has_stock",
+          "uo_type": "uo",
+          "uo_value": 1.0,
+          "detail": "Fixe → 1.0j"
+        },
+        {
+          "question_id": "stock_valorisation",
+          "label": "Méthode de valorisation",
+          "module": "has_stock",
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"Coût moyen pondéré (AVCO)\" → 1.0j"
+        },
+        {
+          "question_id": "has_kits_vente",
+          "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+          "module": "has_kits_vente",
+          "uo_type": "base_module",
+          "uo_value": 1.0,
+          "detail": "Activation module → 1j"
+        },
+        {
+          "question_id": "kits_nb_kits",
+          "label": "Nombre de kits distincts (ordre de grandeur)",
+          "module": "has_kits_vente",
+          "uo_type": "uo_map",
+          "uo_value": 2.0,
+          "detail": "\"> 200\" → 2.0j"
+        },
+        {
+          "question_id": "kits_explosion_bl",
+          "label": "Explosion des composants sur le bon de livraison ?",
+          "module": "has_kits_vente",
+          "uo_type": "uo_map",
+          "uo_value": 1.0,
+          "detail": "\"Oui — les composants apparaissent individuellement sur le BL\" → 1.0j"
+        },
+        {
+          "question_id": "kits_stock_composants",
+          "label": "Déstockage des composants à la livraison (pas du kit lui-même) ?",
+          "module": "has_kits_vente",
+          "uo_type": "uo",
+          "uo_value": 0.5,
+          "detail": "Fixe → 0.5j"
+        }
+      ]
+    },
+    "ajustement": {
+      "total_uo_brut": 61.0,
+      "total_uo_ajuste": 73.2,
+      "ecart_global_pct": 20.0,
+      "justification_globale": "Ajustement +20% justifié par : migration massive de données Excel manuelles (>20k clients), gros volume produits (>15k) avec variantes, >200 kits complexes avec explosion BL, et transition depuis 2 ERP différents (Sage + Quadratus) nécessitant harmonisation des données.",
+      "par_module": {
+        "_general": {
+          "label": "Paramètres généraux",
+          "uo_brut": 20.0,
+          "uo_ajuste": 25.0,
+          "coefficient": 1.25,
+          "justification": "Migration complexe : >20k clients depuis Excel manuel + >15k produits avec variantes + harmonisation données Sage/Quadratus. Nettoyage et dédoublonnage nécessaires."
+        },
+        "has_sale": {
+          "label": "Besoins Ventes (devis, commandes, facturation) ?",
+          "uo_brut": 6.0,
+          "uo_ajuste": 6.6,
+          "coefficient": 1.1,
+          "justification": "Configuration standard avec variantes simples (2 attributs, <10 combinaisons). Ajustement mineur pour intégration avec les >200 kits."
+        },
+        "has_purchase": {
+          "label": "Besoins Achats (commandes fournisseurs, réception) ?",
+          "uo_brut": 5.0,
+          "uo_ajuste": 5.5,
+          "coefficient": 1.1,
+          "justification": "Dropshipping + demandes d'achat + multi-fournisseurs avec tarifs Excel à nettoyer. Complexité modérée mais données sources manuelles."
+        },
+        "has_account": {
+          "label": "Besoins Comptabilité ?",
+          "uo_brut": 14.5,
+          "uo_ajuste": 17.4,
+          "coefficient": 1.2,
+          "justification": "Transition depuis 2 ERP (Sage + Quadratus) nécessitant harmonisation plan comptable et analytique. Factur-X + TVA intracommunautaire + personnalisation PDF intermédiaire."
+        },
+        "has_stock": {
+          "label": "Besoins Stocks & Logistique ?",
+          "uo_brut": 11.0,
+          "uo_ajuste": 13.2,
+          "coefficient": 1.2,
+          "justification": "Multi-emplacements + putaway + routes MTO/dropshipping + réappro auto. Intégration avec >200 kits nécessitant déstockage composants complexe."
+        },
+        "has_kits_vente": {
+          "label": "Kits à la vente (produits composés vendus à l'unité sans ordre de fabrication) ?",
+          "uo_brut": 4.5,
+          "uo_ajuste": 5.4,
+          "coefficient": 1.2,
+          "justification": ">200 kits avec explosion BL et déstockage composants. Configuration avancée nécessitant tests approfondis avec le module stock."
+        }
+      },
+      "risques": [
+        {
+          "module": "global",
+          "description": "Qualité des données Excel manuelles : >20k clients et tarifs fournisseurs nécessiteront probablement nettoyage/dédoublonnage supplémentaire",
+          "impact_uo": 5,
+          "probabilite": "élevée"
+        },
+        {
+          "module": "_general",
+          "description": "Harmonisation complexe entre données Sage 50/100/1000 et Quadratus avec structures potentiellement différentes",
+          "impact_uo": 3,
+          "probabilite": "moyenne"
+        },
+        {
+          "module": "has_kits_vente",
+          "description": ">200 kits avec explosion BL : risque de performance et complexité sous-estimée lors des tests en volume",
+          "impact_uo": 2,
+          "probabilite": "moyenne"
+        },
+        {
+          "module": "has_stock",
+          "description": "Intégration kits/stock/variantes : matrice incomplète de variantes peut créer des incohérences stock",
+          "impact_uo": 2,
+          "probabilite": "faible"
+        }
+      ],
+      "recommandations": [
+        "Prévoir audit qualité données dès le début : échantillonnage clients/fournisseurs Excel pour identifier doublons et incohérences",
+        "Planifier migration en 2 phases : d'abord Sage (plus structuré), puis Quadratus avec harmonisation",
+        "Tests de charge obligatoires sur les >200 kits avec explosion BL avant go-live",
+        "Formation renforcée utilisateurs : transition depuis 2 ERP différents nécessite accompagnement changement",
+        "Prévoir buffer 10% supplémentaire pour les ajustements post-tests utilisateurs"
+      ]
+    },
+    "projets_reference": [],
+    "meta": {
+      "nb_projets_historique": 0,
+      "nb_projets_similaires": 0
+    }
+  },
+  "flux": {
+    "flux": [
+      {
+        "nom": "Order-to-Cash",
+        "description": "Flux principal de vente depuis la commande client jusqu'à l'encaissement, avec gestion des kits et routes MTO/Dropshipping.",
+        "modules_impliques": [
+          "sale",
+          "stock",
+          "account",
+          "kits_vente"
+        ],
+        "mermaid": "graph LR\n    A[Commande client] --> B{Type produit ?}\n    B -->|Kit| C[Explosion kit]\n    B -->|Produit simple| D{Route ?}\n    C --> D\n    D -->|MTO| E[Réassort fournisseur]\n    D -->|Dropshipping| F[Commande directe fournisseur]\n    D -->|Stock| G[Picking entrepôt]\n    E --> G\n    F --> H[Livraison directe]\n    G --> I[Livraison client]\n    H --> J[Facture]\n    I --> J\n    J --> K[Encaissement]"
+      },
+      {
+        "nom": "Procure-to-Pay",
+        "description": "Flux d'achat depuis l'expression du besoin jusqu'au paiement fournisseur, incluant les demandes d'achat et le dropshipping.",
+        "modules_impliques": [
+          "purchase",
+          "stock",
+          "account"
+        ],
+        "mermaid": "graph LR\n    A[Demande d'achat] --> B[Validation demande]\n    B --> C[Commande fournisseur]\n    C --> D{Type livraison ?}\n    D -->|Dropshipping| E[Livraison directe client]\n    D -->|Stock| F[Réception entrepôt]\n    E --> G[Facture fournisseur]\n    F --> H[Contrôle réception]\n    H --> G\n    G --> I[Validation facture]\n    I --> J[Paiement fournisseur]"
+      },
+      {
+        "nom": "Gestion-Kits",
+        "description": "Flux spécifique de traitement des kits de vente avec explosion des composants et gestion du stock.",
+        "modules_impliques": [
+          "kits_vente",
+          "sale",
+          "stock"
+        ],
+        "mermaid": "graph TD\n    A[Commande kit] --> B[Explosion nomenclature]\n    B --> C{Stock composants ?}\n    C -->|Insuffisant| D[Réassort composants]\n    C -->|Suffisant| E[Réservation composants]\n    D --> F[Réception composants]\n    F --> E\n    E --> G[Picking composants]\n    G --> H[Livraison détaillée]\n    H --> I[Facturation kit forfait]"
+      },
+      {
+        "nom": "Réapprovisionnement",
+        "description": "Flux de gestion automatique des stocks avec règles de réassort et gestion multi-fournisseurs.",
+        "modules_impliques": [
+          "stock",
+          "purchase"
+        ],
+        "mermaid": "graph LR\n    A[Règle réassort] --> B{Stock minimum ?}\n    B -->|Atteint| C[Calcul besoin]\n    B -->|OK| D[Attente]\n    C --> E{Multi-fournisseurs ?}\n    E -->|Oui| F[Sélection meilleur fournisseur]\n    E -->|Non| G[Fournisseur unique]\n    F --> H[Commande automatique]\n    G --> H\n    H --> I[Réception]\n    I --> J[Mise à jour stock]"
+      }
+    ],
+    "nb_flux": 4
+  },
+  "config": {
+    "manifest": {
+      "name": "Presales Config — Société 88888",
+      "version": "19.0.1.0.0",
+      "category": "Tools",
+      "summary": "Configuration automatique avant-vente",
+      "depends": [
+        "base",
+        "sale_management",
+        "purchase",
+        "account_accountant",
+        "stock",
+        "mrp"
+      ],
+      "data": [
+        "data/config.xml"
+      ],
+      "installable": true,
+      "auto_install": false
+    },
+    "modules_to_install": [
+      "crm",
+      "sale_management",
+      "purchase",
+      "account_accountant",
+      "stock",
+      "mrp"
+    ],
+    "config_xml": "<odoo>\n  <data noupdate=\"0\">\n    <record id=\"presales_config\" model=\"res.config.settings\">\n      <!-- Ventes -->\n      <field name=\"group_discount_per_so_line\">True</field>\n      <field name=\"module_sale_margin\">True</field>\n      <field name=\"default_invoice_policy\">order</field>\n      \n      <!-- Achats -->\n      <field name=\"module_stock_dropshipping\">True</field>\n      \n      <!-- Comptabilité -->\n      <field name=\"module_account_accountant\">True</field>\n      \n      <!-- Stock -->\n      <field name=\"group_stock_multi_locations\">True</field>\n      <field name=\"group_stock_adv_location\">True</field>\n      <field name=\"replenish_on_order\">True</field>\n      \n      <!-- Produits -->\n      <field name=\"group_product_variant\">True</field>\n      \n      <!-- Fabrication (pour kits) -->\n      <field name=\"group_mrp_byproducts\">True</field>\n    </record>\n  </data>\n</odoo>",
+    "settings": {
+      "group_discount_per_so_line": true,
+      "module_sale_margin": true,
+      "default_invoice_policy": "order",
+      "module_stock_dropshipping": true,
+      "module_account_accountant": true,
+      "group_stock_multi_locations": true,
+      "group_stock_adv_location": true,
+      "replenish_on_order": true,
+      "group_product_variant": true,
+      "group_mrp_byproducts": true
+    },
+    "security_groups": [
+      "group_discount_per_so_line",
+      "group_stock_multi_locations",
+      "group_stock_adv_location",
+      "group_product_variant",
+      "group_mrp_byproducts"
+    ],
+    "companies": [
+      {
+        "name": "Société 88888",
+        "currency": "EUR"
+      }
+    ],
+    "notes": [
+      "Plan comptable PCG France à configurer manuellement",
+      "Comptabilité analytique (1 axe) à paramétrer",
+      "SEPA et TVA intracommunautaire à configurer",
+      "Règles de putaway à définir pour les emplacements multiples",
+      "Plus de 200 kits de vente à créer avec nomenclatures",
+      "Migration de plus de 20 000 clients et 15 000 produits à planifier"
+    ],
+    "warnings": [
+      "Volume important de données à migrer (>20k clients, >15k produits)",
+      "Kits avec explosion sur BL nécessite configuration avancée des nomenclatures",
+      "Variantes produits avec matrice incomplète peut nécessiter nettoyage des données"
+    ]
+  },
+  "propale": {
+    "titre": "Proposition commerciale — Intégration Odoo 19 — Société SIREN 88888",
+    "date": "16/04/2026",
+    "reference": "PROP-20260416-SIR",
+    "sections": [
+      {
+        "numero": "1",
+        "titre": "Synthèse exécutive",
+        "contenu": "Nous proposons l'implémentation d'Odoo 19 pour digitaliser et unifier vos processus commerciaux, achats, stocks et comptables actuellement répartis entre Excel, Sage et Quadratus. Ce projet d'envergure permettra de gérer efficacement vos >20k clients, >15k produits avec variantes et >200 kits, tout en automatisant vos flux Order-to-Cash et Procure-to-Pay. L'investissement estimé se situe entre 61 et 73,2 jours d'intégration pour une transformation digitale complète de votre organisation."
+      },
+      {
+        "numero": "2",
+        "titre": "Compréhension du besoin",
+        "contenu": "Votre organisation fait face à un défi de taille : harmoniser et digitaliser des processus métier actuellement éclatés sur plusieurs systèmes (Excel manuel, Sage 50/100/1000, Quadratus). Avec plus de 20 000 clients, 15 000 produits avec variantes et 200 kits complexes, vous avez besoin d'une solution ERP unifiée capable de gérer l'ensemble de vos flux : ventes avec devis et facturation, achats incluant dropshipping, gestion de stocks multi-emplacements, et comptabilité avec TVA intracommunautaire. L'enjeu principal réside dans la migration et l'harmonisation de ces données hétérogènes tout en préservant la continuité d'activité."
+      },
+      {
+        "numero": "3",
+        "titre": "Solution proposée",
+        "contenu": "Nous préconisons une implémentation complète d'Odoo 19 couvrant les modules Ventes, Achats, Stocks, Comptabilité et Kits de vente, avec une approche de migration progressive pour minimiser les risques.",
+        "sous_sections": [
+          {
+            "titre": "Périmètre fonctionnel",
+            "contenu": "• Module Ventes : gestion complète des devis, commandes et facturation avec support des variantes produits (2 attributs, <10 combinaisons)\n• Module Achats : commandes fournisseurs, réceptions, dropshipping et demandes d'achat avec intégration des tarifs fournisseurs Excel\n• Module Stocks : gestion multi-emplacements avec putaway, routes MTO/dropshipping et réapprovisionnement automatique\n• Module Kits de vente : configuration avancée pour >200 kits avec explosion sur BL et déstockage automatique des composants\n• Module Comptabilité : plan comptable harmonisé, analytique, TVA intracommunautaire, Factur-X et personnalisation PDF"
+          },
+          {
+            "titre": "Architecture technique",
+            "contenu": "Solution Odoo 19 Community/Enterprise hébergée avec migration de données en 2 phases : d'abord les données Sage (plus structurées), puis Quadratus avec harmonisation. Mise en place d'outils de nettoyage et dédoublonnage pour les données Excel manuelles. Configuration des flux métier Order-to-Cash, Procure-to-Pay, Gestion-Kits et Réapprovisionnement avec tests de charge obligatoires sur les volumes importants."
+          }
+        ]
+      },
+      {
+        "numero": "4",
+        "titre": "Chiffrage détaillé",
+        "contenu": "Notre estimation se base sur l'analyse approfondie de votre périmètre et des complexités identifiées, notamment la migration depuis 3 systèmes différents et les volumes importants de données.",
+        "tableau_chiffrage": [
+          {
+            "poste": "Paramètres généraux et migration",
+            "uo": 25.0,
+            "detail": "Migration complexe >20k clients Excel + >15k produits + harmonisation Sage/Quadratus"
+          },
+          {
+            "poste": "Module Ventes",
+            "uo": 6.6,
+            "detail": "Configuration standard avec variantes et intégration kits"
+          },
+          {
+            "poste": "Module Achats",
+            "uo": 5.5,
+            "detail": "Dropshipping + multi-fournisseurs + nettoyage tarifs Excel"
+          },
+          {
+            "poste": "Module Comptabilité",
+            "uo": 17.4,
+            "detail": "Harmonisation 2 ERP + TVA intracommunautaire + Factur-X"
+          },
+          {
+            "poste": "Module Stocks & Logistique",
+            "uo": 13.2,
+            "detail": "Multi-emplacements + routes complexes + intégration kits"
+          },
+          {
+            "poste": "Kits de vente",
+            "uo": 5.4,
+            "detail": ">200 kits avec explosion BL et déstockage composants"
+          }
+        ],
+        "total_uo": 73.2,
+        "fourchette": {
+          "basse": 61.0,
+          "haute": 73.2
+        }
+      },
+      {
+        "numero": "5",
+        "titre": "Licences Odoo",
+        "contenu": "Les licences Odoo seront définies précisément lors du cadrage projet en fonction du nombre d'utilisateurs finaux et des modules Enterprise requis. Pour un projet de cette envergure, nous recommandons généralement Odoo Enterprise pour bénéficier du support officiel et des fonctionnalités avancées (notamment pour la comptabilité et les stocks). Le coût des licences sera communiqué séparément après validation du nombre d'utilisateurs et sera facturé directement par Odoo SA."
+      },
+      {
+        "numero": "6",
+        "titre": "Méthodologie et planning",
+        "contenu": "Notre approche projet privilégie une méthodologie éprouvée avec des jalons de validation pour sécuriser la migration de vos données critiques.",
+        "phases": [
+          {
+            "nom": "Phase 1 - Cadrage et audit données",
+            "duree": "2 semaines",
+            "description": "Analyse détaillée des données sources, identification des doublons et incohérences, définition du plan de migration"
+          },
+          {
+            "nom": "Phase 2 - Paramétrage et développements",
+            "duree": "8 semaines",
+            "description": "Configuration des modules, développements spécifiques, migration données Sage puis Quadratus"
+          },
+          {
+            "nom": "Phase 3 - Tests et recette",
+            "duree": "3 semaines",
+            "description": "Tests fonctionnels, tests de charge sur les kits, recette utilisateur, corrections"
+          },
+          {
+            "nom": "Phase 4 - Formation et go-live",
+            "duree": "2 semaines",
+            "description": "Formation utilisateurs, accompagnement démarrage, support post go-live"
+          }
+        ]
+      },
+      {
+        "numero": "7",
+        "titre": "Conditions et modalités",
+        "contenu": "• Facturation : 30% à la commande, 40% à la recette fonctionnelle, 30% au go-live\n• Validité de l'offre : 30 jours à compter de la date d'émission\n• Propriété du code : les développements spécifiques restent votre propriété\n• Garantie : 3 mois de garantie sur les développements à compter du go-live\n• Support : 40h de support post go-live incluses dans le forfait\n• Risques identifiés : des ajustements peuvent être nécessaires selon la qualité réelle des données sources (audit préalable recommandé)\n• Prérequis client : mise à disposition d'un référent métier à 50% pendant la durée du projet"
+      }
+    ]
+  }
+}

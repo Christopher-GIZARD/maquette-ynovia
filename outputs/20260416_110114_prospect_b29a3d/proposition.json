@@ -1,0 +1,111 @@
+{
+  "titre": "Proposition commerciale — Intégration Odoo 19 — Société SIREN 88888",
+  "date": "16/04/2026",
+  "reference": "PROP-20260416-SIR",
+  "sections": [
+    {
+      "numero": "1",
+      "titre": "Synthèse exécutive",
+      "contenu": "Nous proposons l'implémentation d'Odoo 19 pour digitaliser et unifier vos processus commerciaux, achats, stocks et comptables actuellement répartis entre Excel, Sage et Quadratus. Ce projet d'envergure permettra de gérer efficacement vos >20k clients, >15k produits avec variantes et >200 kits, tout en automatisant vos flux Order-to-Cash et Procure-to-Pay. L'investissement estimé se situe entre 61 et 73,2 jours d'intégration pour une transformation digitale complète de votre organisation."
+    },
+    {
+      "numero": "2",
+      "titre": "Compréhension du besoin",
+      "contenu": "Votre organisation fait face à un défi de taille : harmoniser et digitaliser des processus métier actuellement éclatés sur plusieurs systèmes (Excel manuel, Sage 50/100/1000, Quadratus). Avec plus de 20 000 clients, 15 000 produits avec variantes et 200 kits complexes, vous avez besoin d'une solution ERP unifiée capable de gérer l'ensemble de vos flux : ventes avec devis et facturation, achats incluant dropshipping, gestion de stocks multi-emplacements, et comptabilité avec TVA intracommunautaire. L'enjeu principal réside dans la migration et l'harmonisation de ces données hétérogènes tout en préservant la continuité d'activité."
+    },
+    {
+      "numero": "3",
+      "titre": "Solution proposée",
+      "contenu": "Nous préconisons une implémentation complète d'Odoo 19 couvrant les modules Ventes, Achats, Stocks, Comptabilité et Kits de vente, avec une approche de migration progressive pour minimiser les risques.",
+      "sous_sections": [
+        {
+          "titre": "Périmètre fonctionnel",
+          "contenu": "• Module Ventes : gestion complète des devis, commandes et facturation avec support des variantes produits (2 attributs, <10 combinaisons)\n• Module Achats : commandes fournisseurs, réceptions, dropshipping et demandes d'achat avec intégration des tarifs fournisseurs Excel\n• Module Stocks : gestion multi-emplacements avec putaway, routes MTO/dropshipping et réapprovisionnement automatique\n• Module Kits de vente : configuration avancée pour >200 kits avec explosion sur BL et déstockage automatique des composants\n• Module Comptabilité : plan comptable harmonisé, analytique, TVA intracommunautaire, Factur-X et personnalisation PDF"
+        },
+        {
+          "titre": "Architecture technique",
+          "contenu": "Solution Odoo 19 Community/Enterprise hébergée avec migration de données en 2 phases : d'abord les données Sage (plus structurées), puis Quadratus avec harmonisation. Mise en place d'outils de nettoyage et dédoublonnage pour les données Excel manuelles. Configuration des flux métier Order-to-Cash, Procure-to-Pay, Gestion-Kits et Réapprovisionnement avec tests de charge obligatoires sur les volumes importants."
+        }
+      ]
+    },
+    {
+      "numero": "4",
+      "titre": "Chiffrage détaillé",
+      "contenu": "Notre estimation se base sur l'analyse approfondie de votre périmètre et des complexités identifiées, notamment la migration depuis 3 systèmes différents et les volumes importants de données.",
+      "tableau_chiffrage": [
+        {
+          "poste": "Paramètres généraux et migration",
+          "uo": 25.0,
+          "detail": "Migration complexe >20k clients Excel + >15k produits + harmonisation Sage/Quadratus"
+        },
+        {
+          "poste": "Module Ventes",
+          "uo": 6.6,
+          "detail": "Configuration standard avec variantes et intégration kits"
+        },
+        {
+          "poste": "Module Achats",
+          "uo": 5.5,
+          "detail": "Dropshipping + multi-fournisseurs + nettoyage tarifs Excel"
+        },
+        {
+          "poste": "Module Comptabilité",
+          "uo": 17.4,
+          "detail": "Harmonisation 2 ERP + TVA intracommunautaire + Factur-X"
+        },
+        {
+          "poste": "Module Stocks & Logistique",
+          "uo": 13.2,
+          "detail": "Multi-emplacements + routes complexes + intégration kits"
+        },
+        {
+          "poste": "Kits de vente",
+          "uo": 5.4,
+          "detail": ">200 kits avec explosion BL et déstockage composants"
+        }
+      ],
+      "total_uo": 73.2,
+      "fourchette": {
+        "basse": 61.0,
+        "haute": 73.2
+      }
+    },
+    {
+      "numero": "5",
+      "titre": "Licences Odoo",
+      "contenu": "Les licences Odoo seront définies précisément lors du cadrage projet en fonction du nombre d'utilisateurs finaux et des modules Enterprise requis. Pour un projet de cette envergure, nous recommandons généralement Odoo Enterprise pour bénéficier du support officiel et des fonctionnalités avancées (notamment pour la comptabilité et les stocks). Le coût des licences sera communiqué séparément après validation du nombre d'utilisateurs et sera facturé directement par Odoo SA."
+    },
+    {
+      "numero": "6",
+      "titre": "Méthodologie et planning",
+      "contenu": "Notre approche projet privilégie une méthodologie éprouvée avec des jalons de validation pour sécuriser la migration de vos données critiques.",
+      "phases": [
+        {
+          "nom": "Phase 1 - Cadrage et audit données",
+          "duree": "2 semaines",
+          "description": "Analyse détaillée des données sources, identification des doublons et incohérences, définition du plan de migration"
+        },
+        {
+          "nom": "Phase 2 - Paramétrage et développements",
+          "duree": "8 semaines",
+          "description": "Configuration des modules, développements spécifiques, migration données Sage puis Quadratus"
+        },
+        {
+          "nom": "Phase 3 - Tests et recette",
+          "duree": "3 semaines",
+          "description": "Tests fonctionnels, tests de charge sur les kits, recette utilisateur, corrections"
+        },
+        {
+          "nom": "Phase 4 - Formation et go-live",
+          "duree": "2 semaines",
+          "description": "Formation utilisateurs, accompagnement démarrage, support post go-live"
+        }
+      ]
+    },
+    {
+      "numero": "7",
+      "titre": "Conditions et modalités",
+      "contenu": "• Facturation : 30% à la commande, 40% à la recette fonctionnelle, 30% au go-live\n• Validité de l'offre : 30 jours à compter de la date d'émission\n• Propriété du code : les développements spécifiques restent votre propriété\n• Garantie : 3 mois de garantie sur les développements à compter du go-live\n• Support : 40h de support post go-live incluses dans le forfait\n• Risques identifiés : des ajustements peuvent être nécessaires selon la qualité réelle des données sources (audit préalable recommandé)\n• Prérequis client : mise à disposition d'un référent métier à 50% pendant la durée du projet"
+    }
+  ]
+}

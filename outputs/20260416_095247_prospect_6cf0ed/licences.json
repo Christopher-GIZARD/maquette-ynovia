@@ -1,0 +1,39 @@
+{
+  "recommandation": {
+    "plan": "Standard",
+    "licences_internes": 10,
+    "licences_portail": 2.0,
+    "cout_mensuel_estime": {
+      "par_utilisateur_interne": 31.1,
+      "par_utilisateur_portail": 0,
+      "total_mensuel": 311.0,
+      "total_annuel": 3732.0
+    }
+  },
+  "justification": "Avec 10 utilisateurs internes et 0 modules activés, le plan Standard est recommandé. Les utilisateurs portail (2.0) sont inclus sans surcoût.",
+  "details_par_role": [
+    {
+      "role": "Administrateur / Direction",
+      "nb_users": 2,
+      "acces": "Tous les modules",
+      "type_licence": "Interne"
+    },
+    {
+      "role": "Commercial",
+      "nb_users": 3,
+      "acces": "CRM, Ventes, Facturation",
+      "type_licence": "Interne"
+    },
+    {
+      "role": "Opérationnel",
+      "nb_users": 5,
+      "acces": "Stock, Achats, Projet",
+      "type_licence": "Interne"
+    }
+  ],
+  "notes": [
+    "Les tarifs sont indicatifs et basés sur la grille publique Odoo.",
+    "Un plan Custom est recommandé à partir de 6 modules pour optimiser les coûts.",
+    "Les utilisateurs portail (clients/fournisseurs) sont gratuits."
+  ]
+}

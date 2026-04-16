@@ -1,0 +1,10 @@
+graph TD
+    A[Commande kit] --> B[Explosion nomenclature]
+    B --> C{Stock composants ?}
+    C -->|Insuffisant| D[Réassort composants]
+    C -->|Suffisant| E[Réservation composants]
+    D --> F[Réception composants]
+    F --> E
+    E --> G[Picking composants]
+    G --> H[Livraison détaillée]
+    H --> I[Facturation kit forfait]
