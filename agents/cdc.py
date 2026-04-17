@@ -5,6 +5,9 @@ Génère un cahier des charges structuré à partir des réponses
 du formulaire prospect. Le document couvre le contexte, le
 périmètre fonctionnel, la reprise de données, les contraintes
 et les risques.
+
+Utilise le RAG pour enrichir le contexte avec la documentation
+Odoo 19 pertinente pour les modules activés par le prospect.
 """
 
 import json
@@ -22,19 +25,44 @@ class CDCAgent(Agent):
 
     prompt_name = "cdc"
 
+    def __init__(self, claude, retriever=None):
+        super().__init__(claude)
+        self.retriever = retriever
+
     def build_user_message(self, context: dict) -> str:
         reponses = context["reponses"]
         societe = context.get("societe", {})
         entreprise = context.get("entreprise", societe)
 
-        # Identifier les modules activés avec leurs détails
         modules_actifs = self._extract_modules_details(reponses)
-
-        # Extraire les infos de migration
         migration = self._extract_migration(reponses)
-
-        # Extraire les contraintes
         contraintes = self._extract_contraintes(reponses)
+
+        # Récupérer le contexte documentaire via RAG
+        doc_context = ""
+        if self.retriever:
+            try:
+                doc_context = self.retriever.get_context_for_agent(
+                    agent_name="cdc",
+                    reponses=reponses,
+                    max_chars=8000,
+                )
+                if doc_context:
+                    logger.info(f"RAG : {len(doc_context)} chars de doc Odoo injectés")
+            except Exception as e:
+                logger.warning(f"RAG indisponible : {e}")
+
+        # Section RAG conditionnelle
+        rag_section = ""
+        if doc_context:
+            rag_section = f"""
+{doc_context}
+
+IMPORTANT : Utilise ces extraits de documentation pour décrire précisément
+les fonctionnalités Odoo 19 dans le périmètre fonctionnel. Cite les vrais
+noms de fonctionnalités et les vrais termes Odoo.
+
+"""
 
         return f"""## Informations société
 
@@ -55,7 +83,7 @@ class CDCAgent(Agent):
 ## Contraintes et paramètres généraux
 
 {json.dumps(contraintes, indent=2, ensure_ascii=False)}
-
+{rag_section}
 ## Réponses complètes du formulaire
 
 {json.dumps(reponses, indent=2, ensure_ascii=False)}
