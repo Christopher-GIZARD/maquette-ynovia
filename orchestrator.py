@@ -33,6 +33,13 @@ from generators.pdf_gen import generate_proposition_html
 
 logger = logging.getLogger("presales.orchestrator")
 
+# Import RAG conditionnel (fonctionne sans si pas indexé)
+try:
+    from services.rag.retriever import Retriever
+    _RAG_AVAILABLE = True
+except ImportError:
+    _RAG_AVAILABLE = False
+
 
 class Pipeline:
     """
@@ -60,9 +67,24 @@ class Pipeline:
             self.pappers = None
             logger.info("Client Pappers non configuré (PAPPERS_API_KEY manquante)")
 
+        # RAG (optionnel — fonctionne sans si pas indexé)
+        self.retriever = None
+        if _RAG_AVAILABLE:
+            try:
+                retriever = Retriever()
+                if retriever.store.collection_count(retriever.collection) > 0:
+                    self.retriever = retriever
+                    logger.info(f"RAG activé : {retriever.store.collection_count(retriever.collection)} chunks disponibles")
+                else:
+                    logger.info("RAG : collection vide — lancez l'ingestion PDF pour activer")
+            except Exception as e:
+                logger.info(f"RAG non disponible : {e}")
+        else:
+            logger.info("RAG non disponible (dépendances manquantes)")
+
         # Agents
         self.agents = {
-            "cdc": CDCAgent(claude=self.claude),
+            "cdc": CDCAgent(claude=self.claude, retriever=self.retriever),
             "chiffrage": ChiffrageAgent(
                 claude=self.claude,
                 uo_calculator=self.uo_calculator,
@@ -105,6 +127,7 @@ class Pipeline:
         context = {
             "reponses": reponses,
             "societe": societe,
+            "_project_dir": output_dir
         }
 
         # ── Étape 1 : Enrichissement Pappers ───────────────
@@ -145,8 +168,8 @@ class Pipeline:
         context["config"] = self.agents["config_odoo"].run(context)
 
         # ── Étape 6 : Agent Licences ───────────────────────
-        #progress("Agent Licences — Recommandation du plan de licences…", 70)
-        #context["licences"] = self.agents["licence"].run(context)
+        progress("Agent Licences — Recommandation du plan de licences…", 70)
+        context["licences"] = self.agents["licence"].run(context)
 
         # ── Étape 7 : Agent Proposition ────────────────────
         progress("Agent Proposition — Compilation de la propale…", 80)
@@ -161,8 +184,8 @@ class Pipeline:
     def _generate_deliverables(self, output_dir: Path, context: dict):
         """Génère tous les livrables dans les formats finaux."""
         societe = context.get("societe", {})
-
-        self._save_json(output_dir / "all_results.json", context)
+        context_to_save = {k: v for k, v in context.items() if not k.startswith("_")}
+        self._save_json(output_dir / "all_results.json", context_to_save)
 
         # CDC → Word
         if "cdc" in context:

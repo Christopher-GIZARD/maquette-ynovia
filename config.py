@@ -53,3 +53,6 @@ SIMILAR_PROJECTS_LIMIT = int(os.getenv("SIMILAR_PROJECTS_LIMIT", "5"))
 
 SERVER_HOST = os.getenv("SERVER_HOST", "0.0.0.0")
 SERVER_PORT = int(os.getenv("SERVER_PORT", "8000"))
+
+# ── Debug ────────────────────────────────────────────────
+DEBUG = bool(os.getenv("DEBUG", ""))

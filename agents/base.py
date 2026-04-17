@@ -12,6 +12,7 @@ La méthode run() orchestre le tout : charger le prompt,
 construire le message, envoyer à Claude, parser la réponse.
 """
 
+import json
 import logging
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -139,6 +140,9 @@ class Agent(ABC):
         )
         logger.debug(f"[{agent_name}] Réponse reçue ({len(raw_response)} chars)")
 
+        # Debug : sauvegarder l'échange complet
+        self._debug_dump(agent_name, message, raw_response, context)
+
         # 3. Parser la réponse
         result = self.parse_response(raw_response)
         logger.info(f"[{agent_name}] Terminé — {len(result)} clés dans le résultat")
@@ -163,5 +167,57 @@ class Agent(ABC):
             message=message
         )
 
+        # Debug : sauvegarder l'échange (la réponse est déjà parsée)
+        self._debug_dump(agent_name, message, json.dumps(result, indent=2, ensure_ascii=False), context)
+
         logger.info(f"[{agent_name}] Terminé — {len(result)} clés dans le résultat")
         return result
+
+    def _debug_dump(self, agent_name: str, message: str, response: str, context: dict):
+        """
+        Sauvegarde l'échange complet avec Claude dans le dossier du projet.
+
+        Crée un sous-dossier debug/ dans le répertoire du projet avec
+        un fichier par agent contenant le prompt système, le message
+        envoyé, et la réponse reçue.
+
+        Activé uniquement si DEBUG=true dans le .env.
+        """
+        if not config.DEBUG:
+            return
+
+        # Trouver le dossier du projet dans le contexte
+        # (injecté par l'orchestrateur via le callback on_progress)
+        project_dir = context.get("_project_dir")
+        if not project_dir:
+            # Fallback : dossier debug global
+            project_dir = config.OUTPUTS_DIR / "_debug"
+
+        debug_dir = Path(project_dir) / "debug"
+        debug_dir.mkdir(parents=True, exist_ok=True)
+
+        filename = f"{self.prompt_name}.md"
+        filepath = debug_dir / filename
+
+        content = f"""# Debug — {agent_name}
+
+## Prompt système ({len(self.system_prompt)} chars)
+
+```
+{self.system_prompt}
+```
+
+## Message envoyé ({len(message)} chars)
+
+```
+{message}
+```
+
+## Réponse reçue ({len(response)} chars)
+
+```
+{response}
+```
+"""
+        filepath.write_text(content, encoding="utf-8")
+        logger.debug(f"[{agent_name}] Debug sauvegardé : {filepath}")
