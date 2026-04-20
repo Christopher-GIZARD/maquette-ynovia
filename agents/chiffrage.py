@@ -73,20 +73,31 @@ class ChiffrageAgent(Agent):
         logger.info("Étape 3/3 — Ajustement IA du chiffrage")
         ajustement = self._get_adjustment(reponses, societe, uo_result, projets_proches)
 
+        # ── 4. Application du coefficient de catégorie ─────
+        categorie = societe.get("categorie", {})
+        coeff_cat = categorie.get("coefficient_combine", 1.0)
+        total_ajuste = ajustement.get("total_uo_ajuste", uo_result["total_uo"])
+        ajustement["total_uo_final"] = round(total_ajuste * coeff_cat, 1)
+        for mod in ajustement.get("par_module", {}).values():
+            mod["uo_final"] = round(mod.get("uo_ajuste", 0) * coeff_cat, 1)
+
         # ── Assemblage du résultat ─────────────────────────
         result = {
             "uo_brut": uo_result,
             "ajustement": ajustement,
             "projets_reference": projets_proches,
+            "categorie": categorie,
             "meta": {
                 "nb_projets_historique": self.history.count,
                 "nb_projets_similaires": len(projets_proches),
+                "coefficient_categorie": coeff_cat,
             }
         }
 
         logger.info(
             f"Chiffrage terminé : {uo_result['total_uo']}j brut → "
-            f"{ajustement.get('total_uo_ajuste', uo_result['total_uo'])}j ajusté"
+            f"{total_ajuste}j ajusté → "
+            f"{ajustement['total_uo_final']}j final (coeff catégorie {coeff_cat})"
         )
 
         return result

@@ -24,6 +24,7 @@ from pydantic import BaseModel
 
 import config
 from orchestrator import Pipeline
+from services.pappers import PappersClient
 
 # ── Configuration ──────────────────────────────────────────
 
@@ -129,7 +130,7 @@ def run_pipeline_background(project_id: str, project_dir: Path, data: dict):
 
         generated_files = [
             f.name for f in project_dir.iterdir()
-            if f.name not in ("input.json", "status.json", "all_results.json", "cahier_des_charges.json", "chiffrage.json", "config_odoo.json", "flux_metier.json", "licences.json", "proposition.json")
+            if f.suffix != ".json" and f.name != "debug"
         ]
 
         write_status(project_dir, "done",
@@ -144,6 +145,27 @@ def run_pipeline_background(project_id: str, project_dir: Path, data: dict):
 
 
 # ── Endpoints API ──────────────────────────────────────────
+
+@app.get("/api/config")
+async def get_config():
+    """Expose la configuration publique (features activées)."""
+    return {"pappers_enabled": bool(config.PAPPERS_API_KEY)}
+
+
+@app.get("/api/pappers/{siren}")
+async def enrich_pappers(siren: str):
+    """Enrichit les données société via l'API Pappers à partir du SIREN."""
+    if not config.PAPPERS_API_KEY:
+        raise HTTPException(status_code=503, detail="API Pappers non configurée")
+
+    client = PappersClient()
+    data = client.enrich(siren)
+
+    if "_pappers_error" in data:
+        raise HTTPException(status_code=502, detail=data["_pappers_error"])
+
+    return data
+
 
 @app.post("/api/submit", response_model=dict)
 async def submit_form(data: FormSubmission, background_tasks: BackgroundTasks):

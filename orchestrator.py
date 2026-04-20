@@ -18,7 +18,6 @@ from typing import Callable
 from services.client_factory import get_claude_client
 from services.uo_calculator import UOCalculator
 from services.project_history import ProjectHistory
-from services.pappers import PappersClient
 from agents.cdc import CDCAgent
 from agents.chiffrage import ChiffrageAgent
 from agents.flux import FluxAgent
@@ -59,14 +58,6 @@ class Pipeline:
         self.uo_calculator = UOCalculator()
         self.project_history = ProjectHistory()
 
-        # Pappers (optionnel — fonctionne sans si pas de clé)
-        try:
-            self.pappers = PappersClient()
-            logger.info("Client Pappers initialisé")
-        except ValueError:
-            self.pappers = None
-            logger.info("Client Pappers non configuré (PAPPERS_API_KEY manquante)")
-
         # RAG (optionnel — fonctionne sans si pas indexé)
         self.retriever = None
         if _RAG_AVAILABLE:
@@ -102,6 +93,7 @@ class Pipeline:
             f"Historique: {self.project_history.count} projets"
         )
 
+
     def run(
         self,
         data: dict,
@@ -127,56 +119,36 @@ class Pipeline:
         context = {
             "reponses": reponses,
             "societe": societe,
+            "entreprise": societe,
             "_project_dir": output_dir
         }
 
-        # ── Étape 1 : Enrichissement Pappers ───────────────
-        progress("Enrichissement des données société (Pappers)…", 5)
-        siren = societe.get("siren", "")
-        if self.pappers and siren:
-            pappers_data = self.pappers.enrich(siren)
-            # Fusion : les données Pappers complètent le formulaire
-            # mais ne remplacent pas ce que le commercial a saisi
-            context["entreprise"] = {**pappers_data, **societe}
-            # Remettre les champs Pappers qui ont plus de valeur que la saisie manuelle
-            for key in ("raison_sociale", "forme_juridique", "code_naf", "secteur_activite",
-                        "adresse", "effectif", "ca_annuel", "resultat_net", "date_creation",
-                        "dirigeant_principal", "numero_tva"):
-                if key in pappers_data and pappers_data[key]:
-                    context["entreprise"][key] = pappers_data[key]
-        else:
-            context["entreprise"] = societe
-            if not siren:
-                logger.info("Pas de SIREN — enrichissement Pappers ignoré")
-            elif not self.pappers:
-                logger.info("Client Pappers non configuré — enrichissement ignoré")
-
-        # ── Étape 2 : Agent CDC ────────────────────────────
+        # ── Étape 1 : Agent CDC ────────────────────────────
         progress("Agent CDC — Rédaction du cahier des charges…", 15)
         context["cdc"] = self.agents["cdc"].run(context)
 
-        # ── Étape 3 : Agent Chiffrage ──────────────────────
+        # ── Étape 2 : Agent Chiffrage ──────────────────────
         progress("Agent Chiffrage — Calcul et ajustement des UO…", 30)
         context["chiffrage"] = self.agents["chiffrage"].run(context)
 
-        # ── Étape 4 : Agent Flux ───────────────────────────
-        progress("Agent Flux — Génération des schémas de flux…", 45)
+        # ── Étape 3 : Agent Flux ───────────────────────────
+        progress("Agent Flux — Génération des schémas de flux…", 48)
         context["flux"] = self.agents["flux"].run(context)
 
-        # ── Étape 5 : Agent Config Odoo ────────────────────
-        progress("Agent Config — Création du module Odoo…", 60)
+        # ── Étape 4 : Agent Config Odoo ────────────────────
+        progress("Agent Config — Création du module Odoo…", 62)
         context["config"] = self.agents["config_odoo"].run(context)
 
-        # ── Étape 6 : Agent Licences ───────────────────────
-        progress("Agent Licences — Recommandation du plan de licences…", 70)
+        # ── Étape 5 : Agent Licences ───────────────────────
+        progress("Agent Licences — Recommandation du plan de licences…", 74)
         context["licences"] = self.agents["licence"].run(context)
 
-        # ── Étape 7 : Agent Proposition ────────────────────
-        progress("Agent Proposition — Compilation de la propale…", 80)
+        # ── Étape 6 : Agent Proposition ────────────────────
+        progress("Agent Proposition — Compilation de la propale…", 86)
         context["propale"] = self.agents["proposition"].run(context)
 
-        # ── Étape 8 : Génération des livrables ─────────────
-        progress("Génération des fichiers livrables…", 90)
+        # ── Étape 7 : Génération des livrables ─────────────
+        progress("Génération des fichiers livrables…", 93)
         self._generate_deliverables(output_dir, context)
 
         return context

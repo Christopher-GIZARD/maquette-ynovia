@@ -38,6 +38,11 @@
       "type": "text"
     },
     {
+      "id": "activite_principale",
+      "label": "Activité principale déclarée",
+      "type": "text"
+    },
+    {
       "id": "secteur_activite",
       "label": "Secteur d'activité",
       "type": "text"
@@ -55,7 +60,12 @@
     {
       "id": "effectif",
       "label": "Effectif",
-      "type": "number"
+      "type": "text"
+    },
+    {
+      "id": "dirigeant_principal",
+      "label": "Dirigeant principal",
+      "type": "text"
     },
     {
       "id": "date_creation",
@@ -65,6 +75,11 @@
     {
       "id": "adresse",
       "label": "Adresse du siège",
+      "type": "text"
+    },
+    {
+      "id": "site_web",
+      "label": "Site web",
       "type": "text"
     }
   ],
