@@ -76,8 +76,8 @@ def _build_synthese(ws, data, societe):
     ws.row_dimensions[1].height = 35
 
     # En-têtes
-    headers = ["Module", "Statut", "UO Brut (j)", "Coefficient", "UO Ajusté (j)", "Justification"]
-    widths = [30, 10, 14, 12, 14, 55]
+    headers = ["Module", "Statut", "UO Brut (j)", "Coefficient", "UO Ajusté (j)", "UO Final (j)", "Justification"]
+    widths = [30, 10, 14, 12, 14, 14, 55]
 
     row = 3
     for col, (header, width) in enumerate(zip(headers, widths), 1):
@@ -114,17 +114,22 @@ def _build_synthese(ws, data, societe):
         ws.cell(row=row, column=4, value=coeff).font = BODY_FONT
         ws.cell(row=row, column=4).number_format = "0.00"
         ws.cell(row=row, column=4).alignment = Alignment(horizontal="center")
+        uo_final = mod_info.get("uo_final", uo_ajuste)
+
         ws.cell(row=row, column=5, value=uo_ajuste).font = BODY_FONT
         ws.cell(row=row, column=5).number_format = "0.0"
         ws.cell(row=row, column=5).alignment = Alignment(horizontal="center")
-        ws.cell(row=row, column=6, value=justif).font = BODY_FONT
-        ws.cell(row=row, column=6).alignment = Alignment(wrap_text=True)
+        ws.cell(row=row, column=6, value=uo_final).font = BOLD_FONT
+        ws.cell(row=row, column=6).number_format = "0.0"
+        ws.cell(row=row, column=6).alignment = Alignment(horizontal="center")
+        ws.cell(row=row, column=7, value=justif).font = BODY_FONT
+        ws.cell(row=row, column=7).alignment = Alignment(wrap_text=True)
 
         # Colorer le coefficient si != 1.0
         if coeff > 1.0:
             ws.cell(row=row, column=4).fill = LIGHT_ORANGE
 
-        for col in range(1, 7):
+        for col in range(1, 8):
             ws.cell(row=row, column=col).border = THIN_BORDER
             if fill:
                 ws.cell(row=row, column=col).fill = fill
@@ -145,21 +150,54 @@ def _build_synthese(ws, data, societe):
     ws.cell(row=row, column=5).number_format = "0.0"
     ws.cell(row=row, column=5).alignment = Alignment(horizontal="center")
 
-    ecart = ajustement.get("ecart_global_pct", 0)
-    ws.cell(row=row, column=6, value=f"Écart : +{ecart}% vs brut").font = TOTAL_FONT
+    total_final = ajustement.get("total_uo_final", total_ajuste)
+    ws.cell(row=row, column=6, value=total_final).font = TOTAL_FONT
     ws.cell(row=row, column=6).fill = TEAL_FILL
+    ws.cell(row=row, column=6).number_format = "0.0"
+    ws.cell(row=row, column=6).alignment = Alignment(horizontal="center")
 
-    for col in range(1, 7):
+    ecart = ajustement.get("ecart_global_pct", 0)
+    ws.cell(row=row, column=7, value=f"Écart : +{ecart}% vs brut").font = TOTAL_FONT
+    ws.cell(row=row, column=7).fill = TEAL_FILL
+
+    for col in range(1, 8):
         ws.cell(row=row, column=col).border = THIN_BORDER
 
     ws.row_dimensions[row].height = 30
 
+    # Bloc catégorie prospect
+    categorie = data.get("categorie", {})
+    if categorie:
+        row += 2
+        ws.merge_cells(f"A{row}:G{row}")
+        ws.cell(row=row, column=1, value="Coefficient de catégorie prospect").font = BOLD_FONT
+        ws.cell(row=row, column=1).fill = LIGHT_GRAY
+        row += 1
+
+        coeff_cat = categorie.get("coefficient_combine", 1.0)
+        taille = categorie.get("taille", {})
+        sante = categorie.get("sante", {})
+        resume = categorie.get("resume", "")
+
+        cat_rows = [
+            ("Catégorie taille", f"{taille.get('label', '')}  {taille.get('detail', '')}  (×{taille.get('coefficient', 1.0)})"),
+            ("Santé financière", f"{sante.get('label', '')}  {sante.get('detail', '')}  (×{sante.get('coefficient', 1.0)})"),
+            ("Coefficient combiné", f"×{coeff_cat}  —  {resume}"),
+        ]
+        for label, val in cat_rows:
+            ws.cell(row=row, column=1, value=label).font = BOLD_FONT
+            ws.merge_cells(f"B{row}:G{row}")
+            ws.cell(row=row, column=2, value=val).font = BODY_FONT
+            for col in range(1, 8):
+                ws.cell(row=row, column=col).border = THIN_BORDER
+            row += 1
+
     # Justification globale
-    row += 2
-    ws.merge_cells(f"A{row}:F{row}")
+    row += 1
+    ws.merge_cells(f"A{row}:G{row}")
     ws.cell(row=row, column=1, value="Justification globale :").font = BOLD_FONT
     row += 1
-    ws.merge_cells(f"A{row}:F{row}")
+    ws.merge_cells(f"A{row}:G{row}")
     ws.cell(row=row, column=1, value=ajustement.get("justification_globale", "")).font = BODY_FONT
     ws.cell(row=row, column=1).alignment = Alignment(wrap_text=True)
     ws.row_dimensions[row].height = 60

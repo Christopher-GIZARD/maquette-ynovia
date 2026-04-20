@@ -89,7 +89,8 @@ class PappersClient:
     def _call_api(self, siren: str) -> dict:
         """Appelle l'endpoint entreprise de l'API Pappers."""
         params = {
-            "siren": siren
+            "siren": siren,
+            "champs_supplementaires": "sites_internet",
         }
         headers = {
             "api-key": self.api_key
@@ -123,9 +124,10 @@ class PappersClient:
             ca_annuel = derniere_annee.get("chiffre_affaires")
             resultat_net = derniere_annee.get("resultat")
 
-        # Effectif — Pappers retourne une tranche ou un nombre
-        effectif_raw = raw.get("effectif")
-        effectif = _parse_effectif(effectif_raw)
+        # Effectif — on conserve la tranche textuelle brute (ex: "10 à 19 salariés")
+        effectif = raw.get("effectif") or raw.get("tranche_effectif") or ""
+        if effectif and not isinstance(effectif, str):
+            effectif = str(effectif)
 
         # Dirigeants
         dirigeants = raw.get("representants", [])
@@ -134,7 +136,28 @@ class PappersClient:
             d = dirigeants[0]
             nom = f"{d.get('prenom', '')} {d.get('nom', '')}".strip()
             qualite = d.get("qualite", "")
-            dirigeant_principal = f"{nom} ({qualite})" if qualite else nom
+            if nom:
+                dirigeant_principal = f"{nom} ({qualite})" if qualite else nom
+
+        # Catégorisation prospect (2 axes)
+        effectif_num = _parse_effectif(raw.get("effectif"))
+        finance_data = {
+            "ca":            ca_annuel,
+            "resultat":      resultat_net,
+            "fonds_propres": finances[0].get("fonds_propres") if finances else None,
+            "marge_nette":   (
+                round(resultat_net / ca_annuel * 100, 1)
+                if ca_annuel and resultat_net else None
+            ),
+            "taux_croissance_ca": (
+                round(
+                    (finances[0]["chiffre_affaires"] / finances[1]["chiffre_affaires"] - 1) * 100, 1
+                )
+                if len(finances) >= 2 and finances[1].get("chiffre_affaires")
+                else None
+            ),
+        }
+        categorie = _categorize_prospect(effectif_num, finance_data)
 
         return {
             # Identité
@@ -152,7 +175,7 @@ class PappersClient:
 
             # Taille
             "effectif": effectif,
-            "effectif_tranche": raw.get("tranche_effectif", ""),
+            "activite_principale": raw.get("libelle_code_naf", ""),
             "ca_annuel": _to_k_euros(ca_annuel),
             "resultat_net": _to_k_euros(resultat_net),
 
@@ -162,6 +185,7 @@ class PappersClient:
             "ville": siege.get("ville", ""),
 
             # Contact
+            "site_web": (raw.get("sites_internet") or [None])[0] or "",
             "dirigeant_principal": dirigeant_principal,
             "numero_tva": raw.get("numero_tva_intracommunautaire", ""),
 
@@ -169,25 +193,36 @@ class PappersClient:
             "statut": raw.get("statut_rcs", ""),
             "capital_social": raw.get("capital", None),
 
+            # Catégorisation (2 axes)
+            "categorie": categorie,
+
             # Méta
             "_source": "pappers",
         }
 
 
 def _parse_effectif(effectif_raw) -> int | None:
-    """Parse l'effectif depuis la réponse Pappers (peut être str ou int)."""
+    """Parse l'effectif depuis la réponse Pappers (peut être str ou int).
+
+    Gère les formats :
+    - int/float : 1500
+    - str simple : "10 à 19 salariés"
+    - str avec milliers : "Entre 1 000 et 1 999 salariés"
+    """
     if effectif_raw is None:
         return None
     if isinstance(effectif_raw, (int, float)):
         return int(effectif_raw)
-    # Tranche textuelle : "10 à 19 salariés" → prend le milieu
     if isinstance(effectif_raw, str):
         import re
-        numbers = re.findall(r"\d+\s*\d+", effectif_raw)
+        # Nettoyer : retirer les espaces entre chiffres (séparateurs de milliers FR)
+        # "Entre 1 000 et 1 999 salariés" → "Entre 1000 et 1999 salariés"
+        cleaned = re.sub(r'(\d)\s+(\d)', r'\1\2', effectif_raw)
+        numbers = re.findall(r"\d+", cleaned)
         if len(numbers) >= 2:
-            return (int(numbers[0].replace(" ", "")) + int(numbers[1].replace(" ", ""))) // 2
+            return (int(numbers[0]) + int(numbers[1])) // 2
         if len(numbers) == 1:
-            return int(numbers[0].replace(" ", ""))
+            return int(numbers[0])
     return None
 
 
@@ -215,3 +250,128 @@ def _build_adresse(siege: dict) -> str:
     ligne2 = f"{siege.get('code_postal', '')} {siege.get('ville', '')}".strip()
 
     return f"{ligne1}, {ligne2}" if ligne1 else ligne2
+
+
+def _categorize_prospect(effectif: int | None, finance_data: dict) -> dict:
+    """
+    Catégorise le prospect sur 2 axes pour ajuster le chiffrage.
+
+    Axe 1 — Taille : basé sur effectif + CA
+        Impact : complexité du projet (droits d'accès, conduite du changement,
+        nombre de flux, volume de données)
+
+    Axe 2 — Santé financière : basé sur rentabilité + croissance
+        Impact : capacité d'investissement, niveau de service attendu,
+        risque de coupes budgétaires
+
+    Chaque axe produit un coefficient multiplicateur.
+    Le coefficient combiné s'applique au chiffrage brut.
+
+    Returns:
+        {
+            "taille": {"label": "PME", "code": "PME", "coefficient": 1.0, "detail": "..."},
+            "sante": {"label": "Dynamique", "code": "DYNAMIQUE", "coefficient": 1.05, "detail": "..."},
+            "coefficient_combine": 1.05,
+            "resume": "PME en croissance — projet standard avec budget confortable"
+        }
+    """
+    taille = _axe_taille(effectif, finance_data.get("ca"))
+    sante = _axe_sante_financiere(finance_data)
+    coeff_combine = round(taille["coefficient"] * sante["coefficient"], 2)
+
+    # Résumé en langage naturel pour les agents
+    resume = f"{taille['label']} {sante['detail']}"
+
+    return {
+        "taille": taille,
+        "sante": sante,
+        "coefficient_combine": coeff_combine,
+        "resume": resume,
+    }
+
+
+def _axe_taille(effectif: int | None, ca_euros: float | None) -> dict:
+    """
+    Axe 1 — Taille de l'entreprise.
+
+    Critères INSEE/UE + impact projet Odoo.
+
+    Seuils :
+        Micro   : < 10 salariés  ET  CA < 2 M€     → coeff 0.85
+        TPE     : < 50 salariés  OU  CA < 10 M€     → coeff 0.95
+        PME     : < 250 salariés ET  CA < 50 M€     → coeff 1.00 (base)
+        ETI     : < 5000 salariés ET CA < 1 500 M€  → coeff 1.15
+        GE      : >= 5000 salariés OU CA >= 1 500 M€ → coeff 1.25
+    """
+    eff = effectif or 0
+    ca_me = (ca_euros / 1_000_000) if ca_euros else 0
+
+    if eff < 10 and ca_me < 2:
+        return {"label": "Micro-entreprise", "code": "MICRO", "coefficient": 0.85,
+                "detail": f"{eff} sal., {ca_me:.1f} M€ CA"}
+    elif eff < 50 and ca_me < 10:
+        return {"label": "TPE", "code": "TPE", "coefficient": 0.95,
+                "detail": f"{eff} sal., {ca_me:.1f} M€ CA"}
+    elif eff < 250 and ca_me < 50:
+        return {"label": "PME", "code": "PME", "coefficient": 1.0,
+                "detail": f"{eff} sal., {ca_me:.1f} M€ CA"}
+    elif eff < 5000 and ca_me < 1500:
+        return {"label": "ETI", "code": "ETI", "coefficient": 1.15,
+                "detail": f"{eff} sal., {ca_me:.1f} M€ CA"}
+    else:
+        return {"label": "Grande entreprise", "code": "GE", "coefficient": 1.25,
+                "detail": f"{eff} sal., {ca_me:.1f} M€ CA"}
+
+
+def _axe_sante_financiere(finance_data: dict) -> dict:
+    """
+    Axe 2 — Santé financière.
+
+    Basé sur 3 indicateurs :
+    - Rentabilité : marge nette (résultat / CA)
+    - Croissance : évolution du CA sur la dernière année
+    - Solidité : fonds propres positifs ou négatifs
+
+    Catégories :
+        Fragile    : résultat négatif OU fonds propres négatifs   → coeff 0.90
+        Stable     : résultat positif, croissance faible (< 5%)   → coeff 1.00
+        Dynamique  : résultat positif ET croissance > 5%           → coeff 1.05
+        Premium    : marge nette > 8% ET croissance > 10%          → coeff 1.10
+    """
+    resultat = finance_data.get("resultat")
+    fonds_propres = finance_data.get("fonds_propres")
+    marge_nette = finance_data.get("marge_nette")
+    croissance = finance_data.get("taux_croissance_ca")
+
+    # Pas de données financières
+    if resultat is None and fonds_propres is None:
+        return {"label": "Inconnu", "code": "INCONNU", "coefficient": 1.0,
+                "detail": "— données financières non disponibles"}
+
+    # Fragile : résultat négatif ou fonds propres négatifs
+    if (resultat is not None and resultat < 0) or \
+            (fonds_propres is not None and fonds_propres < 0):
+        indicators = []
+        if resultat is not None and resultat < 0:
+            indicators.append(f"résultat négatif ({resultat / 1_000_000:.1f} M€)")
+        if fonds_propres is not None and fonds_propres < 0:
+            indicators.append(f"fonds propres négatifs")
+        return {"label": "Fragile", "code": "FRAGILE", "coefficient": 0.90,
+                "detail": f"— {', '.join(indicators)}"}
+
+    # Premium : très rentable ET forte croissance
+    marge = marge_nette if marge_nette is not None else 0
+    crois = croissance if croissance is not None else 0
+
+    if marge > 8 and crois > 10:
+        return {"label": "Premium", "code": "PREMIUM", "coefficient": 1.10,
+                "detail": f"— marge nette {marge}%, croissance {crois}%"}
+
+    # Dynamique : rentable avec croissance
+    if resultat is not None and resultat > 0 and crois > 5:
+        return {"label": "Dynamique", "code": "DYNAMIQUE", "coefficient": 1.05,
+                "detail": f"— croissance {crois}%, résultat positif"}
+
+    # Stable : rentable mais faible croissance
+    return {"label": "Stable", "code": "STABLE", "coefficient": 1.0,
+            "detail": f"— résultat positif, croissance {crois}%"}
